@@ -1,0 +1,22 @@
+// Block
+.MainNav {
+  // Modificator
+  &-dark {
+
+  }
+
+  // Elements
+  &__Logo {
+
+  }
+  &__Item {
+    &-active {
+
+    }
+  }
+  &__Lang {
+    &-select {
+
+    }
+  }
+}
