@@ -4,7 +4,7 @@ import { Jumbotron, Button } from 'reactstrap';
 const JumbotronLanding = (props) => {
     return (
         <div>
-            <Jumbotron style={{ backgroundSize: 'cover', backgroundImage: 'url(' + props.data.landingImage + ')' }}>
+            <Jumbotron style={{ backgroundSize: 'cover', backgroundImage: 'url(' + props.landingImage + ')' }}>
                 <h1 className="display-3">Hello, world!</h1>
                 <p className="lead">This is a simple hero unit, a simple Jumbotron-style component for calling extra attention to featured content or information.</p>
                 <hr className="my-2" />

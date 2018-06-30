@@ -1,7 +1,4 @@
 const counterReducer = (state = 0, action) => {
-
-    console.log('---','default',state);
-
     switch (action.type) {
         case 'INCREMENT':
             return state + 1;

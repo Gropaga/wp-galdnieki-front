@@ -4,13 +4,16 @@ import { connect } from 'react-redux'
 import { requestHome, receiveHome, receiveError } from '../../actions/home'
 
 import JumbotronLanding from './JumbotronLanding'
-
+import ItemCards from '../ItemCards'
 
 class Home extends React.Component {
     render() {
         return this.props.isFetching ?
             <h1>Loading...</h1> :
-            <JumbotronLanding data={ this.props.content } />;
+            <div>
+                <JumbotronLanding { ...this.props.content } />
+                {/*<ItemCards { ...this.props.doors } />*/}
+            </div>
     }
 
     async componentWillMount() {
