@@ -11,13 +11,13 @@ class Home extends React.Component {
         return this.props.isFetching ?
             <h1>Loading...</h1> :
             <div>
-                <JumbotronLanding { ...this.props.content } />
+                <JumbotronLanding { ...this.props } />
                 {/*<ItemCards { ...this.props.doors } />*/}
             </div>
     }
 
     async componentWillMount() {
-        if (this.props.content === null) {
+        if (typeof this.props.updated  === 'undefined') {
             const rawResponse = await fetch('http://gald.lv:8080/wp-json/shop/v1/landing-page/');
             const json = await rawResponse.json();
             this.props.receiveHome(json);
@@ -34,7 +34,7 @@ Home.propTypes = {
 
 const mapStateToProps = state => ({
     isFetching: state.home.isFetching,
-    content: state.home.content,
+    landingImage: state.home.landingImage,
 });
 
 const mapDispatchToProps = dispatch => ({

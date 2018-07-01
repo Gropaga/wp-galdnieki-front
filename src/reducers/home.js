@@ -7,11 +7,12 @@ const homeReducer = (state = { isFetching: true, content: null }, action) => {
                 isFetching: true
             });
         case RECEIVE_HOME:
-            return Object.assign({}, state, {
+            return {
+                ...state,
+                ...action.content,
                 isFetching: false,
-                content: action.content,
                 updated: Date.now()
-            });
+            };
         case RECEIVE_ERROR:
             return Object.assign({}, state, {
                 isFetching: false,
