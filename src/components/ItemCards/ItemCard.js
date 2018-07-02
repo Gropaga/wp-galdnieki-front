@@ -6,17 +6,27 @@ import ItemDropdown from './ItemDropdown'
 
 const ItemCard = (props) => {
     return (
-        <div>
+        <div className="col-sm-3">
             <Card>
-                {/*<CardImg top width="100%" src={ props.image } alt={ props.title } />*/}
+                <CardImage color={ props.color } />
                 <CardBody>
                     <CardTitle>{ props.title }</CardTitle>
-                    <CardText>{ props.description }</CardText>
+                    <CardText>{ props.desc }</CardText>
                     {/*<ItemDropdown costs={ props.costs } />*/}
                 </CardBody>
             </Card>
         </div>
     );
+};
+
+const CardImage = ({ color }) => {
+    if (typeof color[0] !== 'undefined' && typeof color[0].gallery[0] !== 'undefined') {
+        return <CardImg
+            top width="100%"
+            src={ color[0].gallery[0].medium[0] } alt="No alt" />;
+    } else {
+        return <div/>;
+    }
 };
 
 ItemCard.propTypes = {

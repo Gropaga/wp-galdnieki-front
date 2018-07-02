@@ -5,12 +5,12 @@ const JumbotronLanding = (props) => {
     return (
         <div>
             <Jumbotron style={{ backgroundSize: 'cover', backgroundImage: 'url(' + props.landingImage + ')' }}>
-                <h1 className="display-3">Hello, world!</h1>
-                <p className="lead">This is a simple hero unit, a simple Jumbotron-style component for calling extra attention to featured content or information.</p>
+                <h1 className="display-3">{ props.jumbo[props.locale].heading }</h1>
+                <p className="lead">{ props.jumbo[props.locale].text }</p>
                 <hr className="my-2" />
-                <p>It uses utility classes for typgraphy and spacing to space content out within the larger container.</p>
+                <p>{ props.jumbo[props.locale]['sub-text'] }</p>
                 <p className="lead">
-                    <Button color="primary">Learn More</Button>
+                    <Button color="primary">{ props.jumbo[props.locale]['button-text'] }</Button>
                 </p>
             </Jumbotron>
         </div>

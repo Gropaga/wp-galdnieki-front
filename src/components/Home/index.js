@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { requestHome, receiveHome, receiveError } from '../../actions/home'
 
 import localeConnect from '../../lib/localeConnect';
-
+import { Button } from 'reactstrap';
 import JumbotronLanding from './JumbotronLanding'
 import ItemCards from '../ItemCards'
 
@@ -13,7 +13,18 @@ class Home extends React.Component {
         return this.props.isFetching ?
             <h1>Loading...</h1> :
             <div>
-                <JumbotronLanding { ...this.props } />
+                <JumbotronLanding
+                    locale={ this.props.locale }
+                    landingImage={ this.props.landingImage }
+                    jumbo={ this.props.jumbo }
+                />
+                <h4>
+                    Двери
+                    {" "}
+                    <Button outline color="primary" size="sm">
+                        посмотреть каталог дверей
+                    </Button>
+                </h4>
                 <ItemCards
                     locale={ this.props.locale }
                     doors={ this.props.doors }
