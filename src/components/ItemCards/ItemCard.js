@@ -3,12 +3,14 @@ import PropTypes from 'prop-types'
 import { Card, CardImg, CardText, CardBody,
     CardTitle } from 'reactstrap';
 import ItemDropdown from './ItemDropdown'
+import ItemCarousel from './ItemCarousel';
 
 const ItemCard = (props) => {
     return (
         <div className="col-sm-3">
             <Card>
-                <CardImage color={ props.color } />
+                {/*<CardImage color={ props.color } />*/}
+                <ItemCarousel color={ props.color }/>
                 <CardBody>
                     <CardTitle>{ props.title }</CardTitle>
                     <CardText>{ props.desc }</CardText>
