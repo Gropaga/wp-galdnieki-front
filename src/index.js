@@ -19,9 +19,9 @@ const store = createStore(
     connectRouter(history)(rootReducer),
     composeEnhancer(
         applyMiddleware(
-            consoleLogger,
             thunkMiddleware,
             routerMiddleware(history),
+            consoleLogger,
         ),
     ),
 );

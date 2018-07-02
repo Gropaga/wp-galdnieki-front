@@ -3,6 +3,8 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { requestHome, receiveHome, receiveError } from '../../actions/home'
 
+import localeConnect from '../../lib/localeConnect';
+
 import JumbotronLanding from './JumbotronLanding'
 import ItemCards from '../ItemCards'
 
@@ -12,13 +14,17 @@ class Home extends React.Component {
             <h1>Loading...</h1> :
             <div>
                 <JumbotronLanding { ...this.props } />
-                {/*<ItemCards { ...this.props.doors } />*/}
+                <ItemCards
+                    locale={ this.props.locale }
+                    doors={ this.props.doors }
+                />
             </div>
     }
 
     async componentWillMount() {
         if (typeof this.props.updated  === 'undefined') {
-            const rawResponse = await fetch('http://gald.lv:8080/wp-json/shop/v1/landing-page/');
+            const rawResponse = await fetch('http://gald.lv:8080/' +
+                'wp-json/shop/v1/landing-page/');
             const json = await rawResponse.json();
             this.props.receiveHome(json);
         }
@@ -35,6 +41,8 @@ Home.propTypes = {
 const mapStateToProps = state => ({
     isFetching: state.home.isFetching,
     landingImage: state.home.landingImage,
+    doors: state.home.doors,
+    jumbo: state.home.jumbo
 });
 
 const mapDispatchToProps = dispatch => ({

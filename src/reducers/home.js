@@ -1,6 +1,14 @@
 import { REQUEST_HOME, RECEIVE_HOME, RECEIVE_ERROR} from '../actions/home'
 
-const homeReducer = (state = { isFetching: true, content: null }, action) => {
+const initState = {
+    isFetching: true,
+    content: null,
+    doors: [],
+    jumbo: {},
+    landingImage: null
+};
+
+const homeReducer = (state = { ...initState }, action) => {
     switch (action.type) {
         case REQUEST_HOME:
             return Object.assign({}, state, {

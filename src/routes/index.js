@@ -5,12 +5,16 @@ import Counter from '../components/Counter'
 import NoMatch from '../components/NoMatch'
 import MainNav from '../components/bem/MainNav/index.js'
 
+import LocaleRoute from '../lib/LocaleRoute'
+
 
 const routes = (history) => (
     <div className="container">
         <MainNav pathname={ history.location.pathname } />
         <Switch>
-            <Route exact path="/" component={Home} />
+            <LocaleRoute exact path=":language(/ru|)" component={Home} />
+            <Route exact path=":language(/ru|)/counter" component={Counter} />
+            <Route component={NoMatch} />
         </Switch>
     </div>
 );
