@@ -7,11 +7,7 @@ function localeConnect(
     options = {}
 ) {
     return connect(
-
-
         state => {
-            console.log('suka', state);
-
             return Object.assign(mapStateToProps(state), {
                 locale: state.home.locale
             });

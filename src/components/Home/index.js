@@ -2,8 +2,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { requestHome, receiveHome, receiveError } from '../../actions/home'
-
-import localeConnect from '../../lib/localeConnect';
 import { Button } from 'reactstrap';
 import JumbotronLanding from './JumbotronLanding'
 import ItemCards from '../ItemCards'

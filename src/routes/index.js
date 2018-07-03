@@ -13,8 +13,8 @@ const routes = (history) => (
         <MainNav pathname={ history.location.pathname } />
         <Switch>
             <LocaleRoute exact path=":language(/ru|)" component={Home} />
-            <Route exact path=":language(/ru|)/counter" component={Counter} />
-            <Route component={NoMatch} />
+            <LocaleRoute exact path=":language(/ru|)/counter" component={Counter} />
+            <LocaleRoute component={NoMatch} />
         </Switch>
     </div>
 );

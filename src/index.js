@@ -9,7 +9,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import App from './App'
 import rootReducer from './reducers'
-import 'bootstrap/scss/bootstrap.scss';
+import './custom-bootstrap.scss';
 import consoleLogger from './middleware/consoleLogger'
 
 const history = createBrowserHistory();
