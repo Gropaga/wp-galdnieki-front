@@ -1,15 +1,23 @@
 import React from 'react'
 import ItemCard from './ItemCard'
 
-const ItemCards = (props) => {
-    return <div className="row">{ Object.keys(props.doors[props.locale])
-        .map((key, index, doors) => {
+const ItemCards = ({ locale, doors, selectDimensions }) => {
+    return <div className="row">{
+        Object.keys(doors).filter((doorId) => (doors[doorId].locale === locale))
+        .map((doorId) => {
             return <ItemCard
-                title={ props.doors[props.locale][key].post.post_title }
-                desc={ props.doors[props.locale][key].post.post_excerpt }
-                color={ props.doors[props.locale][key].color }
-                price={ props.doors[props.locale][key].price }
-                key={ `door_${props.doors[props.locale][key].post.post_title}` }
+                doorId={ doorId }
+                title={ doors[doorId].title }
+                desc={ doors[doorId].content }
+                color={ doors[doorId].color }
+                price={ doors[doorId].price }
+                selected={ doors[doorId].selected }
+                key={ doorId }
+                selectDimensions={
+                    (doorId) =>
+                        (dimensions) =>
+                            selectDimensions(doorId, dimensions)
+                }
             />;
         })}</div>;
 };

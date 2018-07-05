@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { requestHome, receiveHome, receiveError } from '../../actions/home'
+import { requestHome, receiveHome, receiveError, selectDoorSize } from '../../actions/home'
 import { Button } from 'reactstrap';
 import JumbotronLanding from './JumbotronLanding'
 import ItemCards from '../ItemCards'
@@ -13,7 +13,7 @@ class Home extends React.Component {
             <div>
                 <JumbotronLanding
                     locale={ this.props.locale }
-                    landingImage={ this.props.landingImage }
+                    image={ this.props.landingImage }
                     jumbo={ this.props.jumbo }
                 />
                 <h4>
@@ -26,6 +26,7 @@ class Home extends React.Component {
                 <ItemCards
                     locale={ this.props.locale }
                     doors={ this.props.doors }
+                    selectDimensions={ this.props.selectDimensions }
                 />
             </div>
     }
@@ -58,6 +59,9 @@ const mapDispatchToProps = dispatch => ({
     requestHome: (language) => dispatch(requestHome(language)),
     receiveHome: (json) => dispatch(receiveHome(json)),
     receiveError: (json) => dispatch(receiveError(json)),
+
+    selectDimensions: (doorId, dimensions) =>
+        dispatch(selectDoorSize(doorId, dimensions))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home)

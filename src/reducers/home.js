@@ -1,8 +1,8 @@
-import { REQUEST_HOME, RECEIVE_HOME, RECEIVE_ERROR} from '../actions/home'
+import { REQUEST_HOME, RECEIVE_HOME, RECEIVE_ERROR,
+    SELECT_DOOR_SIZE} from '../actions/home'
 
 const initState = {
     isFetching: true,
-    content: null,
     doors: [],
     jumbo: {},
     landingImage: null
@@ -27,6 +27,20 @@ const homeReducer = (state = { ...initState }, action) => {
                 content: action.content,
                 updated: Date.now()
             });
+        case SELECT_DOOR_SIZE:
+            return {
+                ...state,
+                doors: {
+                    ...state.doors,
+                    [action.doorId]: {
+                        ...state.doors[action.doorId],
+                        selected: {
+                            height: action.height,
+                            width: action.width
+                        }
+                    }
+                }
+            };
         default:
             return state
     }
