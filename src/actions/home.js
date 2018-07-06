@@ -27,7 +27,7 @@ export function receiveError(json) {
     }
 }
 
-export function selectDoorSize(doorId, dimensions) {
+export function selectDimensions(doorId, dimensions) {
     return {
         type: SELECT_DOOR_SIZE,
         doorId: doorId,

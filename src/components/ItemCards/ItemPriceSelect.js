@@ -3,24 +3,38 @@ import PropTypes from 'prop-types'
 import { FormGroup, Label, Input } from 'reactstrap';
 
 const ItemPriceSelect = ({ price, selected, onChange }) => {
+
+    console.log('itempriceselect', JSON.stringify({
+        height: selected.height,
+        width: selected.width
+    }));
+
     return (
         <FormGroup>
-            <Input onChange={ (event) => onChange(event.target.value) } type="select" name="selectMulti" id="exampleSelectMulti">
+            <Input
+                value={ JSON.stringify({
+                    height: selected.height,
+                    width: selected.width
+                })}
+                onChange={ (event) => onChange(event.target.value) }
+                type="select"
+                name="selectMulti"
+                id="exampleSelectMulti"
+            >
                 {
                     Object.values(price.reduce((acc, p) => (
                         Object.assign(acc, {
                             // making unique
                             [JSON.stringify({height: p.height,width: p.width})]:
                                 <option
-                                    value={JSON.stringify({
+                                    value={ JSON.stringify({
                                         height: p.height,
                                         width: p.width
                                     })}
-                                    selected={selected}
                                     key={ JSON.stringify({
                                         height: p.height,
                                         width: p.width
-                                    }) }
+                                    })}
                                 >
                                     {`${p.height} x ${p.width} mm`}
                                 </option>

@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { requestHome, receiveHome, receiveError, selectDoorSize } from '../../actions/home'
+import { requestHome, receiveHome, receiveError, selectDimensions } from '../../actions/home'
 import { Button } from 'reactstrap';
 import JumbotronLanding from './JumbotronLanding'
 import ItemCards from '../ItemCards'
@@ -52,7 +52,8 @@ const mapStateToProps = state => ({
     isFetching: state.home.isFetching,
     landingImage: state.home.landingImage,
     doors: state.home.doors,
-    jumbo: state.home.jumbo
+    jumbo: state.home.jumbo,
+    updated: state.home.updated
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -61,7 +62,7 @@ const mapDispatchToProps = dispatch => ({
     receiveError: (json) => dispatch(receiveError(json)),
 
     selectDimensions: (doorId, dimensions) =>
-        dispatch(selectDoorSize(doorId, dimensions))
+        dispatch(selectDimensions(doorId, dimensions))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home)

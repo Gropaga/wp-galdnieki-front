@@ -4,8 +4,12 @@ import { Card, CardImg, CardText, CardBody,
     CardTitle } from 'reactstrap';
 import ItemCarousel from './ItemCarousel';
 import ItemPriceSelect from './ItemPriceSelect';
+import ItemPrice from "./ItemPrice";
 
 const ItemCard = (props) => {
+
+    console.log('selected', props.selected);
+
     return (
         <div className="col-sm-3">
             <Card>
@@ -15,7 +19,12 @@ const ItemCard = (props) => {
                     {/*<CardText>{ props.desc }</CardText>*/}
                     <ItemPriceSelect
                         price={ props.price }
+                        selected={ props.selected }
                         onChange={ props.selectDimensions(props.doorId) }
+                    />
+                    <ItemPrice
+                        price={ props.price }
+                        selected={ props.selected }
                     />
                 </CardBody>
             </Card>

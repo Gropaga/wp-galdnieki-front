@@ -11,7 +11,7 @@ const ItemCards = ({ locale, doors, selectDimensions }) => {
                 desc={ doors[doorId].content }
                 color={ doors[doorId].color }
                 price={ doors[doorId].price }
-                selected={ doors[doorId].selected }
+                selected={ doors[doorId].selected || {height: 0, width: 0} }
                 key={ doorId }
                 selectDimensions={
                     (doorId) =>
@@ -21,5 +21,9 @@ const ItemCards = ({ locale, doors, selectDimensions }) => {
             />;
         })}</div>;
 };
+
+const defaultDimensions = price => {
+    price.reduce()
+}
 
 export default ItemCards
