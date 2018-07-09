@@ -13,7 +13,6 @@ const homeReducer = (state = { ...initState }, action) => {
         case REQUEST_HOME:
             return Object.assign({}, state, {
                 isFetching: true,
-                helloworld: "333333"
             });
         case RECEIVE_HOME:
             return {
