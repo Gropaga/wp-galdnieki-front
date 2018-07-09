@@ -2,19 +2,20 @@ import React from 'react';
 import PropTypes from 'prop-types'
 import { FormGroup, Label, Input } from 'reactstrap';
 
-const ItemPriceSelect = ({ price, selected, onChange }) => {
+const ItemPriceSelect = ({ price, sizeSelect, onChange }) => {
 
     console.log('itempriceselect', JSON.stringify({
-        height: selected.height,
-        width: selected.width
+        height: sizeSelect.height,
+        width: sizeSelect.width
     }));
 
     return (
         <FormGroup>
             <Input
+                bsSize="sm"
                 value={ JSON.stringify({
-                    height: selected.height,
-                    width: selected.width
+                    height: sizeSelect.height,
+                    width: sizeSelect.width
                 })}
                 onChange={ (event) => onChange(event.target.value) }
                 type="select"

@@ -1,7 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { requestHome, receiveHome, receiveError, selectDimensions } from '../../actions/home'
+import { requestHome, receiveHome, receiveError,
+    selectDimensions, selectColor } from '../../actions/home'
 import { Button } from 'reactstrap';
 import JumbotronLanding from './JumbotronLanding'
 import ItemCards from '../ItemCards'
@@ -27,13 +28,14 @@ class Home extends React.Component {
                     locale={ this.props.locale }
                     doors={ this.props.doors }
                     selectDimensions={ this.props.selectDimensions }
+                    selectColor={ this.props.selectColor }
                 />
             </div>
     }
 
     async componentWillMount() {
         if (typeof this.props.updated  === 'undefined') {
-            const rawResponse = await fetch('http://gald.lv:8080/' +
+            const rawResponse = await fetch('http://192.168.1.4:8080/' +
                 'wp-json/shop/v1/landing-page/');
             const json = await rawResponse.json();
             this.props.receiveHome(json);
@@ -62,7 +64,10 @@ const mapDispatchToProps = dispatch => ({
     receiveError: (json) => dispatch(receiveError(json)),
 
     selectDimensions: (doorId, dimensions) =>
-        dispatch(selectDimensions(doorId, dimensions))
+        dispatch(selectDimensions(doorId, dimensions)),
+
+    selectColor: (doorId, colorIndex) =>
+        dispatch(selectColor(doorId, colorIndex))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home)

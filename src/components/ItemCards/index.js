@@ -1,7 +1,7 @@
 import React from 'react'
 import ItemCard from './ItemCard'
 
-const ItemCards = ({ locale, doors, selectDimensions }) => {
+const ItemCards = ({ locale, doors, selectDimensions, selectColor }) => {
     return <div className="row">{
         Object.keys(doors).filter((doorId) => (doors[doorId].locale === locale))
         .map((doorId) => {
@@ -11,19 +11,21 @@ const ItemCards = ({ locale, doors, selectDimensions }) => {
                 desc={ doors[doorId].content }
                 color={ doors[doorId].color }
                 price={ doors[doorId].price }
-                selected={ doors[doorId].selected || {height: 0, width: 0} }
+                sizeSelect={ doors[doorId].sizeSelect}
+                colorSelect={ doors[doorId].colorSelect }
                 key={ doorId }
                 selectDimensions={
                     (doorId) =>
                         (dimensions) =>
                             selectDimensions(doorId, dimensions)
                 }
+                selectColor={
+                    (doorId) =>
+                        (dimensions) =>
+                            selectColor(doorId, dimensions)
+                }
             />;
         })}</div>;
 };
-
-const defaultDimensions = price => {
-    price.reduce()
-}
 
 export default ItemCards

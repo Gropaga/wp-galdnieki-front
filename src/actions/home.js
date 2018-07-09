@@ -3,6 +3,7 @@ export const RECEIVE_HOME = 'RECEIVE_HOME';
 export const RECEIVE_ERROR = 'RECEIVE_ERROR';
 
 export const SELECT_DOOR_SIZE = 'SELECT_DOOR_SIZE';
+export const SELECT_DOOR_COLOR = 'SELECT_DOOR_COLOR';
 
 export function requestHome(language) {
     return {
@@ -35,3 +36,10 @@ export function selectDimensions(doorId, dimensions) {
     }
 }
 
+export function selectColor(doorId, colorIndex) {
+    return {
+        type: SELECT_DOOR_COLOR,
+        doorId: doorId,
+        colorIndex: colorIndex
+    }
+}

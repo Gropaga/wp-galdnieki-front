@@ -1,33 +1,39 @@
 import React from 'react';
 import PropTypes from 'prop-types'
-import { Card, CardImg, CardText, CardBody,
+import { Card, CardBody,
     CardTitle } from 'reactstrap';
 import ItemCarousel from './ItemCarousel';
 import ItemPriceSelect from './ItemPriceSelect';
 import ItemPrice from "./ItemPrice";
+import ItemColor from "./ItemColor";
 
 const ItemCard = (props) => {
 
-    console.log('selected', props.selected);
+    // console.log('props.color', props.color);
+    // debugger;
 
     return (
         <div className="col-sm-3">
-            <Card>
-                <ItemCarousel color={ props.color }/>
-                <CardBody>
-                    <CardTitle>{ props.title }</CardTitle>
-                    {/*<CardText>{ props.desc }</CardText>*/}
-                    <ItemPriceSelect
-                        price={ props.price }
-                        selected={ props.selected }
-                        onChange={ props.selectDimensions(props.doorId) }
-                    />
-                    <ItemPrice
-                        price={ props.price }
-                        selected={ props.selected }
-                    />
-                </CardBody>
-            </Card>
+            <ItemCarousel
+                color={ props.color}
+                colorSelect={ props.colorSelect }
+            />
+            <h6 className="mt-3">{ props.title }</h6>
+            {/*<CardText>{ props.desc }</CardText>*/}
+            <ItemColor
+                color={ props.color }
+                colorSelect={ props.colorSelect}
+                onClick={ props.selectColor(props.doorId) }
+            />
+            <ItemPriceSelect
+                price={ props.price }
+                sizeSelect={ props.sizeSelect }
+                onChange={ props.selectDimensions(props.doorId) }
+            />
+            <ItemPrice
+                price={ props.price }
+                sizeSelect={ props.sizeSelect }
+            />
         </div>
     );
 };

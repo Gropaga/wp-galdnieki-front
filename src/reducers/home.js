@@ -1,5 +1,5 @@
 import { REQUEST_HOME, RECEIVE_HOME, RECEIVE_ERROR,
-    SELECT_DOOR_SIZE} from '../actions/home'
+    SELECT_DOOR_SIZE, SELECT_DOOR_COLOR} from '../actions/home'
 
 const initState = {
     isFetching: true,
@@ -35,10 +35,21 @@ const homeReducer = (state = { ...initState }, action) => {
                     ...state.doors,
                     [action.doorId]: {
                         ...state.doors[action.doorId],
-                        selected: {
+                        sizeSelect: {
                             height: action.height,
                             width: action.width
                         }
+                    }
+                }
+            };
+        case SELECT_DOOR_COLOR:
+            return {
+                ...state,
+                doors: {
+                    ...state.doors,
+                    [action.doorId]: {
+                        ...state.doors[action.doorId],
+                        colorSelect: action.colorIndex
                     }
                 }
             };

@@ -1,0 +1,17 @@
+$dot-size: 35px;
+
+.ColorDots {
+  text-align: center;
+  &__item {
+    height: $dot-size;
+    width: $dot-size;
+    background-color: $black;
+    border: 1px solid $gray-300;
+    display: inline-block;
+    cursor: pointer;
+    margin-right: 5px;
+    &-active {
+      cursor: auto;
+    }
+  }
+}

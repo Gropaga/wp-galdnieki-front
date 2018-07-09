@@ -2,19 +2,19 @@ import React from 'react';
 import PropTypes from 'prop-types'
 import { Table } from 'reactstrap';
 
-const ItemPrice = ({ price, selected }) => {
+const ItemPrice = ({ price, sizeSelect }) => {
     return (
         <Table size="sm">
             <tbody>
             {
                 price.filter(p =>
-                    p.height === selected.height && p.width === selected.width
+                    p.height === sizeSelect.height && p.width === sizeSelect.width
                 ).map(p =>
                     <tr key={ JSON.stringify({
                         price: p.price,
                         material: p.material
                     }) }>
-                        <th scope="row">{ p.material }</th>
+                        <td scope="row">{ p.material }</td>
                         <td className="text-right">{ p.price } EUR</td>
                     </tr>
                 )
