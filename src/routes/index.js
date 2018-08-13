@@ -7,16 +7,18 @@ import MainNav from '../components/bem/MainNav/index.js'
 
 import LocaleRoute from '../lib/LocaleRoute'
 
+const routes = (history, path, locale) => {
 
-const routes = (history) => (
-    <div className="container">
-        <MainNav pathname={ history.location.pathname } />
+    return <div className="container">
+        <MainNav exact path={path} locale={locale} history={history} />
         <Switch>
-            <LocaleRoute exact path=":language(/ru|)" component={Home} />
-            <LocaleRoute exact path=":language(/ru|)/counter" component={Counter} />
-            <LocaleRoute component={NoMatch} />
+            <LocaleRoute exact path=":language(/ru|)" component={Home}/>
+            <LocaleRoute exact path=":language(/ru|)/counter" component={Counter}/>
+            <LocaleRoute component={NoMatch}/>
         </Switch>
     </div>
-);
+};
+
+
 
 export default routes

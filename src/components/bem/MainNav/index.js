@@ -7,15 +7,15 @@ import {
     Nav,
     NavItem,
     NavLink,
-    UncontrolledDropdown,
-    DropdownToggle,
-    DropdownMenu,
-    DropdownItem } from 'reactstrap';
+} from 'reactstrap';
 import { Link } from 'react-router-dom'
+import { _ } from '../../../lib/i18n';
 
 export default class MainNav extends React.Component {
     constructor(props) {
         super(props);
+
+        console.log('rest', props);
 
         this.toggle = this.toggle.bind(this);
         this.state = {
@@ -36,10 +36,10 @@ export default class MainNav extends React.Component {
                     <Collapse isOpen={this.state.isOpen} navbar>
                         <Nav navbar>
                             <NavItem>
-                                <NavLink tag={ Link } to="/counter">Двери</NavLink>
+                                <NavLink tag={ Link } to="/counter">{ _('Doors') }</NavLink>
                             </NavItem>
                             <NavItem>
-                                <NavLink tag={ Link } to="/counter">Лестницы</NavLink>
+                                <NavLink tag={ Link } to="/counter">{ _('Stairs') }</NavLink>
                             </NavItem>
                             <NavItem>
                                 <NavLink tag={ Link } to="/counter">Окна</NavLink>

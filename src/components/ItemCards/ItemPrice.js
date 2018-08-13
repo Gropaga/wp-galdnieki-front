@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types'
 import { Table } from 'reactstrap';
+import { _ } from "../../lib/i18n";
 
 const ItemPrice = ({ price, sizeSelect }) => {
     return (
@@ -14,7 +15,7 @@ const ItemPrice = ({ price, sizeSelect }) => {
                         price: p.price,
                         material: p.material
                     }) }>
-                        <td scope="row">{ p.material }</td>
+                        <td scope="row">{ _(p.material) }</td>
                         <td className="text-right">{ p.price } EUR</td>
                     </tr>
                 )

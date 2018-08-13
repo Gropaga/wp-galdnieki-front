@@ -17,6 +17,7 @@ class Home extends React.Component {
                     image={ this.props.landingImage }
                     jumbo={ this.props.jumbo }
                 />
+
                 <h4>
                     Двери
                     {" "}
@@ -35,7 +36,7 @@ class Home extends React.Component {
 
     async componentWillMount() {
         if (typeof this.props.updated  === 'undefined') {
-            const rawResponse = await fetch('http://192.168.1.4:8080/' +
+            const rawResponse = await fetch('http://localhost:8080/' +
                 'wp-json/shop/v1/landing-page/');
             const json = await rawResponse.json();
             this.props.receiveHome(json);

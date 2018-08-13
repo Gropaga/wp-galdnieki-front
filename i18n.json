@@ -1,0 +1,27 @@
+{
+  "locales": {
+    "lv": {
+      "Door": "Durvis",
+      "Doors": "Durvi",
+      "Stairs": "Kapnes",
+      "Ash": "Pelni",
+      "Oak": "Ozols",
+      "Birch": "Bērzs",
+      "Nut": "Rieksts"
+    },
+    "ru": {
+      "Door": "Дверь",
+      "Doors": "Двери",
+      "Stairs": "Лестницы",
+      "Ash": "Орех",
+      "Oak": "Дуб",
+      "Birch": "Берёза",
+      "Nut": "Орех"
+    }
+  },
+  "default": "lv",
+  "pathMatch": {
+    "/ru": "ru",
+    "": "lv"
+  }
+}
