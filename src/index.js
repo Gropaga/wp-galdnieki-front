@@ -12,9 +12,18 @@ import rootReducer from './reducers'
 import './style/index.scss';
 import consoleLogger from './middleware/consoleLogger'
 import { matchPath } from 'react-router'
-import i18n from "./middleware/i18n";
+import { setup as i18nSetup } from "./lib/i18n";
 
 const history = createBrowserHistory();
+
+i18nSetup(() => {
+    return matchPath(history.location.pathname, {
+        path: ':language(/ru|)',
+        exact: false,
+        strict: false
+    }).params.language;
+});
+
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(
     connectRouter(history)(rootReducer),
@@ -23,12 +32,12 @@ const store = createStore(
             thunkMiddleware,
             routerMiddleware(history),
             consoleLogger,
-            i18n(history)
         ),
     ),
 );
 
 const path = (history) => {
+    console.log(history.location.pathname);
     return matchPath(history.location.pathname, {
         path: ':language(/ru|)',
         exact: false,

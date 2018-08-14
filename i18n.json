@@ -1,22 +1,52 @@
 {
   "locales": {
-    "lv": {
-      "Door": "Durvis",
-      "Doors": "Durvi",
-      "Stairs": "Kapnes",
-      "Ash": "Pelni",
-      "Oak": "Ozols",
-      "Birch": "Bērzs",
-      "Nut": "Rieksts"
+    "strings": {
+      "lv": {
+        "Door": "Durvis",
+        "Doors": "Durvi",
+        "Stairs": "Kapnes",
+        "Windows": "Logi",
+        "Kitchen": "Virtuve",
+        "Interior": "Interjers",
+
+        "door catalogue": "apskatīt durvju katalogu",
+
+        "Ash": "Pelni",
+        "Oak": "Ozols",
+        "Birch": "Bērzs",
+        "Nut": "Rieksts"
+      },
+      "ru": {
+        "Door": "Дверь",
+        "Doors": "Двери",
+        "Stairs": "Лестницы",
+        "Windows": "Окна",
+        "Kitchen": "Кухни",
+        "Interior": "Интерьер",
+
+        "door catalogue": "посмотреть каталог дверей",
+
+        "Ash": "Орех",
+        "Oak": "Дуб",
+        "Birch": "Берёза",
+        "Nut": "Орех"
+      }
     },
-    "ru": {
-      "Door": "Дверь",
-      "Doors": "Двери",
-      "Stairs": "Лестницы",
-      "Ash": "Орех",
-      "Oak": "Дуб",
-      "Birch": "Берёза",
-      "Nut": "Орех"
+    "paths": {
+      "lv": {
+        "doors": "durvis",
+        "stairs": "kapnes",
+        "windows": "logi",
+        "kitchens": "virtuves",
+        "interior": "interjers"
+      },
+      "ru": {
+        "doors": "dveri",
+        "stairs": "lestnici",
+        "windows": "okna",
+        "kitchens": "kuhni",
+        "interior": "interier"
+      }
     }
   },
   "default": "lv",

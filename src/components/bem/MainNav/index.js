@@ -9,7 +9,7 @@ import {
     NavLink,
 } from 'reactstrap';
 import { Link } from 'react-router-dom'
-import { _ } from '../../../lib/i18n';
+import { _, getLocale } from '../../../lib/i18n';
 
 export default class MainNav extends React.Component {
     constructor(props) {
@@ -28,6 +28,7 @@ export default class MainNav extends React.Component {
         });
     }
     render() {
+        console.log('getLocale()', getLocale());
         return (
             <div>
                 <Navbar color="white" light expand="md">
@@ -42,13 +43,13 @@ export default class MainNav extends React.Component {
                                 <NavLink tag={ Link } to="/counter">{ _('Stairs') }</NavLink>
                             </NavItem>
                             <NavItem>
-                                <NavLink tag={ Link } to="/counter">Окна</NavLink>
+                                <NavLink tag={ Link } to="/counter">{ _('Windows') }</NavLink>
                             </NavItem>
                             <NavItem>
-                                <NavLink tag={ Link } to="/counter">Кухни</NavLink>
+                                <NavLink tag={ Link } to="/counter">{ _('Kitchen') }</NavLink>
                             </NavItem>
                             <NavItem>
-                                <NavLink tag={ Link } to="/counter">Интерьер</NavLink>
+                                <NavLink tag={ Link } to="/counter">{ _('Interior') }</NavLink>
                             </NavItem>
                         </Nav>
                         <Nav className="ml-auto" navbar>

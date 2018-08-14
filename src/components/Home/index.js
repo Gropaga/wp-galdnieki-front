@@ -6,6 +6,7 @@ import { requestHome, receiveHome, receiveError,
 import { Button } from 'reactstrap';
 import JumbotronLanding from './JumbotronLanding'
 import ItemCards from '../ItemCards'
+import { _ } from "../../lib/i18n";
 
 class Home extends React.Component {
     render() {
@@ -19,10 +20,10 @@ class Home extends React.Component {
                 />
 
                 <h4>
-                    Двери
+                    { _('Doors') }
                     {" "}
                     <Button outline color="primary" size="sm">
-                        посмотреть каталог дверей
+                        { _('door catalogue') }
                     </Button>
                 </h4>
                 <ItemCards
