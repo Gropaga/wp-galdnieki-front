@@ -17,15 +17,18 @@ export const _ = (key) => {
     }
 };
 
-export const _p = (key) => {
-    if (config.locales &&
-        config.locales.paths[locale('path')] &&
-        config.locales.paths[locale('path')][key]
-    ) {
-        return config.locales.paths[locale('path')][key];
-    } else {
-        return key;
-    }
-};
+export const _p = (key) => (
+    ((key) => {
+        console.log(key);
+        if (config.locales &&
+            config.locales.paths[locale('language')] &&
+            config.locales.paths[locale('language')][key]
+        ) {
+            return `/${config.locales.paths[locale('language')][key]}`;
+        } else {
+            return `/${key}`;
+        }
+    })(key.replace('/', ''))
+);
 
 export const getLocale = () => locale();

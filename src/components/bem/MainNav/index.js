@@ -36,7 +36,7 @@ export default class MainNav extends React.Component {
                     <Collapse isOpen={this.state.isOpen} navbar>
                         <Nav navbar>
                             <NavItem>
-                                <NavLinkI18n history={ this.props.history } tag={ Link } to="/counter">{ _('Doors') }</NavLinkI18n>
+                                <NavLinkI18n history={ this.props.history } tag={ Link } to="/doors">{ _('Doors') }</NavLinkI18n>
                             </NavItem>
                             <NavItem>
                                 <NavLinkI18n history={ this.props.history } tag={ Link } to="/counter">{ _('Stairs') }</NavLinkI18n>
