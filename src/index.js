@@ -16,12 +16,12 @@ import { setup as i18nSetup } from "./lib/i18n";
 
 const history = createBrowserHistory();
 
-i18nSetup(() => {
+i18nSetup((key) => {
     return matchPath(history.location.pathname, {
-        path: ':language(/ru|)',
+        path: ':language(/ru|):page(/\w+|):item(/\w+|)',
         exact: false,
         strict: false
-    }).params.language;
+    }).params[key];
 });
 
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -39,7 +39,7 @@ const store = createStore(
 const path = (history) => {
     console.log(history.location.pathname);
     return matchPath(history.location.pathname, {
-        path: ':language(/ru|)',
+        path: ':language(/ru|):page(/w+|)',
         exact: false,
         strict: false
     });
