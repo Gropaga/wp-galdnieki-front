@@ -11,6 +11,7 @@ import { Link } from 'react-router-dom'
 import { _, getLocale } from '../../../lib/i18n';
 import NavLinkI18n from '../../NavLinkI18n'
 import NavLinkLocale from '../../NavLinkLocale'
+import NavbarBrandLocale from "../../NavbarBrandLocale";
 
 export default class MainNav extends React.Component {
     constructor(props) {
@@ -27,11 +28,10 @@ export default class MainNav extends React.Component {
         });
     }
     render() {
-        console.log('getLocale()', getLocale());
         return (
             <div>
                 <Navbar color="white" light expand="md">
-                    <NavbarBrand tag={ Link } to="/">Galdnieks.lv</NavbarBrand>
+                    <NavbarBrandLocale history={ this.props.history } tag={ Link } to="/">Galdnieks.lv</NavbarBrandLocale>
                     <NavbarToggler onClick={this.toggle} />
                     <Collapse isOpen={this.state.isOpen} navbar>
                         <Nav navbar>
@@ -39,24 +39,24 @@ export default class MainNav extends React.Component {
                                 <NavLinkI18n history={ this.props.history } tag={ Link } to="/doors">{ _('Doors') }</NavLinkI18n>
                             </NavItem>
                             <NavItem>
-                                <NavLinkI18n history={ this.props.history } tag={ Link } to="/counter">{ _('Stairs') }</NavLinkI18n>
+                                <NavLinkI18n history={ this.props.history } tag={ Link } to="/stairs">{ _('Stairs') }</NavLinkI18n>
                             </NavItem>
                             <NavItem>
-                                <NavLinkI18n history={ this.props.history } tag={ Link } to="/counter">{ _('Windows') }</NavLinkI18n>
+                                <NavLinkI18n history={ this.props.history } tag={ Link } to="/windows">{ _('Windows') }</NavLinkI18n>
                             </NavItem>
                             <NavItem>
-                                <NavLinkI18n history={ this.props.history } tag={ Link } to="/counter">{ _('Kitchen') }</NavLinkI18n>
+                                <NavLinkI18n history={ this.props.history } tag={ Link } to="/kitchen">{ _('Kitchen') }</NavLinkI18n>
                             </NavItem>
                             <NavItem>
-                                <NavLinkI18n history={ this.props.history } tag={ Link } to="/counter">{ _('Interior') }</NavLinkI18n>
+                                <NavLinkI18n history={ this.props.history } tag={ Link } to="/interior">{ _('Interior') }</NavLinkI18n>
                             </NavItem>
                         </Nav>
                         <Nav className="ml-auto" navbar>
                             <NavItem>
-                                <NavLinkLocale history={ this.props.history }  tag={ Link } to="/ru">По-русски</NavLinkLocale>
+                                <NavLinkLocale history={ this.props.history }  tag={ Link } locale="ru">По-русски</NavLinkLocale>
                             </NavItem>
                             <NavItem>
-                                <NavLinkLocale history={ this.props.history }  tag={ Link } to="/">Latviski</NavLinkLocale>
+                                <NavLinkLocale history={ this.props.history }  tag={ Link } locale="lv">Latviski</NavLinkLocale>
                             </NavItem>
                         </Nav>
                     </Collapse>

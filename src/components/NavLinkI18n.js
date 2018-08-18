@@ -1,11 +1,7 @@
 import React from 'react';
-import { matchPath } from 'react-router'
-import {
-    NavLink,
-} from 'reactstrap';
-
+import { pathMatchByHistory } from "../lib/pathMatch";
+import { NavLink } from 'reactstrap';
 import { _p } from '../lib/i18n'
-
 
 export default class NavLinkI18n extends React.Component {
     constructor(props) {
@@ -22,10 +18,7 @@ export default class NavLinkI18n extends React.Component {
     }
 
     getPath() {
-        return matchPath(this.props.history.location.pathname, {
-            path: ':language(/ru|):page(/w+|):resource(/w+|)',
-            exact: false,
-            strict: false
-        }).params.language + _p(this.props.to);
+        return pathMatchByHistory(this.props.history).language +
+                _p(this.props.to);
     }
 }

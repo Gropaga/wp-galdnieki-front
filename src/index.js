@@ -37,7 +37,6 @@ const store = createStore(
 );
 
 const path = (history) => {
-    console.log(history.location.pathname);
     return matchPath(history.location.pathname, {
         path: ':language(/ru|):page(/w+|)',
         exact: false,

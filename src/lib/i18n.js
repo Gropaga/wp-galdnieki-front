@@ -6,25 +6,35 @@ export const setup = (callback) => {
     locale = (objKey) => config.pathMatch[callback(objKey)];
 };
 
-export const _ = (key) => {
+export const _ = (key, language = locale('language')) => {
     if (
-        config.locales.strings[locale('language')] &&
-        config.locales.strings[locale('language')][key]
+        config.locales.strings[language] &&
+        config.locales.strings[language][key]
     ) {
-        return config.locales.strings[locale('language')][key];
+        return config.locales.strings[language][key];
     } else {
         return key;
     }
 };
 
-export const _p = (key) => (
+export const _pRev = (key, language = locale('language')) => {
+    return reverseObject(config.locales.paths[language])[key];
+};
+
+const reverseObject = (object) => {
+    return Object.keys(object).reduce((acc, key) => {
+        return Object.assign(acc, {[object[key]]: key});
+    }, {});
+};
+
+export const _p = (key, language = locale('language')) => (
     ((key) => {
         console.log(key);
         if (config.locales &&
-            config.locales.paths[locale('language')] &&
-            config.locales.paths[locale('language')][key]
+            config.locales.paths[language] &&
+            config.locales.paths[language][key]
         ) {
-            return `/${config.locales.paths[locale('language')][key]}`;
+            return `/${config.locales.paths[language][key]}`;
         } else {
             return `/${key}`;
         }
