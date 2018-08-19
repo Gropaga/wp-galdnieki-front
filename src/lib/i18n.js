@@ -40,4 +40,4 @@ export const _p = (key, language = locale('language')) => (
     })(key.replace('/', ''))
 );
 
-export const getLocale = () => locale();
+export const getLocale = () => locale('language');
