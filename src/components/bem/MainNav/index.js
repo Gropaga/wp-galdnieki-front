@@ -45,7 +45,7 @@ export default class MainNav extends React.Component {
                                 <NavLinkI18n history={ this.props.history } tag={ Link } to="/windows">{ _('Windows') }</NavLinkI18n>
                             </NavItem>
                             <NavItem>
-                                <NavLinkI18n history={ this.props.history } tag={ Link } to="/kitchen">{ _('Kitchen') }</NavLinkI18n>
+                                <NavLinkI18n history={ this.props.history } tag={ Link } to="/kitchens">{ _('Kitchen') }</NavLinkI18n>
                             </NavItem>
                             <NavItem>
                                 <NavLinkI18n history={ this.props.history } tag={ Link } to="/interior">{ _('Interior') }</NavLinkI18n>
@@ -53,10 +53,10 @@ export default class MainNav extends React.Component {
                         </Nav>
                         <Nav className="ml-auto" navbar>
                             <NavItem>
-                                <NavLinkLocale history={ this.props.history }  tag={ Link } locale="ru">По-русски</NavLinkLocale>
+                                <NavLinkLocale history={ this.props.history } tag={ Link } locale="ru">По-русски</NavLinkLocale>
                             </NavItem>
                             <NavItem>
-                                <NavLinkLocale history={ this.props.history }  tag={ Link } locale="lv">Latviski</NavLinkLocale>
+                                <NavLinkLocale history={ this.props.history } tag={ Link } locale="lv">Latviski</NavLinkLocale>
                             </NavItem>
                         </Nav>
                     </Collapse>

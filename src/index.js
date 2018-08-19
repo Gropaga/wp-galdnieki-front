@@ -11,18 +11,13 @@ import App from './App'
 import rootReducer from './reducers'
 import './style/index.scss';
 import consoleLogger from './middleware/consoleLogger'
-import { matchPath } from 'react-router'
 import { setup as i18nSetup } from "./lib/i18n";
+
+import {pathMatch} from "./lib/pathMatch";
 
 const history = createBrowserHistory();
 
-i18nSetup((key) => {
-    return matchPath(history.location.pathname, {
-        path: ':language(/ru|):page(/\w+|):item(/\w+|)',
-        exact: false,
-        strict: false
-    }).params[key];
-});
+i18nSetup(key => pathMatch(history.location.pathname)[key]);
 
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(
@@ -36,20 +31,9 @@ const store = createStore(
     ),
 );
 
-const path = (history) => {
-    return matchPath(history.location.pathname, {
-        path: ':language(/ru|):page(/w+|)',
-        exact: false,
-        strict: false
-    });
-};
-
 ReactDOM.render(
     <Provider store={store}>
-        <App
-            path={path(history)}
-            history={history}
-        />
+        <App history={history} />
     </Provider>,
     document.getElementById('root')
 );

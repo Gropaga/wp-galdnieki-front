@@ -3,10 +3,10 @@ import PropTypes from 'prop-types'
 import { ConnectedRouter } from 'connected-react-router'
 import routes from './routes'
 
-const App = ({ history, path }) => {
+const App = ({ history }) => {
     return (
         <ConnectedRouter history={history}>
-            { routes(history, path, path.params.language) }
+            { routes(history) }
         </ConnectedRouter>
     )
 };

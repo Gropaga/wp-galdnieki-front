@@ -10,6 +10,9 @@ import { _ } from "../../lib/i18n";
 
 class Home extends React.Component {
     render() {
+
+        console.log(this.props);
+
         return this.props.isFetching ?
             <h1>Loading...</h1> :
             <div>

@@ -18,7 +18,7 @@ export const _ = (key, language = locale('language')) => {
 };
 
 export const _pRev = (key, language = locale('language')) => {
-    return reverseObject(config.locales.paths[language])[key];
+    return reverseObject(config.locales)[key][language];
 };
 
 const reverseObject = (object) => {
@@ -29,7 +29,6 @@ const reverseObject = (object) => {
 
 export const _p = (key, language = locale('language')) => (
     ((key) => {
-        console.log(key);
         if (config.locales &&
             config.locales.paths[language] &&
             config.locales.paths[language][key]

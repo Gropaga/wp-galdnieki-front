@@ -1,9 +1,8 @@
 import { matchPath } from 'react-router'
 
 export function pathMatch(path) {
-    // TODO path regex is not correct
     return matchPath(path, {
-        path: ':language(/ru|):page(/\w+|):resource(\w+|)',
+        path: ':language(/ru|):page(/[a-z0-9]+|):id(/[a-z0-9]+|)',
         exact: false,
         strict: false
     }).params;

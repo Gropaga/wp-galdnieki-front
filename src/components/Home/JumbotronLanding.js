@@ -1,8 +1,9 @@
 import React from 'react';
 import { Jumbotron, Button } from 'reactstrap';
 
-const JumbotronLanding = ({ locale, image, jumbo }) => (
-    jumbo.filter((jumbo) => jumbo.locale === locale).map((jumbo) => (
+const JumbotronLanding = ({ locale, image, jumbo }) => {
+    console.log(locale);
+    return jumbo.filter((jumbo) => jumbo.locale === locale).map((jumbo) => (
         <Jumbotron style={{ backgroundSize: 'cover', backgroundImage: 'url(' + image + ')' }}>
             <h1 className="display-3">{ jumbo.heading }</h1>
             <p className="lead">{ jumbo.text }</p>
@@ -12,7 +13,7 @@ const JumbotronLanding = ({ locale, image, jumbo }) => (
                 <Button color="primary">{ jumbo.buttonText }</Button>
             </p>
         </Jumbotron>
-    )).pop()
-);
+    )).pop();
+};
 
 export default JumbotronLanding;
