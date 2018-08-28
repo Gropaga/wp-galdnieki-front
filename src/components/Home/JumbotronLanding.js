@@ -2,7 +2,6 @@ import React from 'react';
 import { Jumbotron, Button } from 'reactstrap';
 
 const JumbotronLanding = ({ locale, image, jumbo }) => {
-    console.log(locale);
     return jumbo.filter((jumbo) => jumbo.locale === locale).map((jumbo) => (
         <Jumbotron style={{ backgroundSize: 'cover', backgroundImage: 'url(' + image + ')' }}>
             <h1 className="display-3">{ jumbo.heading }</h1>

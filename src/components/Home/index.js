@@ -6,18 +6,15 @@ import { requestHome, receiveHome, receiveError,
 import { Button } from 'reactstrap';
 import JumbotronLanding from './JumbotronLanding'
 import ItemCards from '../ItemCards'
-import { _ } from "../../lib/i18n";
+import { _, getLocale } from "../../lib/i18n";
 
 class Home extends React.Component {
     render() {
-
-        console.log(this.props);
-
         return this.props.isFetching ?
             <h1>Loading...</h1> :
             <div>
                 <JumbotronLanding
-                    locale={ this.props.locale }
+                    locale={ getLocale() }
                     image={ this.props.landingImage }
                     jumbo={ this.props.jumbo }
                 />
@@ -30,7 +27,7 @@ class Home extends React.Component {
                     </Button>
                 </h4>
                 <ItemCards
-                    locale={ this.props.locale }
+                    locale={ getLocale() }
                     doors={ this.props.doors }
                     selectDimensions={ this.props.selectDimensions }
                     selectColor={ this.props.selectColor }

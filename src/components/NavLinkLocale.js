@@ -41,7 +41,6 @@ export default class NavLinkLocale extends React.Component {
     }
 
     getCurrentPageKey(pathParams) {
-        console.log('getCurrentPageKey', this.reverseObject(locales.locales.paths[getLocale()])[pathParams.page.replace('/','')]);
         return this.reverseObject(locales.locales.paths[getLocale()])[pathParams.page.replace('/','')];
     }
 
