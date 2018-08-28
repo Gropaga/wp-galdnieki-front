@@ -9,5 +9,6 @@ export function pathMatch(path) {
 }
 
 export function pathMatchByHistory(history) {
+
     return pathMatch(history.location.pathname);
 }

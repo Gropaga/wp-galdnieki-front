@@ -2,11 +2,11 @@ import React from 'react';
 import {
     NavLink,
 } from 'reactstrap';
-import {pathMatchByHistory} from "../lib/pathMatch";
-import { getLocale } from "../lib/i18n";
-import locales from '../../i18n';
+import {pathMatchByHistory} from "../../lib/pathMatch";
+import { getLocale } from "../../lib/i18n";
+import locales from '../../../i18n';
 
-export default class NavLinkLocale extends React.Component {
+export default class NavLinkLocaleSelect extends React.Component {
     constructor(props) {
         super(props);
         this.getPath = this.getPath.bind(this);

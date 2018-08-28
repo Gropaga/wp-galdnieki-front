@@ -8,10 +8,10 @@ import {
     NavItem,
 } from 'reactstrap';
 import { Link } from 'react-router-dom'
-import { _, getLocale } from '../../../lib/i18n';
-import NavLinkI18n from '../../NavLinkI18n'
-import NavLinkLocale from '../../NavLinkLocale'
-import NavbarBrandLocale from "../../NavbarBrandLocale";
+import { _, getLocale } from '../../lib/i18n';
+import NavLinkI18n from './NavLinkI18n'
+import NavLinkLocaleSelect from './NavLinkLocaleSelect'
+import NavbarBrandLocale from "./NavbarBrandLocale";
 
 export default class MainNav extends React.Component {
     constructor(props) {
@@ -53,10 +53,10 @@ export default class MainNav extends React.Component {
                         </Nav>
                         <Nav className="ml-auto" navbar>
                             <NavItem>
-                                <NavLinkLocale history={ this.props.history } tag={ Link } locale="ru">По-русски</NavLinkLocale>
+                                <NavLinkLocaleSelect history={ this.props.history } tag={ Link } locale="ru">По-русски</NavLinkLocaleSelect>
                             </NavItem>
                             <NavItem>
-                                <NavLinkLocale history={ this.props.history } tag={ Link } locale="lv">Latviski</NavLinkLocale>
+                                <NavLinkLocaleSelect history={ this.props.history } tag={ Link } locale="lv">Latviski</NavLinkLocaleSelect>
                             </NavItem>
                         </Nav>
                     </Collapse>
