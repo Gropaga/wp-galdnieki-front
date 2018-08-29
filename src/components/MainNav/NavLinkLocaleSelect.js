@@ -4,7 +4,7 @@ import {
 } from 'reactstrap';
 import {pathMatchByHistory} from "../../lib/pathMatch";
 import { getLocale } from "../../lib/i18n";
-import locales from '../../../i18n';
+import dict from '../../../dict';
 
 export default class NavLinkLocaleSelect extends React.Component {
     constructor(props) {
@@ -29,23 +29,21 @@ export default class NavLinkLocaleSelect extends React.Component {
             this.getPageUrlPart(pathParams),
             this.getIdUrlPart(pathParams)
         ].reduce((acc, part)=> {
-            console.log('acc', acc);
-            console.log('part', part);
             return part ? `${acc}/${part}` : acc;
         }, "");
     }
 
     getPageUrlPart(pathParams) {
         if (!pathParams.page) return "";
-        return locales.locales.paths[this.props.locale][this.getCurrentPageKey(pathParams)];
+        return dict.locales.paths[this.props.locale][this.getCurrentPageKey(pathParams)];
     }
 
     getCurrentPageKey(pathParams) {
-        return this.reverseObject(locales.locales.paths[getLocale()])[pathParams.page.replace('/','')];
+        return this.reverseObject(dict.locales.paths[getLocale()])[pathParams.page.replace('/','')];
     }
 
     getLanguageUrlPart() {
-        return this.reverseObject(locales.pathMatch)[this.props.locale].replace('/','');
+        return this.reverseObject(dict.langPaths)[this.props.locale].replace('/','');
     }
 
     getIdUrlPart(pathParams) {

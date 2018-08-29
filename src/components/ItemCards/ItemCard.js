@@ -13,7 +13,7 @@ const ItemCard = (props) => {
     // debugger;
 
     return (
-        <div className="col-sm-3">
+        <div className="col-lg-3 col-md-6">
             <ItemCarousel
                 color={ props.color}
                 colorSelect={ props.colorSelect }
