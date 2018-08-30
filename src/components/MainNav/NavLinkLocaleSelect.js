@@ -12,7 +12,6 @@ export default class NavLinkLocaleSelect extends React.Component {
         this.getPath = this.getPath.bind(this);
         this.getPageUrlPart = this.getPageUrlPart.bind(this);
         this.getLanguageUrlPart = this.getLanguageUrlPart.bind(this);
-        this.getIdUrlPart = this.getIdUrlPart.bind(this);
     }
 
     render() {
@@ -26,8 +25,7 @@ export default class NavLinkLocaleSelect extends React.Component {
     getPath(pathParams) {
         return [
             this.getLanguageUrlPart(pathParams),
-            this.getPageUrlPart(pathParams),
-            this.getIdUrlPart(pathParams)
+            this.getPageUrlPart(pathParams)
         ].reduce((acc, part)=> {
             return part ? `${acc}/${part}` : acc;
         }, "");
@@ -46,9 +44,6 @@ export default class NavLinkLocaleSelect extends React.Component {
         return this.reverseObject(dict.langPaths)[this.props.locale].replace('/','');
     }
 
-    getIdUrlPart(pathParams) {
-        return !!pathParams.id ? pathParams.id : "";
-    }
 
     reverseObject(object) {
         return Object.keys(object).reduce((acc, key) => {

@@ -1,9 +1,11 @@
 import React from 'react'
 import ItemCard from './ItemCard'
 
-const ItemCards = ({ locale, doors, selectDimensions, selectColor }) => {
+const ItemCards = ({ locale, doors, selectDimensions, selectColor, history }) => {
     return <div className="row">{
-        Object.keys(doors).filter((doorId) => (doors[doorId].locale === locale))
+        Object.keys(doors).filter(doorId => doors[doorId].locale === locale)
+            .filter((doorId => typeof doors[doorId].display === "undefined" ||
+                (typeof doors[doorId].display === 'boolean' && doors[doorId].display)))
         .map((doorId) => {
             return <ItemCard
                 doorId={ doorId }
@@ -14,6 +16,7 @@ const ItemCards = ({ locale, doors, selectDimensions, selectColor }) => {
                 sizeSelect={ doors[doorId].sizeSelect}
                 colorSelect={ doors[doorId].colorSelect }
                 key={ doorId }
+                history={ history }
                 selectDimensions={
                     (doorId) =>
                         (dimensions) =>

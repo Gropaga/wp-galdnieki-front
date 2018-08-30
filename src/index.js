@@ -12,8 +12,7 @@ import rootReducer from './reducers'
 import './style/index.scss';
 import consoleLogger from './middleware/consoleLogger'
 import { setup as i18nSetup } from "./lib/i18n";
-
-import {pathMatch} from "./lib/pathMatch";
+import { pathMatch } from "./lib/pathMatch";
 
 const history = createBrowserHistory();
 

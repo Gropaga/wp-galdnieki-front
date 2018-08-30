@@ -1,14 +1,17 @@
 import React from 'react';
 import { UncontrolledCarousel } from 'reactstrap';
+import LinkedCarousel from './LinkedCarousel';
 
-const ItemCarousel = ({ color, colorSelect }) => {
+const ItemCarousel = ({ color, colorSelect, itemSection, itemId }) => {
     return color.map((color, index) => {
         return (
             <div
                 key={ index }
                 className={ index === colorSelect ? '' : 'd-none' }
             >
-                <UncontrolledCarousel
+                <LinkedCarousel
+                    itemSection={itemSection}
+                    itemId={itemId}
                     interval={ 0 }
                     autoPlay={ false }
                     items={ getImages(color) }

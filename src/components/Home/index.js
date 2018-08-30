@@ -31,6 +31,7 @@ class Home extends React.Component {
                     doors={ this.props.doors }
                     selectDimensions={ this.props.selectDimensions }
                     selectColor={ this.props.selectColor }
+                    history={ this.props.history }
                 />
             </div>
     }

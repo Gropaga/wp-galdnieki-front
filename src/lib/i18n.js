@@ -31,7 +31,7 @@ export const _l = (language = locale('language')) => {
     return dict.langPaths[language];
 };
 
-export const _lRev = (language) => {
+export const _lRev = (language = locale('language')) => {
     return reverseObject(dict.langPaths)[language];
 };
 

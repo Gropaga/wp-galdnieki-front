@@ -3,7 +3,7 @@ import { pathMatchByHistory } from "../../lib/pathMatch";
 import { NavLink } from 'reactstrap';
 import { _p } from '../../lib/i18n'
 
-export default class NavLinkI18n extends React.Component {
+class NavLinkI18n extends React.Component {
     constructor(props) {
         super(props);
         this.getPath = this.getPath.bind(this);
@@ -22,3 +22,5 @@ export default class NavLinkI18n extends React.Component {
                 _p(this.props.to);
     }
 }
+
+export default NavLinkI18n
