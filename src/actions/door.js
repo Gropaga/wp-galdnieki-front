@@ -20,16 +20,12 @@ export function requestDoor(doorId) {
 
         const state = getState().door;
 
-        console.log('--- state', state);
-
         if (typeof state.doors === 'object' &&
             typeof state.doors[doorId] === 'object' &&
             typeof state.doors[doorId].updated === 'number'
         ) {
-            console.log('--- show cached', doorId);
             dispatch(displayDoor(doorId));
         } else {
-            console.log('--- fetch', doorId);
             fetch('http://localhost:8080/wp-json/shop/v1/doors/' + doorId).then((response) => {
                 return response.json();
             }).then((data) => {
