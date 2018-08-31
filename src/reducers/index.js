@@ -1,10 +1,10 @@
-import { combineReducers } from 'redux'
 import counterReducer from './counter'
 import homeReducer from './home'
 import doorsReducer from "./doors";
 import doorReducer from "./door";
+import customCombineReducers from './customCombineReducers'
 
-const rootReducer = combineReducers({
+const rootReducer = customCombineReducers({
     count: counterReducer,
     home: homeReducer,
     doors: doorsReducer,
