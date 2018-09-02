@@ -25,7 +25,7 @@ const commonReducer = (state = { ...initState }, action) => {
 };
 
 const isFetching = action => {
-    return pathMatch(action.payload.location.pathname).language === getLocale();
+    return _l(pathMatch(action.payload.location.pathname).language) === getLocale();
 };
 
 export default commonReducer
