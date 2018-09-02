@@ -18,7 +18,6 @@ class Home extends React.Component {
                     image={ this.props.landingImage }
                     jumbo={ this.props.jumbo }
                 />
-
                 <h4>
                     { _('Doors') }
                     {" "}
@@ -28,7 +27,7 @@ class Home extends React.Component {
                 </h4>
                 <ItemCards
                     locale={ getLocale() }
-                    doors={ this.props.doors }
+                    doors={ filterDoors(this.props.doors) }
                     selectDimensions={ this.props.selectDimensions }
                     selectColor={ this.props.selectColor }
                     history={ this.props.history }
@@ -36,15 +35,21 @@ class Home extends React.Component {
             </div>
     }
 
-    async componentWillMount() {
-        if (typeof this.props.updated  === 'undefined') {
-            const rawResponse = await fetch('http://localhost:8080/' +
-                'wp-json/shop/v1/landing-page/');
-            const json = await rawResponse.json();
-            this.props.receiveHome(json);
-        }
+    componentWillMount() {
+        this.props.requestHome();
     }
 }
+
+const filterDoors = doors =>
+    Object.keys(doors)
+        .filter(doorId => doors[doorId].locale === getLocale())
+        .filter(doorId => !!doors[doorId].showOnLandingPage)
+        .reduce((filteredDoors, filteredDoorId) => {
+            return {
+                ...filteredDoors,
+                [filteredDoorId]: doors[filteredDoorId]
+            }
+        }, {});
 
 Home.propTypes = {
     isFetching: PropTypes.bool,
@@ -53,16 +58,18 @@ Home.propTypes = {
     receiveError: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = state => ({
-    isFetching: state.home.isFetching,
-    landingImage: state.home.landingImage,
-    doors: state.home.doors,
-    jumbo: state.home.jumbo,
-    updated: state.home.updated
-});
+const mapStateToProps = state => {
+    return {
+        isFetching: state.isFetching,
+        landingImage: state.landingImage,
+        doors: state.doors,
+        jumbo: state.jumbo,
+        homeUpdated: state.homeUpdated
+    }
+};
 
 const mapDispatchToProps = dispatch => ({
-    requestHome: (language) => dispatch(requestHome(language)),
+    requestHome: () => dispatch(requestHome()),
     receiveHome: (json) => dispatch(receiveHome(json)),
     receiveError: (json) => dispatch(receiveError(json)),
 

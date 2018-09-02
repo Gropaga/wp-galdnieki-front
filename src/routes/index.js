@@ -1,7 +1,6 @@
 import React from 'react'
 import { Route, Switch } from 'react-router'
 import Home from '../components/Home/index'
-import Counter from '../components/Counter'
 import NoMatch from '../components/NoMatch/index'
 import MainNav from '../components/MainNav/index'
 import Doors from '../components/Doors/index'

@@ -3,12 +3,6 @@ import PropTypes from 'prop-types'
 import { FormGroup, Label, Input } from 'reactstrap';
 
 const ItemPriceSelect = ({ price, sizeSelect, onChange }) => {
-
-    console.log('itempriceselect', JSON.stringify({
-        height: sizeSelect.height,
-        width: sizeSelect.width
-    }));
-
     return (
         <FormGroup>
             <Input

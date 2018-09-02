@@ -1,28 +1,29 @@
+import { receiveError } from "./common";
+
 export const REQUEST_DOOR = 'REQUEST_DOOR';
 export const RECEIVE_DOOR = 'RECEIVE_DOOR';
-export const RECEIVE_ERROR = 'RECEIVE_ERROR';
-export const FETCHING_TOGGLE_DOOR = 'FETCHING_TOGGLE_DOOR';
 export const DISPLAY_DOOR = 'DISPLAY_DOOR';
+export const RESET_DISPLAY_DOOR = 'RESET_DISPLAY_DOOR';
 
 export const SELECT_DOOR_SIZE = 'SELECT_DOOR_SIZE';
 export const SELECT_DOOR_COLOR = 'SELECT_DOOR_COLOR';
 
-export function fetchingToggle(isFetching = true) {
+export function resetDoors() {
     return {
-        type: FETCHING_TOGGLE_DOOR,
-        isFetching
+        type: RESET_DISPLAY_DOOR,
     }
 }
 
 export function requestDoor(doorId) {
     return (dispatch, getState) => {
-        dispatch(fetchingToggle());
+        dispatch(resetDoors());
 
-        const state = getState().door;
+        const state = getState();
+
+        console.log(state.doors[doorId], doorId, state.doors[doorId]);
 
         if (typeof state.doors === 'object' &&
-            typeof state.doors[doorId] === 'object' &&
-            typeof state.doors[doorId].updated === 'number'
+            typeof state.doors[doorId] === 'object'
         ) {
             dispatch(displayDoor(doorId));
         } else {
@@ -30,6 +31,8 @@ export function requestDoor(doorId) {
                 return response.json();
             }).then((data) => {
                 dispatch(receiveDoor(data, doorId));
+            }).catch(() => {
+                dispatch(receiveError('Web page error', 400))
             });
         }
     };
@@ -47,14 +50,6 @@ export function receiveDoor(json, doorId) {
         type: RECEIVE_DOOR,
         content: json,
         doorId: doorId,
-        receivedAt: Date.now()
-    }
-}
-
-export function receiveError(json) {
-    return {
-        type: RECEIVE_ERROR,
-        content: json,
         receivedAt: Date.now()
     }
 }

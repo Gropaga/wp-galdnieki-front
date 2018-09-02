@@ -1,28 +1,20 @@
-export const REQUEST_DOORS = 'REQUEST_DOORS';
 export const RECEIVE_DOORS = 'RECEIVE_DOORS';
-export const RECEIVE_ERROR = 'RECEIVE_ERROR';
+export const DISPLAY_DOORS = 'DISPLAY_DOORS';
 
 export const SELECT_DOOR_SIZE = 'SELECT_DOOR_SIZE';
 export const SELECT_DOOR_COLOR = 'SELECT_DOOR_COLOR';
 
-export function requestDoors(language) {
+import { receiveError } from "./common";
+
+export function displayDoors() {
     return {
-        type: REQUEST_DOORS,
-        language: language
+        type: DISPLAY_DOORS,
     }
 }
 
 export function receiveDoors(json) {
     return {
         type: RECEIVE_DOORS,
-        content: json,
-        receivedAt: Date.now()
-    }
-}
-
-export function receiveError(json) {
-    return {
-        type: RECEIVE_ERROR,
         content: json,
         receivedAt: Date.now()
     }
@@ -42,4 +34,22 @@ export function selectColor(doorId, colorIndex) {
         doorId: doorId,
         colorIndex: colorIndex
     }
+}
+
+export function requestDoors() {
+    return (dispatch, getState) => {
+        const state = getState();
+
+        if (typeof state.doorsUpdated === 'number') {
+            dispatch(displayDoors());
+        } else {
+            fetch('http://localhost:8080/wp-json/shop/v1/doors/').then((response) => {
+                return response.json();
+            }).then((data) => {
+                dispatch(receiveDoors(data));
+            }).catch(() => {
+                dispatch(receiveError('Web page error', 400));
+            });
+        }
+    };
 }

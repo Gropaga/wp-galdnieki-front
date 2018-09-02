@@ -8,6 +8,8 @@ import { _, getLocale } from "../../lib/i18n";
 
 class Doors extends React.Component {
     render() {
+        console.log('this.props.isFetching', this.props.isFetching);
+
         return this.props.isFetching ?
             <h1>Loading...</h1> :
             <div>
@@ -16,7 +18,7 @@ class Doors extends React.Component {
                 </h4>
                 <ItemCards
                     locale={ getLocale() }
-                    doors={ this.props.doors }
+                    doors={ filterDoors(this.props.doors) }
                     selectDimensions={ this.props.selectDimensions }
                     selectColor={ this.props.selectColor }
                 />
@@ -24,14 +26,19 @@ class Doors extends React.Component {
     }
 
     async componentWillMount() {
-        if (typeof this.props.updated  === 'undefined') {
-            const rawResponse = await fetch('http://localhost:8080/' +
-                'wp-json/shop/v1/doors/');
-            const json = await rawResponse.json();
-            this.props.receiveDoors(json);
-        }
+        this.props.requestDoors();
     }
 }
+
+const filterDoors = doors =>
+   Object.keys(doors)
+       .filter(doorId => doors[doorId].locale === getLocale())
+       .reduce((filteredDoors, filteredDoorId) => {
+           return {
+               ...filteredDoors,
+               [filteredDoorId]: doors[filteredDoorId]
+           }
+       }, {});
 
 Doors.propTypes = {
     isFetching: PropTypes.bool,
@@ -41,15 +48,13 @@ Doors.propTypes = {
 };
 
 const mapStateToProps = state => ({
-    isFetching: state.doors.isFetching,
-    landingImage: state.doors.landingImage,
-    doors: state.doors.doors,
-    jumbo: state.doors.jumbo,
-    updated: state.doors.updated
+    isFetching: state.isFetching,
+    doors: state.doors,
+    doorsUpdated: state.doorsUpdated
 });
 
 const mapDispatchToProps = dispatch => ({
-    requestDoors: (language) => dispatch(requestDoors(language)),
+    requestDoors: () => dispatch(requestDoors()),
     receiveDoors: (json) => dispatch(receiveDoors(json)),
     receiveError: (json) => dispatch(receiveError(json)),
 

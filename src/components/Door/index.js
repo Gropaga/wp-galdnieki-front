@@ -1,8 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { requestDoor, receiveDoor, receiveError,
-    selectDimensions, selectColor, fetchingToggle } from '../../actions/door'
+import { requestDoor, receiveDoor,
+    selectDimensions, selectColor } from '../../actions/door'
 import ItemCards from '../ItemCards'
 import { _, getLocale } from "../../lib/i18n";
 
@@ -16,42 +16,44 @@ class Door extends React.Component {
                 </h4>
                 <ItemCards
                     locale={ getLocale() }
-                    doors={ this.props.doors }
+                    doors={ filterDoors(this.props.doors) }
                     selectDimensions={ this.props.selectDimensions }
                     selectColor={ this.props.selectColor }
                 />
             </div>
     }
 
-    async componentWillMount() {
-        if (typeof this.props.doors === 'undefined' ||
-            typeof this.props.doors[this.props.match.params.id] === 'undefined' ||
-            typeof this.props.doors[this.props.match.params.id].updated === 'undefined'
-        ) {
-            this.props.requestDoor(this.props.match.params.id.toString().replace('/',''));
-        }
+    componentWillMount() {
+        this.props.requestDoor(this.props.match.params.id.toString().replace('/',''));
     }
 }
+
+const filterDoors = doors =>
+    Object.keys(doors)
+        .filter(doorId => doors[doorId].locale === getLocale())
+        .filter(doorId => !!doors[doorId].display)
+        .reduce((filteredDoors, filteredDoorId) => {
+            return {
+                ...filteredDoors,
+                [filteredDoorId]: doors[filteredDoorId]
+            }
+        }, {});
 
 Door.propTypes = {
     isFetching: PropTypes.bool,
     requestDoor: PropTypes.func.isRequired,
     receiveDoor: PropTypes.func.isRequired,
-    receiveError: PropTypes.func.isRequired,
-    fetchingToggle: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
-    isFetching: state.door.isFetching,
-    landingImage: state.door.landingImage,
-    doors: state.door.doors,
+    isFetching: state.isFetching,
+    landingImage: state.landingImage,
+    doors: state.doors,
 });
 
 const mapDispatchToProps = dispatch => ({
-    requestDoor: (language) => dispatch(requestDoor(language)),
+    requestDoor: (doorId) => dispatch(requestDoor(doorId)),
     receiveDoor: (json, doorId) => dispatch(receiveDoor(json, doorId)),
-    receiveError: (json) => dispatch(receiveError(json)),
-    fetchingToggle: (json) => dispatch(fetchingToggle()),
 
     selectDimensions: (doorId, dimensions) =>
         dispatch(selectDimensions(doorId, dimensions)),

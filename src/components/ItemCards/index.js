@@ -1,12 +1,9 @@
 import React from 'react'
 import ItemCard from './ItemCard'
 
-const ItemCards = ({ locale, doors, selectDimensions, selectColor, history }) => {
+const ItemCards = ({ doors, selectDimensions, selectColor, history }) => {
     return <div className="row">{
-        Object.keys(doors).filter(doorId => doors[doorId].locale === locale)
-            .filter((doorId => typeof doors[doorId].display === "undefined" ||
-                (typeof doors[doorId].display === 'boolean' && doors[doorId].display)))
-        .map((doorId) => {
+        Object.keys(doors).map((doorId) => {
             return <ItemCard
                 doorId={ doorId }
                 title={ doors[doorId].title }

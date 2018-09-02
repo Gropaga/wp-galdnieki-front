@@ -1,14 +1,14 @@
-import counterReducer from './counter'
 import homeReducer from './home'
 import doorsReducer from "./doors";
 import doorReducer from "./door";
+import commonReducer from "./common";
 import customCombineReducers from './customCombineReducers'
 
-const rootReducer = customCombineReducers({
-    count: counterReducer,
-    home: homeReducer,
-    doors: doorsReducer,
-    door: doorReducer,
-});
+const rootReducer = customCombineReducers([
+    homeReducer,
+    doorsReducer,
+    doorReducer,
+    commonReducer,
+]);
 
 export default rootReducer

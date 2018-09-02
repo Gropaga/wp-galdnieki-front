@@ -1,10 +1,9 @@
 import {
     REQUEST_DOOR,
     RECEIVE_DOOR,
-    RECEIVE_ERROR,
     SELECT_DOOR_SIZE,
     SELECT_DOOR_COLOR,
-    FETCHING_TOGGLE_DOOR,
+    RESET_DISPLAY_DOOR,
     DISPLAY_DOOR
 } from '../actions/door'
 
@@ -28,16 +27,10 @@ const doorReducer = (state = { ...initState }, action) => {
                         ...action.content.doors[action.doorId],
                         display: true,
                         updated: action.receivedAt,
-                    }
+                    },
                 },
                 isFetching: false
             };
-        case RECEIVE_ERROR:
-            return Object.assign({}, state, {
-                isFetching: false,
-                content: action.content,
-                updated: action.receivedAt
-            });
         case SELECT_DOOR_SIZE:
             return {
                 ...state,
@@ -75,7 +68,7 @@ const doorReducer = (state = { ...initState }, action) => {
                 },
                 isFetching: false
             };
-        case FETCHING_TOGGLE_DOOR:
+        case RESET_DISPLAY_DOOR:
             return {
                 ...state,
                 doors: Object.keys(state.doors).reduce((acc, key) => {
@@ -87,7 +80,6 @@ const doorReducer = (state = { ...initState }, action) => {
                         }
                     };
                 }, {}),
-                isFetching: action.isFetching
             };
         default:
             return state

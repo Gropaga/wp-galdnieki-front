@@ -1,32 +1,27 @@
-import { REQUEST_DOORS, RECEIVE_DOORS, RECEIVE_ERROR,
-    SELECT_DOOR_SIZE, SELECT_DOOR_COLOR} from '../actions/doors'
+import { RECEIVE_DOORS, SELECT_DOOR_SIZE, SELECT_DOOR_COLOR, DISPLAY_DOORS } from '../actions/doors'
 
 const initState = {
-    isFetching: true,
     doors: [],
-    jumbo: {},
-    landingImage: null
 };
 
 const doorsReducer = (state = { ...initState }, action) => {
     switch (action.type) {
-        case REQUEST_DOORS:
-            return Object.assign({}, state, {
-                isFetching: true,
-            });
+        case DISPLAY_DOORS:
+            return {
+                ...state,
+                isFetching: false
+            };
         case RECEIVE_DOORS:
             return {
                 ...state,
-                ...action.content,
+                doors: {
+                    // this way changed colours and sizes will preserve
+                    ...action.content.doors,
+                    ...state.doors,
+                },
                 isFetching: false,
-                updated: action.receivedAt,
+                doorsUpdated: action.receivedAt,
             };
-        case RECEIVE_ERROR:
-            return Object.assign({}, state, {
-                isFetching: false,
-                content: action.content,
-                updated: action.receivedAt
-            });
         case SELECT_DOOR_SIZE:
             return {
                 ...state,

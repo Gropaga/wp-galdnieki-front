@@ -1,5 +1,4 @@
-import { REQUEST_HOME, RECEIVE_HOME, RECEIVE_ERROR,
-    SELECT_DOOR_SIZE, SELECT_DOOR_COLOR} from '../actions/home'
+import { RECEIVE_HOME, SELECT_DOOR_SIZE, SELECT_DOOR_COLOR, DISPLAY_HOME} from '../actions/home'
 
 const initState = {
     isFetching: true,
@@ -10,23 +9,24 @@ const initState = {
 
 const homeReducer = (state = { ...initState }, action) => {
     switch (action.type) {
-        case REQUEST_HOME:
-            return Object.assign({}, state, {
-                isFetching: true,
-            });
+        case DISPLAY_HOME:
+            return {
+                ...state,
+                isFetching: false
+            };
         case RECEIVE_HOME:
             return {
                 ...state,
+                doors: [
+                    ...action.content.doors,
+                    ...state.doors
+                ],
+                jumbo: action.content.jumbo,
+                landingImage: action.content.landingImage,
                 ...action.content,
                 isFetching: false,
-                updated: action.receivedAt,
+                homeUpdate: action.receivedAt,
             };
-        case RECEIVE_ERROR:
-            return Object.assign({}, state, {
-                isFetching: false,
-                content: action.content,
-                updated: action.receivedAt
-            });
         case SELECT_DOOR_SIZE:
             return {
                 ...state,
