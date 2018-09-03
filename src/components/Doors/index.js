@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { requestDoors, receiveDoors, receiveError,
+import { requestDoors, receiveDoors,
     selectDimensions, selectColor } from '../../actions/doors'
 import ItemCards from '../ItemCards'
 import { _, getLocale } from "../../lib/i18n";

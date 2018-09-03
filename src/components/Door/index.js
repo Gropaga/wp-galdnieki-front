@@ -3,24 +3,24 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { requestDoor, receiveDoor,
     selectDimensions, selectColor } from '../../actions/door'
-import ItemCards from '../ItemCards'
 import { _, getLocale } from "../../lib/i18n";
+import Carousel from "./Carousel";
+import Description from "./Description";
 
 class Door extends React.Component {
     render() {
         return this.props.isFetching ?
             <h1>Loading...</h1> :
-            <div>
-                <h4>
-                    { _('Doors') }
-                </h4>
-                <ItemCards
-                    locale={ getLocale() }
-                    doors={ filterDoors(this.props.doors) }
-                    selectDimensions={ this.props.selectDimensions }
-                    selectColor={ this.props.selectColor }
-                />
-            </div>
+            filterDoors(this.props.doors).reduce((acc, door) =>
+                <div className="row">
+                    <Carousel door={ door } />
+                    <Description
+                        door={ door }
+                        selectColor={ this.props.selectColor }
+                        selectDimensions={ this.props.selectDimensions }
+                    />
+                </div>
+            , <div>{' '}</div>);
     }
 
     componentWillMount() {
@@ -33,11 +33,8 @@ const filterDoors = doors =>
         .filter(doorId => doors[doorId].locale === getLocale())
         .filter(doorId => !!doors[doorId].display)
         .reduce((filteredDoors, filteredDoorId) => {
-            return {
-                ...filteredDoors,
-                [filteredDoorId]: doors[filteredDoorId]
-            }
-        }, {});
+            return [doors[filteredDoorId]] // get only single door
+        }, []);
 
 Door.propTypes = {
     isFetching: PropTypes.bool,

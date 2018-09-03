@@ -21,8 +21,8 @@ const ItemCards = ({ doors, selectDimensions, selectColor, history }) => {
                 }
                 selectColor={
                     (doorId) =>
-                        (dimensions) =>
-                            selectColor(doorId, dimensions)
+                        (colorIndex) =>
+                            selectColor(doorId, colorIndex)
                 }
             />;
         })}</div>;

@@ -15,7 +15,6 @@ const doorsReducer = (state = { ...initState }, action) => {
             return {
                 ...state,
                 doors: {
-                    // this way changed colours and sizes will preserve
                     ...action.content.doors,
                     ...state.doors,
                 },

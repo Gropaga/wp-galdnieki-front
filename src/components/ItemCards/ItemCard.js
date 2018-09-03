@@ -9,10 +9,6 @@ import ItemColor from "./ItemColor";
 import LinkI18n from "../Helpers/LinkI18n"
 
 const ItemCard = (props) => {
-
-    // console.log('props.color', props.color);
-    // debugger;
-
     return (
         <div className="col-lg-3 col-md-6">
 

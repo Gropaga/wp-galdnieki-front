@@ -17,13 +17,12 @@ const homeReducer = (state = { ...initState }, action) => {
         case RECEIVE_HOME:
             return {
                 ...state,
-                doors: [
+                doors: {
                     ...action.content.doors,
                     ...state.doors
-                ],
+                },
                 jumbo: action.content.jumbo,
                 landingImage: action.content.landingImage,
-                ...action.content,
                 isFetching: false,
                 homeUpdate: action.receivedAt,
             };
