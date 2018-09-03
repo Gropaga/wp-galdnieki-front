@@ -10,7 +10,7 @@ class Doors extends React.Component {
     render() {
         console.log('this.props.isFetching', this.props.isFetching);
 
-        return this.props.isFetching ?
+        return this.props.isFetching  || !this.props.doorsUpdated ?
             <h1>Loading...</h1> :
             <div>
                 <h4>

@@ -8,12 +8,8 @@ const initState = {
 };
 
 const commonReducer = (state = { ...initState }, action) => {
+
     switch (action.type) {
-        case LOCATION_CHANGE:
-            return {
-                ...state,
-                isFetching: isFetching(action)
-            };
         case RECEIVE_ERROR:
             return {
                 ...state,
@@ -22,10 +18,6 @@ const commonReducer = (state = { ...initState }, action) => {
         default:
             return state
     }
-};
-
-const isFetching = action => {
-    return _l(pathMatch(action.payload.location.pathname).language) === getLocale();
 };
 
 export default commonReducer

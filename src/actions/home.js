@@ -40,7 +40,7 @@ export function requestHome() {
     return (dispatch, getState) => {
         const state = getState();
 
-        if (typeof state.homeUpdate === 'number') {
+        if (typeof state.homeUpdated === 'number') {
             dispatch(displayHome());
         } else {
             fetch('http://localhost:8080/wp-json/shop/v1/home/').then((response) => {

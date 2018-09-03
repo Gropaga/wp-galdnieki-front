@@ -10,7 +10,7 @@ import { _, getLocale } from "../../lib/i18n";
 
 class Home extends React.Component {
     render() {
-        return this.props.isFetching ?
+        return this.props.isFetching || !this.props.homeUpdated ?
             <h1>Loading...</h1> :
             <div>
                 <JumbotronLanding

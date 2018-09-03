@@ -24,7 +24,7 @@ const homeReducer = (state = { ...initState }, action) => {
                 jumbo: action.content.jumbo,
                 landingImage: action.content.landingImage,
                 isFetching: false,
-                homeUpdate: action.receivedAt,
+                homeUpdated: action.receivedAt,
             };
         case SELECT_DOOR_SIZE:
             return {
