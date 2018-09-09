@@ -3,6 +3,7 @@ import { RECEIVE_HOME, SELECT_DOOR_SIZE, SELECT_DOOR_COLOR, DISPLAY_HOME} from '
 const initState = {
     isFetching: true,
     doors: [],
+    windows: [],
     jumbo: {},
     landingImage: null
 };
@@ -21,6 +22,10 @@ const homeReducer = (state = { ...initState }, action) => {
                     ...action.content.doors,
                     ...state.doors
                 },
+                windows: {
+                    ...action.content.windows,
+                    ...state.windows
+                },
                 jumbo: action.content.jumbo,
                 landingImage: action.content.landingImage,
                 isFetching: false,
@@ -38,6 +43,16 @@ const homeReducer = (state = { ...initState }, action) => {
                             width: action.width
                         }
                     }
+                },
+                windows: {
+                    ...state.windows,
+                    [action.windowId]: {
+                        ...state.windows[action.windowId],
+                        sizeSelect: {
+                            height: action.height,
+                            width: action.width
+                        }
+                    }
                 }
             };
         case SELECT_DOOR_COLOR:
@@ -47,6 +62,13 @@ const homeReducer = (state = { ...initState }, action) => {
                     ...state.doors,
                     [action.doorId]: {
                         ...state.doors[action.doorId],
+                        colorSelect: action.colorIndex
+                    }
+                },
+                windows: {
+                    ...state.windows,
+                    [action.windowId]: {
+                        ...state.doors[action.windowId],
                         colorSelect: action.colorIndex
                     }
                 }

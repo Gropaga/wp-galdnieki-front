@@ -1,5 +1,4 @@
 import React from 'react';
-import { UncontrolledCarousel } from 'reactstrap';
 import LinkedCarousel from './LinkedCarousel';
 
 const ItemCarousel = ({ color, colorSelect, itemSection, itemId }) => {

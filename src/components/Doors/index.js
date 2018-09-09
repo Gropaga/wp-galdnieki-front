@@ -8,8 +8,6 @@ import { _, getLocale } from "../../lib/i18n";
 
 class Doors extends React.Component {
     render() {
-        console.log('this.props.isFetching', this.props.isFetching);
-
         return this.props.isFetching  || !this.props.doorsUpdated ?
             <h1>Loading...</h1> :
             <div>
@@ -18,7 +16,8 @@ class Doors extends React.Component {
                 </h4>
                 <ItemCards
                     locale={ getLocale() }
-                    doors={ filterDoors(this.props.doors) }
+                    items={ filterDoors(this.props.doors) }
+                    itemSection={ 'doors' }
                     selectDimensions={ this.props.selectDimensions }
                     selectColor={ this.props.selectColor }
                 />

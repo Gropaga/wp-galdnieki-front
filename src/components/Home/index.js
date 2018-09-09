@@ -7,6 +7,7 @@ import { Button } from 'reactstrap';
 import JumbotronLanding from './JumbotronLanding'
 import ItemCards from '../ItemCards'
 import { _, getLocale } from "../../lib/i18n";
+import LinkI18n from "../Helpers/LinkI18n";
 
 class Home extends React.Component {
     render() {
@@ -21,13 +22,33 @@ class Home extends React.Component {
                 <h4>
                     { _('Doors') }
                     {" "}
-                    <Button outline color="primary" size="sm">
-                        { _('door catalogue') }
-                    </Button>
+                    <LinkI18n section="doors">
+                        <Button outline color="primary" size="sm">
+                            { _('door catalogue') }
+                        </Button>
+                    </LinkI18n>
                 </h4>
                 <ItemCards
                     locale={ getLocale() }
-                    doors={ filterDoors(this.props.doors) }
+                    itemSection={'doors'}
+                    items={ filterItems(this.props.doors) }
+                    selectDimensions={ this.props.selectDimensions }
+                    selectColor={ this.props.selectColor }
+                    history={ this.props.history }
+                />
+                <h4>
+                    { _('Windows') }
+                    {" "}
+                    <LinkI18n section="windows">
+                        <Button outline color="primary" size="sm">
+                            { _('window catalogue') }
+                        </Button>
+                    </LinkI18n>
+                </h4>
+                <ItemCards
+                    locale={ getLocale() }
+                    itemSection={'windows'}
+                    items={ filterItems(this.props.windows) }
                     selectDimensions={ this.props.selectDimensions }
                     selectColor={ this.props.selectColor }
                     history={ this.props.history }
@@ -40,16 +61,17 @@ class Home extends React.Component {
     }
 }
 
-const filterDoors = doors =>
-    Object.keys(doors)
-        .filter(doorId => doors[doorId].locale === getLocale())
-        .filter(doorId => !!doors[doorId].showOnLandingPage)
-        .reduce((filteredDoors, filteredDoorId) => {
+const filterItems = items => {
+    return Object.keys(items)
+        .filter(itemId => items[itemId].locale === getLocale())
+        .filter(itemId => !!items[itemId].showOnLandingPage)
+        .reduce((filteredItems, filteredItemId) => {
             return {
-                ...filteredDoors,
-                [filteredDoorId]: doors[filteredDoorId]
+                ...filteredItems,
+                [filteredItemId]: items[filteredItemId]
             }
         }, {});
+};
 
 Home.propTypes = {
     isFetching: PropTypes.bool,
@@ -63,6 +85,7 @@ const mapStateToProps = state => {
         isFetching: state.isFetching,
         landingImage: state.landingImage,
         doors: state.doors,
+        windows: state.windows,
         jumbo: state.jumbo,
         homeUpdated: state.homeUpdated
     }

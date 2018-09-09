@@ -4,6 +4,9 @@ import Home from '../components/Home/index'
 import NoMatch from '../components/NoMatch/index'
 import MainNav from '../components/MainNav/index'
 import Doors from '../components/Doors/index'
+import Windows from '../components/Windows/index'
+import Window from '../components/Window/index'
+import Stairs from '../components/Stairs/index'
 import Door from '../components/Door/index'
 import {_lRev, _p} from "../lib/i18n";
 
@@ -14,8 +17,11 @@ export default (history) => {
             { ['lv', 'ru'].map((language) => {
                     return [
                         <Route exact path={constructPath(language)} component={Home}/>,
+                        <Route exact path={constructPath(language, 'windows')} component={Windows}/>,
+                        <Route exact path={constructPath(language, 'windows', true)} component={Window}/>,
                         <Route exact path={constructPath(language, 'doors')} component={Doors}/>,
-                        <Route exact path={constructPath(language, 'doors', true)} component={Door}/>
+                        <Route exact path={constructPath(language, 'doors', true)} component={Door}/>,
+                        <Route exact path={constructPath(language, 'stairs')} component={Stairs}/>,
                     ];
                 }
             ) }

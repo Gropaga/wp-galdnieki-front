@@ -1,28 +1,29 @@
 import React from 'react'
 import ItemCard from './ItemCard'
 
-const ItemCards = ({ doors, selectDimensions, selectColor, history }) => {
+const ItemCards = ({ items, selectDimensions, selectColor, history, itemSection }) => {
     return <div className="row">{
-        Object.keys(doors).map((doorId) => {
+        Object.keys(items).map((itemId) => {
             return <ItemCard
-                doorId={ doorId }
-                title={ doors[doorId].title }
-                desc={ doors[doorId].content }
-                color={ doors[doorId].color }
-                price={ doors[doorId].price }
-                sizeSelect={ doors[doorId].sizeSelect}
-                colorSelect={ doors[doorId].colorSelect }
-                key={ doorId }
+                itemId={ itemId }
+                itemSection={ itemSection }
+                title={ items[itemId].title }
+                desc={ items[itemId].content }
+                color={ items[itemId].color }
+                price={ items[itemId].price }
+                sizeSelect={ items[itemId].sizeSelect}
+                colorSelect={ items[itemId].colorSelect }
+                key={ itemId }
                 history={ history }
                 selectDimensions={
-                    (doorId) =>
+                    (itemId) =>
                         (dimensions) =>
-                            selectDimensions(doorId, dimensions)
+                            selectDimensions(itemId, dimensions)
                 }
                 selectColor={
-                    (doorId) =>
+                    (itemId) =>
                         (colorIndex) =>
-                            selectColor(doorId, colorIndex)
+                            selectColor(itemId, colorIndex)
                 }
             />;
         })}</div>;
