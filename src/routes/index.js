@@ -8,6 +8,7 @@ import Windows from '../components/Windows/index'
 import Window from '../components/Window/index'
 import Stairs from '../components/Stairs/index'
 import Door from '../components/Door/index'
+import Kitchens from '../components/Kitchens/index'
 import {_lRev, _p} from "../lib/i18n";
 
 export default (history) => {
@@ -22,6 +23,7 @@ export default (history) => {
                         <Route exact path={constructPath(language, 'doors')} component={Doors}/>,
                         <Route exact path={constructPath(language, 'doors', true)} component={Door}/>,
                         <Route exact path={constructPath(language, 'stairs')} component={Stairs}/>,
+                        <Route exact path={constructPath(language, 'kitchens')} component={Kitchens}/>,
                     ];
                 }
             ) }
