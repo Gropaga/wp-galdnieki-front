@@ -8,13 +8,13 @@ import windowsReducer from "./windows";
 import windowReducer from "./window";
 
 const rootReducer = customCombineReducers([
-    homeReducer,
-    doorsReducer,
-    doorReducer,
+    // homeReducer,
+    // doorsReducer,
+    // doorReducer,
+    // stairsReducer,
+    // windowsReducer,
+    // windowReducer,
     commonReducer,
-    stairsReducer,
-    windowsReducer,
-    windowReducer,
 ]);
 
 export default rootReducer

@@ -1,3 +1,5 @@
+const SECTION = 'doors';
+
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
@@ -6,6 +8,9 @@ import { requestDoor, receiveDoor,
 import { _, getLocale } from "../../lib/i18n";
 import Carousel from "./Carousel";
 import Description from "./Description";
+
+import * as actions from "../../actions/common"
+
 
 class Door extends React.Component {
     render() {
@@ -39,7 +44,6 @@ const filterDoors = doors =>
 Door.propTypes = {
     isFetching: PropTypes.bool,
     requestDoor: PropTypes.func.isRequired,
-    receiveDoor: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
@@ -49,14 +53,13 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    requestDoor: (doorId) => dispatch(requestDoor(doorId)),
-    receiveDoor: (json, doorId) => dispatch(receiveDoor(json, doorId)),
+    requestDoor: (doorId) => dispatch(actions.requestData(SECTION, doorId)),
 
     selectDimensions: (doorId, dimensions) =>
-        dispatch(selectDimensions(doorId, dimensions)),
+        dispatch(actions.selectDimensions(doorId, dimensions)),
 
     selectColor: (doorId, colorIndex) =>
-        dispatch(selectColor(doorId, colorIndex))
+        dispatch(actions.selectColor(doorId, colorIndex))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Door)

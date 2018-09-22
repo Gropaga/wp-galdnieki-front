@@ -4,23 +4,18 @@ import { connect } from 'react-redux'
 import { requestWindow, receiveWindow,
     selectDimensions, selectColor } from '../../actions/window'
 import { _, getLocale } from "../../lib/i18n";
-import Carousel from "./Carousel";
-import Description from "./Description";
+import Item from "../Item";
 
 class Window extends React.Component {
     render() {
         return this.props.isFetching ?
             <h1>Loading...</h1> :
             filterWindows(this.props.windows).reduce((acc, window) =>
-                <div className="row">
-                    <Carousel window={ window } />
-                    <Description
-                        window={ window }
-                        selectColor={ this.props.selectColor }
-                        selectDimensions={ this.props.selectDimensions }
-                    />
-                </div>
-            , <div>{' '}</div>);
+                Item({
+                    item: window,
+                    selectColor: this.props.selectColor,
+                    selectDimensions: this.props.selectDimensions
+                }), <div>{' '}</div>);
     }
 
     componentWillMount() {
@@ -28,13 +23,14 @@ class Window extends React.Component {
     }
 }
 
-const filterWindows = windows =>
-    Object.keys(windows)
+const filterWindows = windows => {
+    return Object.keys(windows)
         .filter(windowId => windows[windowId].locale === getLocale())
         .filter(windowId => !!windows[windowId].display)
         .reduce((filteredWindows, filteredWindowId) => {
             return [windows[filteredWindowId]] // get only single window
         }, []);
+};
 
 Window.propTypes = {
     isFetching: PropTypes.bool,

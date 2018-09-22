@@ -5,30 +5,30 @@ import { requestData, receiveData } from '../../actions/common'
 import { _, getLocale } from "../../lib/i18n";
 import { UncontrolledCarousel } from "reactstrap";
 
-class Kitchens extends React.Component {
+class Contacts extends React.Component {
     render() {
         return this.props.isFetching  || !this.props.updated ?
             <h1>Loading...</h1> :
             <div>
                 <h4>
-                    { _('Kitchens') }
+                    { _('Contacts') }
                 </h4>
                 <div className="row">
                     <div className="col-lg-6 col-md-6">
                         {
-                            this.props.kitchens &&
-                            this.props.kitchens.description &&
-                            this.props.kitchens.description[getLocale()] &&
-                            <div dangerouslySetInnerHTML={{__html: this.props.kitchens.description[getLocale()]}} />
+                            this.props.contacts &&
+                            this.props.contacts.description &&
+                            this.props.contacts.description[getLocale()] &&
+                            <div dangerouslySetInnerHTML={{__html: this.props.contacts.description[getLocale()]}} />
                         }
                     </div>
                     <div className="col-lg-6 col-md-6">
                         {
-                            this.props.kitchens && this.props.kitchens.gallery &&
+                            this.props.contacts && this.props.contacts.gallery &&
                             <UncontrolledCarousel
                                 interval={0}
                                 autoPlay={false}
-                                items={getImages(this.props.kitchens.gallery)}
+                                items={getImages(this.props.contacts.gallery)}
                             />
                         }
                     </div>
@@ -49,7 +49,7 @@ const getImages = (gallery) => gallery.map((img) => {
     }
 });
 
-Kitchens.propTypes = {
+Contacts.propTypes = {
     isFetching: PropTypes.bool,
     requestData: PropTypes.func.isRequired,
     receiveData: PropTypes.func.isRequired,
@@ -58,14 +58,14 @@ Kitchens.propTypes = {
 
 const mapStateToProps = state => ({
     isFetching: state.isFetching,
-    kitchens: state.kitchens,
-    updated: state.kitchens.updated
+    contacts: state.contacts,
+    updated: state.contacts ? state.contacts.updated : undefined
 });
 
 const mapDispatchToProps = dispatch => ({
-    requestData: () => dispatch(requestData('kitchens', ['kitchens'])),
-    receiveData: (json) => dispatch(receiveData('kitchens', json)),
+    requestData: () => dispatch(requestData('contacts', ['contacts'])),
+    receiveData: (json) => dispatch(receiveData('contacts', json)),
     receiveError: (json) => dispatch(receiveError(json)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Kitchens)
+export default connect(mapStateToProps, mapDispatchToProps)(Contacts)

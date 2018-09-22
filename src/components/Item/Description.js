@@ -5,12 +5,12 @@ import ItemPriceSelect from "../ItemCards/ItemPriceSelect";
 import ItemPrice from "../ItemCards/ItemPrice";
 import Price from "./Price";
 
-const Description = ({ window, selectColor, selectDimensions }) =>
+const Description = ({ item, selectColor, selectDimensions }) =>
     <div className="col-lg-6 col-md-6">
-        <h4>{ window.title }</h4>
-        <p>{ window.content }</p>
-        <Colors window={window} onClick={(windowId) => (color) => selectColor(windowId, color)} />
-        <Price window={window} selectDimensions={(windowId) => (dimension) => selectDimensions(windowId, dimension)} />
+        <h4>{ item.title }</h4>
+        <p>{ item.content }</p>
+        <Colors window={item} onClick={(itemId) => (color) => selectColor(itemId, color)} />
+        <Price window={item} selectDimensions={(itemId) => (dimension) => selectDimensions(itemId, dimension)} />
     </div>;
 
 Description.propTypes = {

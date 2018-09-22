@@ -1,44 +1,43 @@
 import {
-    REQUEST_DOOR,
-    RECEIVE_DOOR,
-    SELECT_DOOR_SIZE,
-    SELECT_DOOR_COLOR,
-    RESET_DISPLAY_DOOR,
-    DISPLAY_DOOR
-} from '../actions/door'
+    REQUEST_INTERIOR,
+    RECEIVE_INTERIOR,
+    SELECT_INTERIOR_SIZE,
+    SELECT_INTERIOR_COLOR,
+    RESET_DISPLAY_INTERIOR,
+    DISPLAY_INTERIOR
+} from '../actions/interior'
 
 const initState = {
     isFetching: true,
-    allLoaded: [],
-    doors: []
+    interiors: []
 };
 
-const doorReducer = (state = { ...initState }, action) => {
+const interiorReducer = (state = { ...initState }, action) => {
     switch (action.type) {
-        case REQUEST_DOOR:
+        case REQUEST_INTERIOR:
             return Object.assign({}, state, {
                 isFetching: true,
             });
-        case RECEIVE_DOOR:
+        case RECEIVE_INTERIOR:
             return {
                 ...state,
-                doors: {
-                    ...state.doors,
-                    [action.doorId]: {
-                        ...action.content.doors[action.doorId],
+                interiors: {
+                    ...state.interiors,
+                    [action.interiorId]: {
+                        ...action.content.interiors[action.interiorId],
                         display: true,
                         updated: action.receivedAt,
                     },
                 },
                 isFetching: false
             };
-        case SELECT_DOOR_SIZE:
+        case SELECT_INTERIOR_SIZE:
             return {
                 ...state,
-                doors: {
-                    ...state.doors,
-                    [action.doorId]: {
-                        ...state.doors[action.doorId],
+                interiors: {
+                    ...state.interiors,
+                    [action.interiorId]: {
+                        ...state.interiors[action.interiorId],
                         sizeSelect: {
                             height: action.height,
                             width: action.width
@@ -46,37 +45,37 @@ const doorReducer = (state = { ...initState }, action) => {
                     }
                 }
             };
-        case SELECT_DOOR_COLOR:
+        case SELECT_INTERIOR_COLOR:
             return {
                 ...state,
-                doors: {
-                    ...state.doors,
-                    [action.doorId]: {
-                        ...state.doors[action.doorId],
+                interiors: {
+                    ...state.interiors,
+                    [action.interiorId]: {
+                        ...state.interiors[action.interiorId],
                         colorSelect: action.colorIndex
                     }
                 }
             };
-        case DISPLAY_DOOR:
+        case DISPLAY_INTERIOR:
             return {
                 ...state,
-                doors: {
-                    ...state.doors,
-                    [action.doorId]: {
-                        ...state.doors[action.doorId],
+                interiors: {
+                    ...state.interiors,
+                    [action.interiorId]: {
+                        ...state.interiors[action.interiorId],
                         display: true
                     }
                 },
                 isFetching: false
             };
-        case RESET_DISPLAY_DOOR:
+        case RESET_DISPLAY_INTERIOR:
             return {
                 ...state,
-                doors: Object.keys(state.doors).reduce((acc, key) => {
+                interiors: Object.keys(state.interiors).reduce((acc, key) => {
                     return {
                         ...acc,
                         [key]: {
-                            ...state.doors[key],
+                            ...state.interiors[key],
                             display: false
                         }
                     };
@@ -87,4 +86,4 @@ const doorReducer = (state = { ...initState }, action) => {
     }
 };
 
-export default doorReducer
+export default interiorReducer

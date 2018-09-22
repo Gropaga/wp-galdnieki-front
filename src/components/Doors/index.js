@@ -1,14 +1,16 @@
+const SECTION = 'doors';
+
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { requestDoors, receiveDoors,
-    selectDimensions, selectColor } from '../../actions/doors'
 import ItemCards from '../ItemCards'
 import { _, getLocale } from "../../lib/i18n";
 
+import * as actions from "../../actions/common"
+
 class Doors extends React.Component {
     render() {
-        return this.props.isFetching  || !this.props.doorsUpdated ?
+        return this.props.isFetching || !this.props.updated ?
             <h1>Loading...</h1> :
             <div>
                 <h4>
@@ -42,26 +44,22 @@ const filterDoors = doors =>
 Doors.propTypes = {
     isFetching: PropTypes.bool,
     requestDoors: PropTypes.func.isRequired,
-    receiveDoors: PropTypes.func.isRequired,
-    receiveError: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
     isFetching: state.isFetching,
     doors: state.doors,
-    doorsUpdated: state.doorsUpdated
+    updated: state.allLoaded[SECTION]
 });
 
 const mapDispatchToProps = dispatch => ({
-    requestDoors: () => dispatch(requestDoors()),
-    receiveDoors: (json) => dispatch(receiveDoors(json)),
-    receiveError: (json) => dispatch(receiveError(json)),
+    requestDoors: () => dispatch(actions.requestAllData(SECTION)),
 
     selectDimensions: (doorId, dimensions) =>
-        dispatch(selectDimensions(doorId, dimensions)),
+        dispatch(actions.selectDimensions(SECTION, doorId, dimensions)),
 
     selectColor: (doorId, colorIndex) =>
-        dispatch(selectColor(doorId, colorIndex))
+        dispatch(actions.selectColor(SECTION, doorId, colorIndex))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Doors)

@@ -1,14 +1,16 @@
+const SECTION = 'windows';
+
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { requestWindows, receiveWindows,
-    selectDimensions, selectColor } from '../../actions/windows'
+import * as actions from '../../actions/common';
+
 import ItemCards from '../ItemCards'
 import { _, getLocale } from "../../lib/i18n";
 
 class Windows extends React.Component {
     render() {
-        return this.props.isFetching  || !this.props.windowsUpdated ?
+        return this.props.isFetching  || !this.props.windows.updated ?
             <h1>Loading...</h1> :
             <div>
                 <h4>
@@ -16,7 +18,7 @@ class Windows extends React.Component {
                 </h4>
                 <ItemCards
                     locale={ getLocale() }
-                    itemSection={ 'windows' }
+                    itemSection={ SECTION }
                     items={ filterWindows(this.props.windows) }
                     selectDimensions={ this.props.selectDimensions }
                     selectColor={ this.props.selectColor }
@@ -53,15 +55,15 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    requestWindows: () => dispatch(requestWindows()),
-    receiveWindows: (json) => dispatch(receiveWindows(json)),
+    requestWindows: () => dispatch(actions.requestData(SECTION, [SECTION])),
+    receiveWindows: (json) => dispatch(actions.receiveData(SECTION, json)),
     receiveError: (json) => dispatch(receiveError(json)),
 
     selectDimensions: (windowId, dimensions) =>
-        dispatch(selectDimensions(windowId, dimensions)),
+        dispatch(actions.selectDimensions(SECTION, windowId, dimensions)),
 
     selectColor: (windowId, colorIndex) =>
-        dispatch(selectColor(windowId, colorIndex))
+        dispatch(actions.selectColor(SECTION, windowId, colorIndex))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Windows)
