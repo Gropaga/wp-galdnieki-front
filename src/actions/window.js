@@ -19,9 +19,7 @@ export function requestWindow(windowId) {
         dispatch(resetWindows());
 
         const state = getState();
-
-        console.log(state.windows[windowId], windowId, state.windows[windowId]);
-
+        
         if (typeof state.windows === 'object' &&
             typeof state.windows[windowId] === 'object'
         ) {

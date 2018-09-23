@@ -1,4 +1,4 @@
-const SECTION = 'windows';
+const SECTION = 'interiors';
 
 import React from 'react'
 import PropTypes from 'prop-types'
@@ -8,13 +8,13 @@ import { _, getLocale } from "../../lib/i18n";
 
 import * as actions from "../../actions/common"
 
-class Doors extends React.Component {
+class Interiors extends React.Component {
     render() {
         return this.props.isFetching || !this.props.updated ?
             <h1>Loading...</h1> :
             <div>
                 <h4>
-                    { _('Windows') }
+                    { _('Interiors') }
                 </h4>
                 <ItemCards
                     locale={ getLocale() }
@@ -48,7 +48,7 @@ const mapStateToProps = state => ({
     updated: state.allLoaded[SECTION]
 });
 
-Doors.propTypes = {
+Interiors.propTypes = {
     isFetching: PropTypes.bool,
     requestItems: PropTypes.func.isRequired,
 };
@@ -63,4 +63,4 @@ const mapDispatchToProps = dispatch => ({
         dispatch(actions.selectColor(SECTION, itemId, colorIndex))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Doors)
+export default connect(mapStateToProps, mapDispatchToProps)(Interiors)

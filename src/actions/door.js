@@ -20,8 +20,6 @@ export function requestDoor(doorId) {
 
         const state = getState();
 
-        console.log(state.doors[doorId], doorId, state.doors[doorId]);
-
         if (typeof state.doors === 'object' &&
             typeof state.doors[doorId] === 'object'
         ) {

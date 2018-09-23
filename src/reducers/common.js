@@ -14,7 +14,9 @@ const initState = {
     allLoaded: {},
     doors: [],
     stairs: [],
-    interior: [],
+    contacts: [],
+    interiors: [],
+    windows: [],
 };
 
 const commonReducer = (state = { ...initState }, {type, section, ...action}) => {
@@ -27,10 +29,10 @@ const commonReducer = (state = { ...initState }, {type, section, ...action}) => 
         case DISPLAY_DATA:
             return {
                 ...state,
-                doors: {
-                    ...state.doors,
+                [section]: {
+                    ...state[section],
                     [action.itemId]: {
-                        ...state.doors[action.itemId],
+                        ...state[section][action.itemId],
                         display: true
                     }
                 },
@@ -53,10 +55,10 @@ const commonReducer = (state = { ...initState }, {type, section, ...action}) => 
         case RECEIVE_DATA:
             return {
                 ...state,
-                doors: {
-                    ...state.doors,
+                [section]: {
+                    ...state[section],
                     [action.itemId]: {
-                        ...action.content.doors[action.itemId],
+                        ...action.content[section][action.itemId],
                         display: true,
                         updated: action.receivedAt,
                     },

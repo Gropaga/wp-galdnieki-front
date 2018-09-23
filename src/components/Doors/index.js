@@ -18,48 +18,49 @@ class Doors extends React.Component {
                 </h4>
                 <ItemCards
                     locale={ getLocale() }
-                    items={ filterDoors(this.props.doors) }
-                    itemSection={ 'doors' }
+                    items={ this.filterItems(this.props[SECTION]) }
+                    itemSection={ SECTION }
                     selectDimensions={ this.props.selectDimensions }
                     selectColor={ this.props.selectColor }
                 />
             </div>
     }
 
-    async componentWillMount() {
-        this.props.requestDoors();
+    filterItems(items) {
+        return Object.keys(items)
+            .filter(itemId => items[itemId].locale === getLocale())
+            .reduce((filteredItems, filteredItemId) => {
+                return {
+                    ...filteredItems,
+                    [filteredItemId]: items[filteredItemId]
+                }
+            }, {})
+    }
+
+    componentWillMount() {
+        this.props.requestItems();
     }
 }
 
-const filterDoors = doors =>
-   Object.keys(doors)
-       .filter(doorId => doors[doorId].locale === getLocale())
-       .reduce((filteredDoors, filteredDoorId) => {
-           return {
-               ...filteredDoors,
-               [filteredDoorId]: doors[filteredDoorId]
-           }
-       }, {});
-
-Doors.propTypes = {
-    isFetching: PropTypes.bool,
-    requestDoors: PropTypes.func.isRequired,
-};
-
 const mapStateToProps = state => ({
     isFetching: state.isFetching,
-    doors: state.doors,
+    [SECTION]: state[SECTION],
     updated: state.allLoaded[SECTION]
 });
 
+Doors.propTypes = {
+    isFetching: PropTypes.bool,
+    requestItems: PropTypes.func.isRequired,
+};
+
 const mapDispatchToProps = dispatch => ({
-    requestDoors: () => dispatch(actions.requestAllData(SECTION)),
+    requestItems: () => dispatch(actions.requestAllData(SECTION)),
 
-    selectDimensions: (doorId, dimensions) =>
-        dispatch(actions.selectDimensions(SECTION, doorId, dimensions)),
+    selectDimensions: (itemId, dimensions) =>
+        dispatch(actions.selectDimensions(SECTION, itemId, dimensions)),
 
-    selectColor: (doorId, colorIndex) =>
-        dispatch(actions.selectColor(SECTION, doorId, colorIndex))
+    selectColor: (itemId, colorIndex) =>
+        dispatch(actions.selectColor(SECTION, itemId, colorIndex))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Doors)

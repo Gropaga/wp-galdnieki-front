@@ -20,8 +20,6 @@ export function requestWindow(interiorId) {
 
         const state = getState();
 
-        console.log(state.interiors[interiorId], interiorId, state.interiors[interiorId]);
-
         if (typeof state.interiors === 'object' &&
             typeof state.interiors[interiorId] === 'object'
         ) {

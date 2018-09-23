@@ -3,24 +3,21 @@ const SECTION = 'doors';
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { requestDoor, receiveDoor,
-    selectDimensions, selectColor } from '../../actions/door'
 import { _, getLocale } from "../../lib/i18n";
-import Carousel from "./Carousel";
-import Description from "./Description";
+import Carousel from "../Item/Carousel";
+import Description from "../Item/Description";
 
 import * as actions from "../../actions/common"
-
 
 class Door extends React.Component {
     render() {
         return this.props.isFetching ?
             <h1>Loading...</h1> :
-            filterDoors(this.props.doors).reduce((acc, door) =>
+            filterItems(this.props[SECTION]).reduce((acc, item) =>
                 <div className="row">
-                    <Carousel door={ door } />
+                    <Carousel item={ item } />
                     <Description
-                        door={ door }
+                        item={ item }
                         selectColor={ this.props.selectColor }
                         selectDimensions={ this.props.selectDimensions }
                     />
@@ -29,37 +26,36 @@ class Door extends React.Component {
     }
 
     componentWillMount() {
-        this.props.requestDoor(this.props.match.params.id.toString().replace('/',''));
+        this.props.requestItem(this.props.match.params.id.toString().replace('/',''));
     }
 }
 
-const filterDoors = doors =>
-    Object.keys(doors)
-        .filter(doorId => doors[doorId].locale === getLocale())
-        .filter(doorId => !!doors[doorId].display)
-        .reduce((filteredDoors, filteredDoorId) => {
-            return [doors[filteredDoorId]] // get only single door
+const filterItems = items =>
+    Object.keys(items)
+        .filter(itemId => items[itemId].locale === getLocale())
+        .filter(itemId => !!items[itemId].display)
+        .reduce((filteredItems, filteredItemId) => {
+            return [items[filteredItemId]] // get only single item
         }, []);
 
 Door.propTypes = {
     isFetching: PropTypes.bool,
-    requestDoor: PropTypes.func.isRequired,
+    requestItem: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
     isFetching: state.isFetching,
-    landingImage: state.landingImage,
-    doors: state.doors,
+    [SECTION]: state[SECTION],
 });
 
 const mapDispatchToProps = dispatch => ({
-    requestDoor: (doorId) => dispatch(actions.requestData(SECTION, doorId)),
+    requestItem: (itemId) => dispatch(actions.requestData(SECTION, itemId)),
 
-    selectDimensions: (doorId, dimensions) =>
-        dispatch(actions.selectDimensions(doorId, dimensions)),
+    selectDimensions: (itemId, dimensions) =>
+        dispatch(actions.selectDimensions(SECTION, itemId, dimensions)),
 
-    selectColor: (doorId, colorIndex) =>
-        dispatch(actions.selectColor(doorId, colorIndex))
+    selectColor: (itemId, colorIndex) =>
+        dispatch(actions.selectColor(SECTION, itemId, colorIndex))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Door)

@@ -108,7 +108,8 @@ export function requestData(section, itemId) {
                 return response.json();
             }).then((content) => {
                 dispatch(receiveData(section, content, itemId));
-            }).catch(() => {
+            }).catch((err) => {
+                console.trace('ERROR:', err);
                 dispatch(receiveError('Web page error', 400));
             });
         }

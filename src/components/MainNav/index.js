@@ -48,7 +48,10 @@ export default class MainNav extends React.Component {
                                 <NavLinkI18n history={ this.props.history } tag={ Link } to="/kitchens">{ _('Kitchen') }</NavLinkI18n>
                             </NavItem>
                             <NavItem>
-                                <NavLinkI18n history={ this.props.history } tag={ Link } to="/interior">{ _('Interior') }</NavLinkI18n>
+                                <NavLinkI18n history={ this.props.history } tag={ Link } to="/interiors">{ _('Interior') }</NavLinkI18n>
+                            </NavItem>
+                            <NavItem>
+                                <NavLinkI18n history={ this.props.history } tag={ Link } to="/contacts">{ _('Contacts') }</NavLinkI18n>
                             </NavItem>
                         </Nav>
                         <Nav className="ml-auto" navbar>

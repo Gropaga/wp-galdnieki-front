@@ -8,6 +8,7 @@
         "Windows": "Logi",
         "Kitchen": "Virtuve",
         "Interior": "Interjers",
+        "Kontakti": "Kontakti",
 
         "door catalogue": "apskatīt durvju katalogu",
         "Colour": "Krāsa",
@@ -25,6 +26,7 @@
         "Windows": "Окна",
         "Kitchen": "Кухни",
         "Interior": "Интерьер",
+        "Kontakti": "Контакты",
 
         "door catalogue": "посмотреть каталог дверей",
         "Colour": "Оттенок",
@@ -42,14 +44,16 @@
         "stairs": "kapnes",
         "windows": "logi",
         "kitchens": "virtuves",
-        "pictures": "interjers"
+        "interiors": "interjers",
+        "contacts": "kontakti"
       },
       "ru": {
         "doors": "dveri",
         "stairs": "lestnici",
         "windows": "okna",
         "kitchens": "kuhni",
-        "interior": "interier"
+        "interiors": "interier",
+        "contacts": "kontakti"
       }
     }
   },

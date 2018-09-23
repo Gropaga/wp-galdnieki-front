@@ -1,67 +1,61 @@
+const SECTION = 'interiors';
+
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { requestInteriors, receiveInteriors,
-    selectDimensions, selectColor } from '../../actions/interiors'
-import ItemCards from '../ItemCards'
 import { _, getLocale } from "../../lib/i18n";
+import Carousel from "../Item/Carousel";
+import Description from "../Item/Description";
 
-class Interiors extends React.Component {
+import * as actions from "../../actions/common"
+
+class Interior extends React.Component {
     render() {
-        return this.props.isFetching  || !this.props.interiorsUpdated ?
+        return this.props.isFetching ?
             <h1>Loading...</h1> :
-            <div>
-                <h4>
-                    { _('Interiors') }
-                </h4>
-                <ItemCards
-                    locale={ getLocale() }
-                    itemSection={ 'interiors' }
-                    items={ filterInteriors(this.props.interiors) }
-                    selectDimensions={ this.props.selectDimensions }
-                    selectColor={ this.props.selectColor }
-                />
-            </div>
+            filterItems(this.props[SECTION]).reduce((acc, item) =>
+                    <div className="row">
+                        <Carousel item={ item } />
+                        <Description
+                            item={ item }
+                            selectColor={ this.props.selectColor }
+                            selectDimensions={ this.props.selectDimensions }
+                        />
+                    </div>
+                , <div>{' '}</div>);
     }
 
-    async componentWillMount() {
-        this.props.requestInteriors();
+    componentWillMount() {
+        this.props.requestItem(this.props.match.params.id.toString().replace('/',''));
     }
 }
 
-const filterInteriors = interiors =>
-   Object.keys(interiors)
-       .filter(interiorId => interiors[interiorId].locale === getLocale())
-       .reduce((filteredInteriors, filteredInteriorId) => {
-           return {
-               ...filteredInteriors,
-               [filteredInteriorId]: interiors[filteredInteriorId]
-           }
-       }, {});
+const filterItems = items =>
+    Object.keys(items)
+        .filter(itemId => items[itemId].locale === getLocale())
+        .filter(itemId => !!items[itemId].display)
+        .reduce((filteredItems, filteredItemId) => {
+            return [items[filteredItemId]] // get only single item
+        }, []);
 
-Interiors.propTypes = {
+Interior.propTypes = {
     isFetching: PropTypes.bool,
-    requestInteriors: PropTypes.func.isRequired,
-    receiveInteriors: PropTypes.func.isRequired,
-    receiveError: PropTypes.func.isRequired,
+    requestItem: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
     isFetching: state.isFetching,
-    interiors: state.interiors,
-    interiorsUpdated: state.interiorsUpdated
+    [SECTION]: state[SECTION],
 });
 
 const mapDispatchToProps = dispatch => ({
-    requestInteriors: () => dispatch(requestInteriors()),
-    receiveInteriors: (json) => dispatch(receiveInteriors(json)),
-    receiveError: (json) => dispatch(receiveError(json)),
+    requestItem: (itemId) => dispatch(actions.requestData(SECTION, itemId)),
 
-    selectDimensions: (interiorId, dimensions) =>
-        dispatch(selectDimensions(interiorId, dimensions)),
+    selectDimensions: (itemId, dimensions) =>
+        dispatch(actions.selectDimensions(SECTION, itemId, dimensions)),
 
-    selectColor: (interiorId, colorIndex) =>
-        dispatch(selectColor(interiorId, colorIndex))
+    selectColor: (itemId, colorIndex) =>
+        dispatch(actions.selectColor(SECTION, itemId, colorIndex))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Interiors)
+export default connect(mapStateToProps, mapDispatchToProps)(Interior)

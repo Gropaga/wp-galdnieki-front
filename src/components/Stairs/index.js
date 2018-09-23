@@ -1,13 +1,15 @@
+const SECTION = 'stairs';
+
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { requestStairs, receiveStairs } from '../../actions/stairs'
+import * as actions from "../../actions/common"
 import { _, getLocale } from "../../lib/i18n";
 import { UncontrolledCarousel } from "reactstrap";
 
 class Stairs extends React.Component {
     render() {
-        return this.props.isFetching  || !this.props.stairsUpdated ?
+        return this.props.isFetching || !this.props.updated ?
             <h1>Loading...</h1> :
             <div>
                 <h4>
@@ -16,19 +18,19 @@ class Stairs extends React.Component {
                 <div className="row">
                     <div className="col-lg-6 col-md-6">
                         {
-                            this.props.stairs &&
-                            this.props.stairs.description &&
-                            this.props.stairs.description[getLocale()] &&
-                            <div dangerouslySetInnerHTML={{__html: this.props.stairs.description[getLocale()]}} />
+                            this.props[SECTION] &&
+                            this.props[SECTION].description &&
+                            this.props[SECTION].description[getLocale()] &&
+                            <div dangerouslySetInnerHTML={{__html: this.props[SECTION].description[getLocale()]}} />
                         }
                     </div>
                     <div className="col-lg-6 col-md-6">
                         {
-                            this.props.stairs && this.props.stairs.gallery &&
+                            this.props[SECTION] && this.props[SECTION].gallery &&
                             <UncontrolledCarousel
                                 interval={0}
                                 autoPlay={false}
-                                items={getImages(this.props.stairs.gallery)}
+                                items={getImages(this.props[SECTION].gallery)}
                             />
                         }
                     </div>
@@ -37,7 +39,7 @@ class Stairs extends React.Component {
     }
 
     async componentWillMount() {
-        this.props.requestStairs();
+        this.props.requestPage();
     }
 }
 
@@ -51,20 +53,18 @@ const getImages = (gallery) => gallery.map((img) => {
 
 Stairs.propTypes = {
     isFetching: PropTypes.bool,
-    requestStairs: PropTypes.func.isRequired,
-    receiveStairs: PropTypes.func.isRequired,
+    requestPage: PropTypes.func.isRequired,
     receiveError: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
     isFetching: state.isFetching,
-    stairs: state.stairs,
-    stairsUpdated: state.stairsUpdated
+    [SECTION]: state[SECTION],
+    updated: state.allLoaded[SECTION]
 });
 
 const mapDispatchToProps = dispatch => ({
-    requestStairs: () => dispatch(requestStairs()),
-    receiveStairs: (json) => dispatch(receiveStairs(json)),
+    requestPage: () => dispatch(actions.requestAllData(SECTION)),
     receiveError: (json) => dispatch(receiveError(json)),
 });
 
