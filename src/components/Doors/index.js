@@ -1,40 +1,45 @@
 const SECTION = 'doors';
 
-import React from 'react'
-import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
-import ItemCards from '../ItemCards'
+import React from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import ItemCards from '../ItemCards';
 import { _, getLocale } from "../../lib/i18n";
 
 import * as actions from "../../actions/common"
 import BreadcrumbNav from "../BreadcrumbNav"
+import DocumentTitle from "../DocumentTitle";
 
 class Doors extends React.Component {
     render() {
-        return this.props.isFetching || !this.props.updated ?
-            <h1>Loading...</h1> :
-            <div className="row">
-                <BreadcrumbNav breadcrumbs={
-                    [
-                        {
-                            node: _(SECTION),
-                            key: SECTION,
-                        },
-                    ]
-                } />
-                <div className="col-md-12">
-                    <h4>
-                        { _(SECTION) }
-                    </h4>
+        return <DocumentTitle title={_(SECTION)}>
+            {
+                this.props.isFetching || !this.props.updated ?
+                <h1>Loading...</h1> :
+                <div className="row">
+                    <BreadcrumbNav breadcrumbs={
+                        [
+                            {
+                                node: _(SECTION),
+                                key: SECTION,
+                            },
+                        ]
+                    } />
+                    <div className="col-md-12">
+                        <h4>
+                            { _(SECTION) }
+                        </h4>
+                    </div>
+                    <ItemCards
+                        locale={ getLocale() }
+                        items={ this.filterItems(this.props[SECTION]) }
+                        itemSection={ SECTION }
+                        selectDimensions={ this.props.selectDimensions }
+                        selectColor={ this.props.selectColor }
+                    />
                 </div>
-                <ItemCards
-                    locale={ getLocale() }
-                    items={ this.filterItems(this.props[SECTION]) }
-                    itemSection={ SECTION }
-                    selectDimensions={ this.props.selectDimensions }
-                    selectColor={ this.props.selectColor }
-                />
-            </div>
+            }
+        </DocumentTitle>;
     }
 
     filterItems(items) {

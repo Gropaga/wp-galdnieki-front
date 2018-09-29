@@ -6,36 +6,40 @@ import { connect } from 'react-redux'
 import ItemCards from '../ItemCards'
 import { _, _l, getLocale } from "../../lib/i18n";
 import BreadcrumbNav from "../BreadcrumbNav"
-
+import DocumentTitle from "../DocumentTitle";
 
 import * as actions from "../../actions/common"
 
 class Interiors extends React.Component {
     render() {
-        return this.props.isFetching || !this.props.updated ?
-            <h1>Loading...</h1> :
-            <div className="row">
-                <BreadcrumbNav breadcrumbs={
-                    [
-                        {
-                            node: _(SECTION),
-                            key: SECTION,
-                        },
-                    ]
-                } />
-                <div className="col-md-12">
-                    <h4>
-                        { _(SECTION) }
-                    </h4>
-                </div>
-                <ItemCards
-                    locale={ getLocale() }
-                    items={ this.filterItems(this.props[SECTION]) }
-                    itemSection={ SECTION }
-                    selectDimensions={ this.props.selectDimensions }
-                    selectColor={ this.props.selectColor }
-                />
-            </div>
+        return <DocumentTitle title={_(SECTION)}>
+            {
+                this.props.isFetching || !this.props.updated ?
+                    <h1>Loading...</h1> :
+                    <div className="row">
+                        <BreadcrumbNav breadcrumbs={
+                            [
+                                {
+                                    node: _(SECTION),
+                                    key: SECTION,
+                                },
+                            ]
+                        } />
+                        <div className="col-md-12">
+                            <h4>
+                                { _(SECTION) }
+                            </h4>
+                        </div>
+                        <ItemCards
+                            locale={ getLocale() }
+                            items={ this.filterItems(this.props[SECTION]) }
+                            itemSection={ SECTION }
+                            selectDimensions={ this.props.selectDimensions }
+                            selectColor={ this.props.selectColor }
+                        />
+                    </div>
+            }
+        </DocumentTitle>;
     }
 
     filterItems(items) {

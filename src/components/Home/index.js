@@ -1,3 +1,7 @@
+import DocumentTitle from "../DocumentTitle";
+
+const SECTION = 'home';
+
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
@@ -11,57 +15,61 @@ import LinkI18n from "../Helpers/LinkI18n";
 
 class Home extends React.Component {
     render() {
-        return this.props.isFetching || !this.props.homeUpdated ?
-            <h1>Loading...</h1> :
-            <div>
-                <JumbotronLanding
-                    locale={ getLocale() }
-                    image={ this.props.landingImage }
-                    jumbo={ this.props.jumbo }
-                />
-                <div className="row">
-                    <div className="col-md-12">
-                        <h4>
-                            { _('doors') }
-                            {" "}
-                            <LinkI18n section="doors">
-                                <Button outline color="primary" size="sm">
-                                    { _('door catalogue') }
-                                </Button>
-                            </LinkI18n>
-                        </h4>
+        return <DocumentTitle title={ _(SECTION) }>
+            {
+                this.props.isFetching || !this.props.homeUpdated ?
+                    <h1>Loading...</h1> :
+                    <div>
+                        <JumbotronLanding
+                            locale={ getLocale() }
+                            image={ this.props.landingImage }
+                            jumbo={ this.props.jumbo }
+                        />
+                        <div className="row">
+                            <div className="col-md-12">
+                                <h4>
+                                    { _('doors') }
+                                    {" "}
+                                    <LinkI18n section="doors">
+                                        <Button outline color="primary" size="sm">
+                                            { _('door catalogue') }
+                                        </Button>
+                                    </LinkI18n>
+                                </h4>
+                            </div>
+                            <ItemCards
+                                locale={ getLocale() }
+                                itemSection={'doors'}
+                                items={ filterItems(this.props.doors) }
+                                selectDimensions={ this.props.selectDimensions }
+                                selectColor={ this.props.selectColor }
+                                history={ this.props.history }
+                            />
+                        </div>
+                        <div className="row">
+                            <div className="col-md-12">
+                                <h4>
+                                    { _('windows') }
+                                    {" "}
+                                    <LinkI18n section="windows">
+                                        <Button outline color="primary" size="sm">
+                                            { _('window catalogue') }
+                                        </Button>
+                                    </LinkI18n>
+                                </h4>
+                            </div>
+                            <ItemCards
+                                locale={ getLocale() }
+                                itemSection={'windows'}
+                                items={ filterItems(this.props.windows) }
+                                selectDimensions={ this.props.selectDimensions }
+                                selectColor={ this.props.selectColor }
+                                history={ this.props.history }
+                            />
+                        </div>
                     </div>
-                    <ItemCards
-                        locale={ getLocale() }
-                        itemSection={'doors'}
-                        items={ filterItems(this.props.doors) }
-                        selectDimensions={ this.props.selectDimensions }
-                        selectColor={ this.props.selectColor }
-                        history={ this.props.history }
-                    />
-                </div>
-                <div className="row">
-                    <div className="col-md-12">
-                        <h4>
-                            { _('windows') }
-                            {" "}
-                            <LinkI18n section="windows">
-                                <Button outline color="primary" size="sm">
-                                    { _('window catalogue') }
-                                </Button>
-                            </LinkI18n>
-                        </h4>
-                    </div>
-                    <ItemCards
-                        locale={ getLocale() }
-                        itemSection={'windows'}
-                        items={ filterItems(this.props.windows) }
-                        selectDimensions={ this.props.selectDimensions }
-                        selectColor={ this.props.selectColor }
-                        history={ this.props.history }
-                    />
-                </div>
-            </div>
+            }
+        </DocumentTitle>;
     }
 
     componentWillMount() {

@@ -9,13 +9,15 @@ import Description from "../Item/Description";
 
 import * as actions from "../../actions/common"
 import BreadcrumbNav from "../BreadcrumbNav"
+import DocumentTitle from "../DocumentTitle";
 
 class Door extends React.Component {
     render() {
         return this.props.isFetching ?
-            <h1>Loading...</h1> :
+            <DocumentTitle title={_(SECTION)}><h1>Loading...</h1></DocumentTitle> :
             filterItems(this.props[SECTION]).reduce((acc, item) =>
-                <div className="row">
+                <DocumentTitle title={ `${item.title} - ${_(SECTION)}` }>
+                    <div className="row">
                     <BreadcrumbNav breadcrumbs={
                         [
                             {
@@ -36,6 +38,7 @@ class Door extends React.Component {
                         selectDimensions={ this.props.selectDimensions }
                     />
                 </div>
+                </DocumentTitle>
             , <div>{' '}</div>);
     }
 

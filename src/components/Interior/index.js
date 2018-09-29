@@ -6,36 +6,39 @@ import { connect } from 'react-redux'
 import { _, _p, _lRev, getLocale } from "../../lib/i18n";
 import Carousel from "../Item/Carousel";
 import Description from "../Item/Description";
-import BreadcrumbNav from "../BreadcrumbNav"
+import BreadcrumbNav from "../BreadcrumbNav";
+import DocumentTitle from "../DocumentTitle";
 
 import * as actions from "../../actions/common"
 
 class Interior extends React.Component {
     render() {
         return this.props.isFetching ?
-            <h1>Loading...</h1> :
+            <DocumentTitle title={_(SECTION)}><h1>Loading...</h1></DocumentTitle> :
             filterItems(this.props[SECTION]).reduce((acc, item) =>
-                    <div className="row">
-                        <BreadcrumbNav breadcrumbs={
-                            [
-                                {
-                                    node: _(SECTION),
-                                    key: SECTION,
-                                    url: `${_lRev()}${_p(SECTION)}`,
-                                },
-                                {
-                                    node: item.title,
-                                    key: item.title
-                                }
-                            ]
-                        } />
-                        <Carousel item={ item } />
-                        <Description
-                            item={ item }
-                            selectColor={ this.props.selectColor }
-                            selectDimensions={ this.props.selectDimensions }
-                        />
-                    </div>
+                    <DocumentTitle title={ `${item.title} - ${_(SECTION)}` }>
+                        <div className="row">
+                            <BreadcrumbNav breadcrumbs={
+                                [
+                                    {
+                                        node: _(SECTION),
+                                        key: SECTION,
+                                        url: `${_lRev()}${_p(SECTION)}`,
+                                    },
+                                    {
+                                        node: item.title,
+                                        key: item.title
+                                    }
+                                ]
+                            } />
+                            <Carousel item={ item } />
+                            <Description
+                                item={ item }
+                                selectColor={ this.props.selectColor }
+                                selectDimensions={ this.props.selectDimensions }
+                            />
+                        </div>
+                    </DocumentTitle>
                 , <div>{' '}</div>);
     }
 
