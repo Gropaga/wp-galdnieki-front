@@ -18,7 +18,7 @@ export const _ = (key, language = locale('language')) => {
 };
 
 export const _pRev = (key, language = locale('language')) => {
-    return reverseObject(dict.locales)[key][language];
+    return reverseObject(dict.locales.paths[language])[key];
 };
 
 const reverseObject = (object) => {

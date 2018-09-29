@@ -3,15 +3,17 @@ import {
     Collapse,
     Navbar,
     NavbarToggler,
-    NavbarBrand,
     Nav,
     NavItem,
+    Breadcrumb,
+    BreadcrumbItem
 } from 'reactstrap';
 import { Link } from 'react-router-dom'
-import { _, getLocale } from '../../lib/i18n';
+import {_, _pRev, getLocale} from '../../lib/i18n';
 import NavLinkI18n from './NavLinkI18n'
 import NavLinkLocaleSelect from './NavLinkLocaleSelect'
 import NavbarBrandLocale from "./NavbarBrandLocale";
+import { pathMatchByHistory } from "../../lib/pathMatch";
 
 export default class MainNav extends React.Component {
     constructor(props) {
@@ -21,6 +23,9 @@ export default class MainNav extends React.Component {
         this.state = {
             isOpen: false
         };
+
+        this.combineObject = this.combineObject.bind(this);
+        this.getNodes = this.getNodes.bind(this);
     }
     toggle() {
         this.setState({
@@ -29,42 +34,89 @@ export default class MainNav extends React.Component {
     }
     render() {
         return (
-            <div>
-                <Navbar color="white" light expand="md">
-                    <NavbarBrandLocale history={ this.props.history } tag={ Link } to="/">Galdnieks.lv</NavbarBrandLocale>
-                    <NavbarToggler onClick={this.toggle} />
-                    <Collapse isOpen={this.state.isOpen} navbar>
-                        <Nav navbar>
-                            <NavItem>
-                                <NavLinkI18n history={ this.props.history } tag={ Link } to="/doors">{ _('Doors') }</NavLinkI18n>
-                            </NavItem>
-                            <NavItem>
-                                <NavLinkI18n history={ this.props.history } tag={ Link } to="/stairs">{ _('Stairs') }</NavLinkI18n>
-                            </NavItem>
-                            <NavItem>
-                                <NavLinkI18n history={ this.props.history } tag={ Link } to="/windows">{ _('Windows') }</NavLinkI18n>
-                            </NavItem>
-                            <NavItem>
-                                <NavLinkI18n history={ this.props.history } tag={ Link } to="/kitchens">{ _('Kitchen') }</NavLinkI18n>
-                            </NavItem>
-                            <NavItem>
-                                <NavLinkI18n history={ this.props.history } tag={ Link } to="/interiors">{ _('Interior') }</NavLinkI18n>
-                            </NavItem>
-                            <NavItem>
-                                <NavLinkI18n history={ this.props.history } tag={ Link } to="/contacts">{ _('Contacts') }</NavLinkI18n>
-                            </NavItem>
-                        </Nav>
-                        <Nav className="ml-auto" navbar>
-                            <NavItem>
-                                <NavLinkLocaleSelect history={ this.props.history } tag={ Link } locale="ru">По-русски</NavLinkLocaleSelect>
-                            </NavItem>
-                            <NavItem>
-                                <NavLinkLocaleSelect history={ this.props.history } tag={ Link } locale="lv">Latviski</NavLinkLocaleSelect>
-                            </NavItem>
-                        </Nav>
-                    </Collapse>
-                </Navbar>
-            </div>
+            <Navbar color="white" light expand="lg">
+                <NavbarBrandLocale history={this.props.history} tag={Link} to="/">Galdnieks.lv</NavbarBrandLocale>
+                <NavbarToggler onClick={this.toggle}/>
+                <Collapse isOpen={this.state.isOpen} navbar>
+                    <Nav navbar>
+                        <NavItem>
+                            <NavLinkI18n history={this.props.history} tag={Link}
+                                         to="/doors">{_('doors')}</NavLinkI18n>
+                        </NavItem>
+                        <NavItem>
+                            <NavLinkI18n history={this.props.history} tag={Link}
+                                         to="/stairs">{_('stairs')}</NavLinkI18n>
+                        </NavItem>
+                        <NavItem>
+                            <NavLinkI18n history={this.props.history} tag={Link}
+                                         to="/windows">{_('windows')}</NavLinkI18n>
+                        </NavItem>
+                        <NavItem>
+                            <NavLinkI18n history={this.props.history} tag={Link}
+                                         to="/kitchens">{_('kitchen')}</NavLinkI18n>
+                        </NavItem>
+                        <NavItem>
+                            <NavLinkI18n history={this.props.history} tag={Link}
+                                         to="/interiors">{_('interiors')}</NavLinkI18n>
+                        </NavItem>
+                        <NavItem>
+                            <NavLinkI18n history={this.props.history} tag={Link}
+                                         to="/contacts">{_('contacts')}</NavLinkI18n>
+                        </NavItem>
+                    </Nav>
+                    <Nav className="ml-auto" navbar>
+                        <NavItem>
+                            <NavLinkLocaleSelect history={this.props.history} tag={Link}
+                                                 locale="ru">По-русски</NavLinkLocaleSelect>
+                        </NavItem>
+                        <NavItem>
+                            <NavLinkLocaleSelect history={this.props.history} tag={Link}
+                                                 locale="lv">Latviski</NavLinkLocaleSelect>
+                        </NavItem>
+                    </Nav>
+                </Collapse>
+            </Navbar>
         );
     }
+
+
+    getBreadcrumbItems(pathMatch) {
+        alert(pathMatch['page']);
+        return [
+            this.removeEmptyValues,
+            this.combineObject,
+            this.getNodes
+        ].reduce((acc, func) => func(acc), [
+            [(url) => <a href={url}>{ _('home') }</a>, pathMatch['language']],
+            [(url) => <a href={url}>{ pathMatch['page'].replace('/','') }</a>, pathMatch['page']],
+            [() => <a href="#">123</a>, pathMatch['id']],
+        ]);
+    }
+
+    removeEmptyValues(acc) {
+        return acc.filter(([, path]) => !!path);
+    }
+
+    getNodes(acc) {
+        return acc.map(([key, value]) => <BreadcrumbItem key={value}>
+            {key(value)}
+        </BreadcrumbItem>);
+    }
+
+    getText(key) {
+        return {
+            language: _('home'),
+            page: _(key),
+            id: _(key),
+        }[key];
+    }
+
+    combineObject([head, ...tail], acc = []) {
+        return tail.length ? this.combineObject(this.addHeadObject(tail, head), [...acc, head]) : [...acc, head];
+    }
+
+    addHeadObject([[headKey, headText], ...tail], [appendKey, appendText]) {
+        return [[headKey, appendText + headText], ...tail];
+    }
 }
+

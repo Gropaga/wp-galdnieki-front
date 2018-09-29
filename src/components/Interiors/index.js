@@ -4,7 +4,9 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import ItemCards from '../ItemCards'
-import { _, getLocale } from "../../lib/i18n";
+import { _, _l, getLocale } from "../../lib/i18n";
+import BreadcrumbNav from "../BreadcrumbNav"
+
 
 import * as actions from "../../actions/common"
 
@@ -12,10 +14,20 @@ class Interiors extends React.Component {
     render() {
         return this.props.isFetching || !this.props.updated ?
             <h1>Loading...</h1> :
-            <div>
-                <h4>
-                    { _('Interiors') }
-                </h4>
+            <div className="row">
+                <BreadcrumbNav breadcrumbs={
+                    [
+                        {
+                            node: _(SECTION),
+                            key: SECTION,
+                        },
+                    ]
+                } />
+                <div className="col-md-12">
+                    <h4>
+                        { _(SECTION) }
+                    </h4>
+                </div>
                 <ItemCards
                     locale={ getLocale() }
                     items={ this.filterItems(this.props[SECTION]) }

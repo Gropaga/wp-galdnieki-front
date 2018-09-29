@@ -2,13 +2,14 @@
   "locales": {
     "strings": {
       "lv": {
-        "Door": "Durvis",
-        "Doors": "Durvi",
-        "Stairs": "Kapnes",
-        "Windows": "Logi",
-        "Kitchen": "Virtuve",
-        "Interior": "Interjers",
-        "Kontakti": "Kontakti",
+        "door": "Durvis",
+        "doors": "Durvi",
+        "stairs": "Kapnes",
+        "windows": "Logi",
+        "kitchen": "Virtuve",
+        "interiors": "Interjers",
+        "contacts": "Kontakti",
+        "home": "Majas",
 
         "door catalogue": "apskatīt durvju katalogu",
         "Colour": "Krāsa",
@@ -20,13 +21,14 @@
         "Nut": "Rieksts"
       },
       "ru": {
-        "Door": "Дверь",
-        "Doors": "Двери",
-        "Stairs": "Лестницы",
-        "Windows": "Окна",
-        "Kitchen": "Кухни",
-        "Interior": "Интерьер",
-        "Kontakti": "Контакты",
+        "door": "Дверь",
+        "doors": "Двери",
+        "stairs": "Лестницы",
+        "windows": "Окна",
+        "kitchen": "Кухни",
+        "interiors": "Интерьер",
+        "contacts": "Контакты",
+        "home": "Домой",
 
         "door catalogue": "посмотреть каталог дверей",
         "Colour": "Оттенок",

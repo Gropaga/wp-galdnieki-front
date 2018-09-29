@@ -19,40 +19,48 @@ class Home extends React.Component {
                     image={ this.props.landingImage }
                     jumbo={ this.props.jumbo }
                 />
-                <h4>
-                    { _('Doors') }
-                    {" "}
-                    <LinkI18n section="doors">
-                        <Button outline color="primary" size="sm">
-                            { _('door catalogue') }
-                        </Button>
-                    </LinkI18n>
-                </h4>
-                <ItemCards
-                    locale={ getLocale() }
-                    itemSection={'doors'}
-                    items={ filterItems(this.props.doors) }
-                    selectDimensions={ this.props.selectDimensions }
-                    selectColor={ this.props.selectColor }
-                    history={ this.props.history }
-                />
-                <h4>
-                    { _('Windows') }
-                    {" "}
-                    <LinkI18n section="windows">
-                        <Button outline color="primary" size="sm">
-                            { _('window catalogue') }
-                        </Button>
-                    </LinkI18n>
-                </h4>
-                <ItemCards
-                    locale={ getLocale() }
-                    itemSection={'windows'}
-                    items={ filterItems(this.props.windows) }
-                    selectDimensions={ this.props.selectDimensions }
-                    selectColor={ this.props.selectColor }
-                    history={ this.props.history }
-                />
+                <div className="row">
+                    <div className="col-md-12">
+                        <h4>
+                            { _('doors') }
+                            {" "}
+                            <LinkI18n section="doors">
+                                <Button outline color="primary" size="sm">
+                                    { _('door catalogue') }
+                                </Button>
+                            </LinkI18n>
+                        </h4>
+                    </div>
+                    <ItemCards
+                        locale={ getLocale() }
+                        itemSection={'doors'}
+                        items={ filterItems(this.props.doors) }
+                        selectDimensions={ this.props.selectDimensions }
+                        selectColor={ this.props.selectColor }
+                        history={ this.props.history }
+                    />
+                </div>
+                <div className="row">
+                    <div className="col-md-12">
+                        <h4>
+                            { _('windows') }
+                            {" "}
+                            <LinkI18n section="windows">
+                                <Button outline color="primary" size="sm">
+                                    { _('window catalogue') }
+                                </Button>
+                            </LinkI18n>
+                        </h4>
+                    </div>
+                    <ItemCards
+                        locale={ getLocale() }
+                        itemSection={'windows'}
+                        items={ filterItems(this.props.windows) }
+                        selectDimensions={ this.props.selectDimensions }
+                        selectColor={ this.props.selectColor }
+                        history={ this.props.history }
+                    />
+                </div>
             </div>
     }
 

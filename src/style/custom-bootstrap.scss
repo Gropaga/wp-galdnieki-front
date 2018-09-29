@@ -1,3 +1,10 @@
 $carousel-control-color:            #007bff;
+$breadcrumb-bg:                     #ffffff;
+$breadcrumb-padding-y:              0;
+$breadcrumb-padding-x:              0;
 
 @import '../../node_modules/bootstrap/scss/bootstrap.scss';
+
+.breadcrumb {
+  font-size: 95%;
+}

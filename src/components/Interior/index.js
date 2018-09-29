@@ -3,9 +3,10 @@ const SECTION = 'interiors';
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { _, getLocale } from "../../lib/i18n";
+import { _, _p, _lRev, getLocale } from "../../lib/i18n";
 import Carousel from "../Item/Carousel";
 import Description from "../Item/Description";
+import BreadcrumbNav from "../BreadcrumbNav"
 
 import * as actions from "../../actions/common"
 
@@ -15,6 +16,19 @@ class Interior extends React.Component {
             <h1>Loading...</h1> :
             filterItems(this.props[SECTION]).reduce((acc, item) =>
                     <div className="row">
+                        <BreadcrumbNav breadcrumbs={
+                            [
+                                {
+                                    node: _(SECTION),
+                                    key: SECTION,
+                                    url: `${_lRev()}${_p(SECTION)}`,
+                                },
+                                {
+                                    node: item.title,
+                                    key: item.title
+                                }
+                            ]
+                        } />
                         <Carousel item={ item } />
                         <Description
                             item={ item }

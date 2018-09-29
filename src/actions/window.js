@@ -19,7 +19,7 @@ export function requestWindow(windowId) {
         dispatch(resetWindows());
 
         const state = getState();
-        
+
         if (typeof state.windows === 'object' &&
             typeof state.windows[windowId] === 'object'
         ) {

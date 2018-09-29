@@ -1,8 +1,5 @@
 import React from 'react'
 import Colors from "./Colors";
-import {selectColor} from "../../actions/window";
-import ItemPriceSelect from "../ItemCards/ItemPriceSelect";
-import ItemPrice from "../ItemCards/ItemPrice";
 import Price from "./Price";
 
 const Description = ({ item, selectColor, selectDimensions }) =>

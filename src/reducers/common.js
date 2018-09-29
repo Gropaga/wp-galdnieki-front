@@ -9,17 +9,7 @@ import {
     DISPLAY_ALL_DATA,
 } from '../actions/common';
 
-const initState = {
-    isFetching: true,
-    allLoaded: {},
-    doors: [],
-    stairs: [],
-    contacts: [],
-    interiors: [],
-    windows: [],
-};
-
-const commonReducer = (state = { ...initState }, {type, section, ...action}) => {
+const commonReducer = (state = {}, {type, section, ...action}) => {
     switch (type) {
         case DISPLAY_ALL_DATA:
             return {

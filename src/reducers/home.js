@@ -1,14 +1,6 @@
 import { RECEIVE_HOME, SELECT_DOOR_SIZE, SELECT_DOOR_COLOR, DISPLAY_HOME} from '../actions/home'
 
-const initState = {
-    isFetching: true,
-    doors: [],
-    windows: [],
-    jumbo: {},
-    landingImage: null
-};
-
-const homeReducer = (state = { ...initState }, action) => {
+const homeReducer = (state = {}, action) => {
     switch (action.type) {
         case DISPLAY_HOME:
             return {
