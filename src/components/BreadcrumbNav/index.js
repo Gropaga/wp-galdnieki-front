@@ -15,7 +15,7 @@ const BreadcrumbNav = ({breadcrumbs, showHome = true}) => {
             {
                 (showHome) &&
                 <BreadcrumbItem key={ `/${_lRev()}` }>
-                    <Link to={ `/${_lRev()}` }>
+                    <Link to={ `${_lRev()}` }>
                         <FontAwesomeIcon icon="home" /> {_('home')}
                     </Link>
                 </BreadcrumbItem>
