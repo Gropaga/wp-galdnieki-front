@@ -3,11 +3,13 @@ const initState = {
     allLoaded: {},
     doors: [],
     stairs: [],
+    kitchens: [],
     contacts: [],
     interiors: [],
     windows: [],
 };
 
+// contains initial data
 const initReducer = (state = { ...initState }) => {
     return state
 };

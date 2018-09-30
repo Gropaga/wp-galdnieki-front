@@ -7,6 +7,7 @@ import {
     RESET_DISPLAY,
     RECEIVE_ERROR,
     DISPLAY_ALL_DATA,
+    START_RECEIVE_DATA,
 } from '../actions/common';
 
 const commonReducer = (state = {}, {type, section, ...action}) => {
@@ -15,6 +16,14 @@ const commonReducer = (state = {}, {type, section, ...action}) => {
             return {
                 ...state,
                 isFetching: false
+            };
+        case START_RECEIVE_DATA:
+            return {
+                ...state,
+                [section]: {
+                    ...state[section],
+                    loading: true,
+                }
             };
         case DISPLAY_DATA:
             return {
@@ -34,6 +43,7 @@ const commonReducer = (state = {}, {type, section, ...action}) => {
                 [section]: {
                     ...action.content[section],
                     ...state[section],
+                    loading: false,
                     updated: action.receivedAt
                 },
                 isFetching: false,
