@@ -4,7 +4,7 @@ export const DISPLAY_HOME = 'DISPLAY_HOME';
 export const SELECT_DOOR_SIZE = 'SELECT_DOOR_SIZE';
 export const SELECT_DOOR_COLOR = 'SELECT_DOOR_COLOR';
 
-import { receiveError } from "./common";
+import {preloadData, receiveError} from "./common";
 
 export function displayHome() {
     return {
@@ -20,22 +20,6 @@ export function receiveHome(json) {
     }
 }
 
-export function selectDimensions(doorId, dimensions) {
-    return {
-        type: SELECT_DOOR_SIZE,
-        doorId: doorId,
-        ...JSON.parse(dimensions)
-    }
-}
-
-export function selectColor(doorId, colorIndex) {
-    return {
-        type: SELECT_DOOR_COLOR,
-        doorId: doorId,
-        colorIndex: colorIndex
-    }
-}
-
 export function requestHome() {
     return (dispatch, getState) => {
         const state = getState();
@@ -47,6 +31,7 @@ export function requestHome() {
                 return response.json();
             }).then((data) => {
                 dispatch(receiveHome(data));
+                dispatch(preloadData('home'))
             }).catch(() => {
                 dispatch(receiveError('Web page error', 400));
             });

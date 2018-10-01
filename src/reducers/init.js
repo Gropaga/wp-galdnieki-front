@@ -7,6 +7,7 @@ const initState = {
     contacts: [],
     interiors: [],
     windows: [],
+    home: [],
 };
 
 // contains initial data

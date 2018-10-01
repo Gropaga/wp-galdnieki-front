@@ -51,7 +51,6 @@ export function displayData(section, itemId) {
 export function receiveData(section, content, itemId) {
     return {
         type: RECEIVE_DATA,
-        section: section,
         content: content,
         itemId: itemId,
         receivedAt: Date.now()
@@ -61,7 +60,7 @@ export function receiveData(section, content, itemId) {
 export function receiveAllData(section, content) {
     return {
         type: RECEIVE_ALL_DATA,
-        section: section,
+        page: section,
         content: content,
         receivedAt: Date.now()
     }
@@ -92,8 +91,9 @@ export function preloadData(excludeSection = false) {
         Object.entries(preload.sections).filter(([section, weight]) => {
             return section !== excludeSection;
         }).filter(([section, weight]) => { // weight is not used
-            return state[section].loading !== false;
-        }).forEach(([section, weight]) => { // weight is not used
+            return state[section].loading !== false ||
+                (state[section].loading === false && state.allLoaded[section] === undefined);
+        }).map(([section, weight]) => { // weight is not used
             dispatch(startReceiveData(section));
             fetch(`http://localhost:8080/wp-json/shop/v1/${section}`).then((response) => {
                 return response.json();
@@ -112,7 +112,7 @@ export function requestAllData(section) {
 
         if (typeof state.allLoaded[section] === 'number') {
             dispatch(displayAllData(section));
-        } else if (state[section].loading !== true) {
+        } else if (typeof state[section] === 'undefined' || state[section].loading !== true) {
             dispatch(startReceiveData(section));
             fetch(`http://localhost:8080/wp-json/shop/v1/${section}`).then((response) => {
                 return response.json();

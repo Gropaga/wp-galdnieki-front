@@ -1,5 +1,3 @@
-import DocumentTitle from "../DocumentTitle";
-
 const SECTION = 'home';
 
 import React from 'react'
@@ -13,11 +11,15 @@ import ItemCards from '../ItemCards'
 import { _, getLocale } from "../../lib/i18n";
 import LinkI18n from "../Helpers/LinkI18n";
 
+import * as actions from "../../actions/common"
+
+import DocumentTitle from "../DocumentTitle";
+
 class Home extends React.Component {
     render() {
         return <DocumentTitle title={ _(SECTION) }>
             {
-                this.props.isFetching || !this.props.homeUpdated ?
+                this.props.isFetching || !this.props.updated ?
                     <h1>Loading...</h1> :
                     <div>
                         <JumbotronLanding
@@ -92,24 +94,22 @@ const filterItems = items => {
 Home.propTypes = {
     isFetching: PropTypes.bool,
     requestHome: PropTypes.func.isRequired,
-    receiveHome: PropTypes.func.isRequired,
     receiveError: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => {
     return {
         isFetching: state.isFetching,
-        landingImage: state.landingImage,
+        landingImage: state.home.landingImage,
         doors: state.doors,
         windows: state.windows,
-        jumbo: state.jumbo,
-        homeUpdated: state.homeUpdated
+        jumbo: state.home.jumbo,
+        updated: state.allLoaded[SECTION]
     }
 };
 
 const mapDispatchToProps = dispatch => ({
-    requestHome: () => dispatch(requestHome()),
-    receiveHome: (json) => dispatch(receiveHome(json)),
+    requestHome: () => dispatch(actions.requestAllData(SECTION)),
     receiveError: (json) => dispatch(receiveError(json)),
 
     selectDimensions: (doorId, dimensions) =>

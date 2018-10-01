@@ -10,7 +10,7 @@ import {
     START_RECEIVE_DATA,
 } from '../actions/common';
 
-const commonReducer = (state = {}, {type, section, ...action}) => {
+const commonReducer = (state = {}, {type, ...action}) => {
     switch (type) {
         case DISPLAY_ALL_DATA:
             return {
@@ -20,58 +20,66 @@ const commonReducer = (state = {}, {type, section, ...action}) => {
         case START_RECEIVE_DATA:
             return {
                 ...state,
-                [section]: {
-                    ...state[section],
+                [action.section]: {
+                    ...state[action.section],
                     loading: true,
                 }
             };
         case DISPLAY_DATA:
             return {
                 ...state,
-                [section]: {
-                    ...state[section],
+                [action.section]: {
+                    ...state[action.section],
                     [action.itemId]: {
-                        ...state[section][action.itemId],
+                        ...state[action.section][action.itemId],
                         display: true
                     }
                 },
                 isFetching: false
             };
         case RECEIVE_ALL_DATA:
-            return {
+            return Object.entries(action.content.data).reduce((newState, [section, data]) => {
+                return {
+                    ...newState,
+                    [section]: {
+                        ...data,
+                        ...state[section],
+                        loading: false,
+                        updated: action.receivedAt
+                    },
+                }
+            }, {
                 ...state,
-                [section]: {
-                    ...action.content[section],
-                    ...state[section],
-                    loading: false,
-                    updated: action.receivedAt
-                },
                 isFetching: false,
                 allLoaded: {
                     ...state.allLoaded,
-                    [section]: action.receivedAt,
+                    [action.page]: action.receivedAt,
                 },
-            };
+            });
         case RECEIVE_DATA:
-            return {
+            return Object.entries(action.content.data).reduce((newState, [section, data]) => {
+                return {
+                    ...newState,
+                    [section]: {
+                        ...newState[section],
+                        [action.itemId]: {
+                            ...data[action.itemId],
+                            display: true,
+                            updated: action.receivedAt
+                        }
+                    }
+                }
+            }, {
                 ...state,
-                [section]: {
-                    ...state[section],
-                    [action.itemId]: {
-                        ...action.content[section][action.itemId],
-                        display: true,
-                        updated: action.receivedAt,
-                    },
-                },
-                isFetching: false
-            };
+                isFetching: false,
+            });
         case SELECT_SIZE:
             return {
                 ...state,
-                [section]: {
-                    ...state[section],
+                [action.section]: {
+                    ...state[action.section],
                     [action.itemId]: {
-                        ...state[section][action.itemId],
+                        ...state[action.section][action.itemId],
                         sizeSelect: {
                             height: action.height,
                             width: action.width
@@ -82,10 +90,10 @@ const commonReducer = (state = {}, {type, section, ...action}) => {
         case SELECT_COLOR:
             return {
                 ...state,
-                [section]: {
-                    ...state[section],
+                [action.section]: {
+                    ...state[action.section],
                     [action.itemId]: {
-                        ...state[section][action.itemId],
+                        ...state[action.section][action.itemId],
                         colorSelect: action.colorIndex
                     }
                 }
@@ -93,11 +101,11 @@ const commonReducer = (state = {}, {type, section, ...action}) => {
         case RESET_DISPLAY:
             return {
                 ...state,
-                [section]: Object.keys(state[section]).reduce((acc, key) => {
+                [action.section]: Object.keys(state[action.section]).reduce((acc, key) => {
                     return {
                         ...acc,
                         [key]: {
-                            ...state[section][key],
+                            ...state[action.section][key],
                             display: false
                         }
                     };

@@ -4,12 +4,11 @@ import {
     Breadcrumb,
     BreadcrumbItem,
 } from 'reactstrap';
-import {_, _lRev, getLocale} from "../../lib/i18n";
+import {_, _lRev} from "../../lib/i18n";
 import { Link } from 'react-router-dom'
 
 
 const BreadcrumbNav = ({breadcrumbs, showHome = true}) => {
-    console.log('breadcrumbs', breadcrumbs);
     return <div className="col-lg-12 col-md-12">
         <Breadcrumb>
             {

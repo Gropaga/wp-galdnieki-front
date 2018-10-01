@@ -1,5 +1,6 @@
 {
   "sections": {
+    "home": 10,
     "doors": 20,
     "stairs": 30,
     "windows": 40,
