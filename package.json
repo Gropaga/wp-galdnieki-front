@@ -4,6 +4,8 @@
   "description": "test task",
   "main": "index.js",
   "scripts": {
+    "build": "webpack",
+    "build-production": "webpack --env=production",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -47,7 +49,7 @@
     "sass-loader": "^6.0.7",
     "style-loader": "^0.20.3",
     "webpack": "^4.1.1",
-    "webpack-cli": "^2.0.11",
+    "webpack-cli": "^2.1.5",
     "webpack-dev-middleware": "^3.0.1"
   }
 }
