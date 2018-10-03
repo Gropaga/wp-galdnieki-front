@@ -95,7 +95,7 @@ export function preloadData(excludeSection = false) {
                 (state[section].loading === false && state.allLoaded[section] === undefined);
         }).map(([section, weight]) => { // weight is not used
             dispatch(startReceiveData(section));
-            fetch(`http://localhost:8080/wp-json/shop/v1/${section}`).then((response) => {
+            fetch(`${RESOURCE_URL}${section}`).then((response) => {
                 return response.json();
             }).then((content) => {
                 dispatch(receiveAllData(section, content));
