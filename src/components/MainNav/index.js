@@ -53,7 +53,7 @@ export default class MainNav extends React.Component {
                         </NavItem>
                         <NavItem>
                             <NavLinkI18n history={this.props.history} tag={Link}
-                                         to="/kitchens">{_('kitchen')}</NavLinkI18n>
+                                         to="/furniture">{_('furniture')}</NavLinkI18n>
                         </NavItem>
                         <NavItem>
                             <NavLinkI18n history={this.props.history} tag={Link}

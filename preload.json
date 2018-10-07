@@ -4,7 +4,7 @@
     "doors": 20,
     "stairs": 30,
     "windows": 40,
-    "kitchens": 50,
+    "furniture": 50,
     "interiors": 60,
     "contacts": 70
   }

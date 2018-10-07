@@ -3,11 +3,11 @@ const initState = {
     allLoaded: {},
     doors: [],
     stairs: [],
-    kitchens: [],
     contacts: [],
     interiors: [],
     windows: [],
     home: [],
+    furniture: [],
 };
 
 // contains initial data

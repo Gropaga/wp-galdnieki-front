@@ -23,9 +23,13 @@ export default class LinkedCarousel extends UncontrolledCarousel {
                     onExited={this.onExited}
                     key={item.src}
                 >
-                    <LinkI18n section={itemSection} id={itemId}>
+                    {
+                        itemSection ?
+                        <LinkI18n section={itemSection} id={itemId}>
+                            <img className="d-block w-100" src={item.src} alt={item.altText} />
+                        </LinkI18n> :
                         <img className="d-block w-100" src={item.src} alt={item.altText} />
-                    </LinkI18n>
+                    }
                     <CarouselCaption captionText={item.caption} captionHeader={item.header || item.caption} />
                 </CarouselItem>
             );

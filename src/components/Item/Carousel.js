@@ -1,11 +1,11 @@
 import React from 'react'
 import ItemCarousel from "../ItemCards/ItemCarousel";
 
-const Carousel = ({ item }) =>
+const Carousel = ({ item, section }) =>
     <div className="col-lg-6 col-md-6">
         <ItemCarousel
             itemId={item.windowId}
-            itemSection="windows"
+            itemSection={false}
             color={ item.color}
             colorSelect={ item.colorSelect }
         />

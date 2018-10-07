@@ -6,7 +6,7 @@
         "doors": "Durvi",
         "stairs": "Kapnes",
         "windows": "Logi",
-        "kitchen": "Virtuve",
+        "furniture": "Mēbeles",
         "interiors": "Interjers",
         "contacts": "Kontakti",
         "home": "Majas",
@@ -25,7 +25,7 @@
         "doors": "Двери",
         "stairs": "Лестницы",
         "windows": "Окна",
-        "kitchen": "Кухни",
+        "furniture": "Мебель",
         "interiors": "Интерьер",
         "contacts": "Контакты",
         "home": "Домой",
@@ -45,7 +45,7 @@
         "doors": "durvis",
         "stairs": "kapnes",
         "windows": "logi",
-        "kitchens": "virtuves",
+        "furniture": "mebeles",
         "interiors": "interjers",
         "contacts": "kontakti"
       },
@@ -53,7 +53,7 @@
         "doors": "dveri",
         "stairs": "lestnici",
         "windows": "okna",
-        "kitchens": "kuhni",
+        "furniture": "mebelj",
         "interiors": "interier",
         "contacts": "kontakti"
       }
