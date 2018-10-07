@@ -33,7 +33,7 @@ module.exports = (env = 'development', argv = {}) => {
         },
         plugins: [
             new webpack.DefinePlugin({
-                "RESOURCE_URL": argv['resource-url'] || JSON.stringify("http://localhost:8080/wp-json/shop/v1/")
+                "RESOURCE_URL": argv['resource-url'] || JSON.stringify("http://localhost:8080/app/cache/")
             }),
         ],
         mode: env

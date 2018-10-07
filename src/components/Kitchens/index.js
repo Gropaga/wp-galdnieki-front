@@ -28,7 +28,7 @@ class Stairs extends React.Component {
                         {
                             this.props[SECTION] && this.props[SECTION].gallery &&
                             <UncontrolledCarousel
-                                interval={0}
+                                interval={0}update_option
                                 autoPlay={false}
                                 items={getImages(this.props[SECTION].gallery)}
                             />
