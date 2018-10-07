@@ -1,6 +1,11 @@
 const path = require('path');
 const webpack = require('webpack');
 
+const resource = {
+    development: 'http://localhost:8080/app/cache/',
+    production: "/"
+};
+
 module.exports = (env = 'development', argv = {}) => {
     return {
         entry: {
@@ -33,7 +38,7 @@ module.exports = (env = 'development', argv = {}) => {
         },
         plugins: [
             new webpack.DefinePlugin({
-                "RESOURCE_URL": argv['resource-url'] || JSON.stringify("http://localhost:8080/app/cache/")
+                "RESOURCE_URL": JSON.stringify(argv['resource-url']) || JSON.stringify(resource[env])
             }),
         ],
         mode: env
