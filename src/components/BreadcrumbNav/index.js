@@ -1,9 +1,7 @@
 import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {
-    Breadcrumb,
-    BreadcrumbItem,
-} from 'reactstrap';
+import Breadcrumb from 'reactstrap/lib/Breadcrumb';
+import BreadcrumbItem from 'reactstrap/lib/BreadcrumbItem';
 import {_, _lRev} from "../../lib/i18n";
 import { Link } from 'react-router-dom'
 

@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types'
-import { FormGroup, Label, Input } from 'reactstrap';
+import FormGroup from 'reactstrap/lib/FormGroup';
+import Input from 'reactstrap/lib/Input';
 
 const ItemPriceSelect = ({ price, sizeSelect, onChange }) => {
     return (

@@ -4,7 +4,7 @@ import { ConnectedRouter } from 'connected-react-router'
 import routes from './routes'
 
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faHome } from '@fortawesome/free-solid-svg-icons'
+import { faHome } from '@fortawesome/free-solid-svg-icons/faHome'
 
 library.add(faHome);
 

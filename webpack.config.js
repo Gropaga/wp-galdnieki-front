@@ -1,15 +1,22 @@
 const path = require('path');
 const webpack = require('webpack');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 const resource = {
     development: 'http://localhost:8080/app/cache/',
     production: "/"
 };
 
+// const cssSettings = {
+//     development: '',
+//     development: '',
+// }
+
 module.exports = (env = 'development', argv = {}) => {
     return {
         entry: {
-            thinkingInReact: path.resolve(__dirname, 'src') + '/index.js',
+            frontendapp: path.resolve(__dirname, 'src') + '/index.js',
         },
         output: {
             path: argv['build-dir'] || path.resolve(__dirname, 'public/js'),
@@ -25,14 +32,13 @@ module.exports = (env = 'development', argv = {}) => {
                     }
                 },
                 {
-                    test: /\.scss?$/,
-                    use: [{
-                        loader: "style-loader" // creates style nodes from JS strings
-                    }, {
-                        loader: "css-loader" // translates CSS into CommonJS
-                    }, {
-                        loader: "sass-loader" // compiles Sass to CSS
-                    }]
+                    test: /\.(sa|sc|c)ss$/,
+                    use: [
+                        env === "development" ? 'style-loader' : MiniCssExtractPlugin.loader,
+                        'css-loader',
+                        'postcss-loader',
+                        'sass-loader',
+                    ],
                 }
             ]
         },
@@ -40,6 +46,13 @@ module.exports = (env = 'development', argv = {}) => {
             new webpack.DefinePlugin({
                 "RESOURCE_URL": JSON.stringify(argv['resource-url']) || JSON.stringify(resource[env])
             }),
+            new BundleAnalyzerPlugin(),
+            new MiniCssExtractPlugin({
+                // Options similar to the same options in webpackOptions.output
+                // both options are optional
+                filename: env === "development" ? '[name].css' : '[name].[hash].css',
+                chunkFilename: env === "development" ? '[id].css' : '[id].[hash].css',
+            })
         ],
         mode: env
     }

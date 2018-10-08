@@ -1,19 +1,17 @@
 import React from 'react';
-import {
-    Collapse,
-    Navbar,
-    NavbarToggler,
-    Nav,
-    NavItem,
-    Breadcrumb,
-    BreadcrumbItem
-} from 'reactstrap';
+import Collapse from "reactstrap/lib/Collapse";
+import Navbar from "reactstrap/lib/Navbar";
+import NavbarToggler from "reactstrap/lib/NavbarToggler";
+import Nav from "reactstrap/lib/Nav";
+import NavItem from "reactstrap/lib/NavItem";
+import BreadcrumbItem from "reactstrap/lib/BreadcrumbItem";
+
+
 import { Link } from 'react-router-dom'
-import {_, _pRev, getLocale} from '../../lib/i18n';
+import { _ } from '../../lib/i18n';
 import NavLinkI18n from './NavLinkI18n'
 import NavLinkLocaleSelect from './NavLinkLocaleSelect'
 import NavbarBrandLocale from "./NavbarBrandLocale";
-import { pathMatchByHistory } from "../../lib/pathMatch";
 
 export default class MainNav extends React.Component {
     constructor(props) {

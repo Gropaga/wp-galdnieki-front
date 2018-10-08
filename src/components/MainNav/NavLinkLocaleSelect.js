@@ -1,7 +1,5 @@
 import React from 'react';
-import {
-    NavLink,
-} from 'reactstrap';
+import NavLink from 'reactstrap/lib/NavLink';
 import {pathMatchByHistory} from "../../lib/pathMatch";
 import { getLocale } from "../../lib/i18n";
 import dict from '../../../dict';

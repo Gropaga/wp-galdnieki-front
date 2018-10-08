@@ -1,6 +1,6 @@
 import React from 'react';
 import { pathMatchByHistory } from "../../lib/pathMatch";
-import { NavLink } from 'reactstrap';
+import NavLink from 'reactstrap/lib/NavLink';
 import { _p } from '../../lib/i18n'
 
 class NavLinkI18n extends React.Component {

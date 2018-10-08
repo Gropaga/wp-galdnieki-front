@@ -1,11 +1,9 @@
-import {
-    UncontrolledCarousel,
-    CarouselItem,
-    CarouselCaption,
-    Carousel,
-    CarouselIndicators,
-    CarouselControl
-} from "reactstrap";
+import CarouselItem from "reactstrap/lib/CarouselItem";
+import CarouselCaption from "reactstrap/lib/CarouselCaption";
+import Carousel from "reactstrap/lib/Carousel";
+import CarouselIndicators from "reactstrap/lib/CarouselIndicators";
+import CarouselControl from "reactstrap/lib/CarouselControl";
+import UncontrolledCarousel from "reactstrap/lib/UncontrolledCarousel";
 
 import React from "react";
 import LinkI18n from '../Helpers/LinkI18n'

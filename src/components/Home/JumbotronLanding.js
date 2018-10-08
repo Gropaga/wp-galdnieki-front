@@ -1,5 +1,6 @@
 import React from 'react';
-import { Jumbotron, Button } from 'reactstrap';
+import Jumbotron from 'reactstrap/lib/Jumbotron';
+import Button from 'reactstrap/lib/Button';
 
 const JumbotronLanding = ({ locale, image, jumbo }) => {
     return jumbo.filter((jumbo) => jumbo.locale === locale).map((jumbo) => (

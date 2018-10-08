@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { requestHome, receiveHome, receiveError,
     selectDimensions, selectColor } from '../../actions/home'
-import { Button } from 'reactstrap';
+import Button from 'reactstrap/lib/Button';
 import JumbotronLanding from './JumbotronLanding'
 import ItemCards from '../ItemCards'
 import { _, getLocale } from "../../lib/i18n";
@@ -75,7 +75,7 @@ class Home extends React.Component {
     }
 
     componentWillMount() {
-        this.props.requestHome();
+        this.props.requestItems();
     }
 }
 
@@ -93,7 +93,7 @@ const filterItems = items => {
 
 Home.propTypes = {
     isFetching: PropTypes.bool,
-    requestHome: PropTypes.func.isRequired,
+    requestItems: PropTypes.func.isRequired,
     receiveError: PropTypes.func.isRequired,
 };
 
@@ -109,14 +109,14 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => ({
-    requestHome: () => dispatch(actions.requestAllData(SECTION)),
+    requestItems: () => dispatch(actions.requestAllData(SECTION)),
     receiveError: (json) => dispatch(receiveError(json)),
 
     selectDimensions: (doorId, dimensions) =>
-        dispatch(selectDimensions(doorId, dimensions)),
+        dispatch(actions.selectDimensions(SECTION, itemId, dimensions)),
 
     selectColor: (doorId, colorIndex) =>
-        dispatch(selectColor(doorId, colorIndex))
+        dispatch(actions.selectColor(SECTION, itemId, colorIndex))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home)

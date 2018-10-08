@@ -1,7 +1,5 @@
 import React from 'react';
-import {
-    NavbarBrand,
-} from 'reactstrap';
+import NavbarBrand from 'reactstrap/lib/NavbarBrand';
 import {pathMatchByHistory} from "../../lib/pathMatch";
 
 export default class NavbarBrandLocale extends React.Component {

@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import * as actions from "../../actions/common"
 import {_, _p, _lRev, getLocale} from "../../lib/i18n";
-import { UncontrolledCarousel } from "reactstrap";
+import UncontrolledCarousel from "reactstrap/lib/UncontrolledCarousel";
 import BreadcrumbNav from "../BreadcrumbNav"
 import DocumentTitle from "../DocumentTitle";
 

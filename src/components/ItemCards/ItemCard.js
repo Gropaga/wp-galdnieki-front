@@ -1,7 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types'
-import { Card, CardBody,
-    CardTitle } from 'reactstrap';
 import ItemCarousel from './ItemCarousel';
 import ItemPriceSelect from './ItemPriceSelect';
 import ItemPrice from "./ItemPrice";

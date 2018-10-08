@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types'
-import { Table } from 'reactstrap';
+import Table from 'reactstrap/lib/Table';
 import { _ } from "../../lib/i18n";
 
 const ItemPrice = ({ price, sizeSelect }) => {
