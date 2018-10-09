@@ -1,4 +1,5 @@
 import 'whatwg-fetch';
+import './style/index.scss';
 
 import { applyMiddleware, compose, createStore } from 'redux'
 import thunkMiddleware from 'redux-thunk'

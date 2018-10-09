@@ -15,6 +15,18 @@ const resource = {
 
 module.exports = (env = 'development', argv = {}) => {
     return {
+        optimization: {
+            splitChunks: {
+                cacheGroups: {
+                    styles: {
+                        name: 'styles',
+                        test: /\.css$/,
+                        chunks: 'all',
+                        enforce: true
+                    }
+                }
+            }
+        },
         entry: {
             frontendapp: path.resolve(__dirname, 'src') + '/index.js',
         },
@@ -34,9 +46,9 @@ module.exports = (env = 'development', argv = {}) => {
                 {
                     test: /\.(sa|sc|c)ss$/,
                     use: [
-                        env === "development" ? 'style-loader' : MiniCssExtractPlugin.loader,
+                        // env === "development" ? 'style-loader' : MiniCssExtractPlugin.loader,
+                        MiniCssExtractPlugin.loader,
                         'css-loader',
-                        'postcss-loader',
                         'sass-loader',
                     ],
                 }
@@ -50,8 +62,9 @@ module.exports = (env = 'development', argv = {}) => {
             new MiniCssExtractPlugin({
                 // Options similar to the same options in webpackOptions.output
                 // both options are optional
-                filename: env === "development" ? '[name].css' : '[name].[hash].css',
-                chunkFilename: env === "development" ? '[id].css' : '[id].[hash].css',
+                filename: 'style.css'
+                // filename: env === "development" ? '[name].css' : '[name].[hash].css',
+                // chunkFilename: env === "development" ? '[id].css' : '[id].[hash].css',
             })
         ],
         mode: env
