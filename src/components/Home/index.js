@@ -3,8 +3,6 @@ const SECTION = 'home';
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { requestHome, receiveHome, receiveError,
-    selectDimensions, selectColor } from '../../actions/home'
 import Button from 'reactstrap/lib/Button';
 import JumbotronLanding from './JumbotronLanding'
 import ItemCards from '../ItemCards'
@@ -94,7 +92,8 @@ const filterItems = items => {
 Home.propTypes = {
     isFetching: PropTypes.bool,
     requestItems: PropTypes.func.isRequired,
-    receiveError: PropTypes.func.isRequired,
+    selectDimensions: PropTypes.func.isRequired,
+    selectColor: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => {
@@ -110,12 +109,11 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => ({
     requestItems: () => dispatch(actions.requestAllData(SECTION)),
-    receiveError: (json) => dispatch(receiveError(json)),
 
-    selectDimensions: (doorId, dimensions) =>
+    selectDimensions: (itemId, dimensions) =>
         dispatch(actions.selectDimensions(SECTION, itemId, dimensions)),
 
-    selectColor: (doorId, colorIndex) =>
+    selectColor: (itemId, colorIndex) =>
         dispatch(actions.selectColor(SECTION, itemId, colorIndex))
 });
 

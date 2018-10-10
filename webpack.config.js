@@ -2,31 +2,17 @@ const path = require('path');
 const webpack = require('webpack');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin"); // css minification
+const TerserPlugin = require('terser-webpack-plugin');
+const cssnano = require("cssnano");
 
 const resource = {
     development: 'http://localhost:8080/app/cache/',
     production: "/"
 };
 
-// const cssSettings = {
-//     development: '',
-//     development: '',
-// }
-
 module.exports = (env = 'development', argv = {}) => {
-    return {
-        optimization: {
-            splitChunks: {
-                cacheGroups: {
-                    styles: {
-                        name: 'styles',
-                        test: /\.css$/,
-                        chunks: 'all',
-                        enforce: true
-                    }
-                }
-            }
-        },
+    const settings = {
         entry: {
             frontendapp: path.resolve(__dirname, 'src') + '/index.js',
         },
@@ -46,8 +32,7 @@ module.exports = (env = 'development', argv = {}) => {
                 {
                     test: /\.(sa|sc|c)ss$/,
                     use: [
-                        // env === "development" ? 'style-loader' : MiniCssExtractPlugin.loader,
-                        MiniCssExtractPlugin.loader,
+                        env === "development" ? 'style-loader' : MiniCssExtractPlugin.loader,
                         'css-loader',
                         'sass-loader',
                     ],
@@ -60,13 +45,48 @@ module.exports = (env = 'development', argv = {}) => {
             }),
             new BundleAnalyzerPlugin(),
             new MiniCssExtractPlugin({
-                // Options similar to the same options in webpackOptions.output
-                // both options are optional
                 filename: 'style.css'
-                // filename: env === "development" ? '[name].css' : '[name].[hash].css',
-                // chunkFilename: env === "development" ? '[id].css' : '[id].[hash].css',
             })
         ],
         mode: env
+    };
+
+    if (env === 'production') {
+        return Object.assign(settings, {
+            optimization: {
+                minimizer: [
+                    new TerserPlugin({
+                        test: /\.js(\?.*)?$/i
+                    }),
+                    new OptimizeCSSAssetsPlugin({
+                        cssProcessor: cssnano,
+                        cssProcessorOptions: {
+                            discardComments: {
+                                removeAll: true,
+                            },
+                            safe: true,
+                        },
+                        canPrint: false,
+                    }),
+                ],
+                splitChunks: {
+                    cacheGroups: {
+                        styles: {
+                            name: 'styles',
+                            test: /\.css$/,
+                            chunks: 'all',
+                            enforce: true
+                        }
+                    }
+                }
+            },
+            externals: {
+                react: "React",
+                ["react-dom"]: "ReactDOM",
+
+            },
+        });
+    } else {
+        return settings;
     }
 };
