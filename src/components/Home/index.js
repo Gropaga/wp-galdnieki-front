@@ -18,7 +18,17 @@ class Home extends React.Component {
         return <DocumentTitle title={ _(SECTION) }>
             {
                 this.props.isFetching || !this.props.updated ?
-                    <h1>Loading...</h1> :
+                    <div className="row">
+                        <div className="col-md-12">
+                            <div className="la-container">
+                                <div className="la-ball-fall la-3x">
+                                    {
+                                        [...Array(this.numberOfBalls).keys()].map(index => <div key={index} />)
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div> :
                     <div>
                         <JumbotronLanding
                             locale={ getLocale() }

@@ -14,7 +14,19 @@ import * as actions from "../../actions/common"
 class Interior extends React.Component {
     render() {
         return this.props.isFetching ?
-            <DocumentTitle title={_(SECTION)}><h1>Loading...</h1></DocumentTitle> :
+            <DocumentTitle title={_(SECTION)}>
+                <div className="row">
+                    <div className="col-md-12">
+                        <div className="la-container">
+                            <div className="la-ball-fall la-3x">
+                                {
+                                    [...Array(this.numberOfBalls).keys()].map(index => <div key={index} />)
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </DocumentTitle> :
             filterItems(this.props[SECTION]).reduce((acc, item) =>
                     <DocumentTitle title={ `${item.title} - ${_(SECTION)}` }>
                         <div className="row">
