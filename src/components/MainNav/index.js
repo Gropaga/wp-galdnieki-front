@@ -79,7 +79,6 @@ export default class MainNav extends React.Component {
 
 
     getBreadcrumbItems(pathMatch) {
-        alert(pathMatch['page']);
         return [
             this.removeEmptyValues,
             this.combineObject,

@@ -11,6 +11,15 @@ import DocumentTitle from "../DocumentTitle";
 import * as actions from "../../actions/common"
 
 class Doors extends React.Component {
+    constructor(props, context) {
+        super(props, context);
+        this._numberOfBalls = 3;
+    }
+
+    get numberOfBalls() {
+        return this._numberOfBalls;
+    }
+
     render() {
         return <DocumentTitle title={_(SECTION)}>
             {

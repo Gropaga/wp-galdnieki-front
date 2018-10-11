@@ -12,6 +12,15 @@ import DocumentTitle from "../DocumentTitle";
 import * as actions from "../../actions/common"
 
 class Interior extends React.Component {
+    constructor(props, context) {
+        super(props, context);
+        this._numberOfBalls = 3;
+    }
+
+    get numberOfBalls() {
+        return this._numberOfBalls;
+    }
+
     render() {
         return this.props.isFetching ?
             <DocumentTitle title={_(SECTION)}>

@@ -41,7 +41,8 @@ module.exports = (env = 'development', argv = {}) => {
         },
         plugins: [
             new webpack.DefinePlugin({
-                "RESOURCE_URL": JSON.stringify(argv['resource-url']) || JSON.stringify(resource[env])
+                "RESOURCE_URL": JSON.stringify(argv['resource-url']) || JSON.stringify(resource[env]),
+                "GA": JSON.stringify(argv['ga']) || JSON.stringify('UA-111111111-1')
             }),
             new BundleAnalyzerPlugin(),
             new MiniCssExtractPlugin({

@@ -10,6 +10,15 @@ import BreadcrumbNav from "../BreadcrumbNav"
 import DocumentTitle from "../DocumentTitle";
 
 class Furniture extends React.Component {
+    constructor(props, context) {
+        super(props, context);
+        this._numberOfBalls = 3;
+    }
+
+    get numberOfBalls() {
+        return this._numberOfBalls;
+    }
+
     render() {
         return <DocumentTitle title={_(SECTION)}>
             {

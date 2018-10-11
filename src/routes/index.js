@@ -13,28 +13,31 @@ import Door from '../components/Door/index'
 import Interior from '../components/Interior/index'
 import Interiors from '../components/Interiors/index'
 import {_lRev, _p} from "../lib/i18n";
+import Analytics from 'react-router-ga';
 
 export default (history) => {
     return <div className="container">
         <MainNav history={history} />
-        <Switch>
-            { ['lv', 'ru'].map((language) => {
-                    return [
-                        <Route exact path={constructPath(language)} component={Home}/>,
-                        <Route exact path={constructPath(language, 'windows')} component={Windows}/>,
-                        <Route exact path={constructPath(language, 'windows', true)} component={Window}/>,
-                        <Route exact path={constructPath(language, 'doors')} component={Doors}/>,
-                        <Route exact path={constructPath(language, 'doors', true)} component={Door}/>,
-                        <Route exact path={constructPath(language, 'stairs')} component={Stairs}/>,
-                        <Route exact path={constructPath(language, 'contacts')} component={Contacts}/>,
-                        <Route exact path={constructPath(language, 'furniture')} component={Furniture}/>,
-                        <Route exact path={constructPath(language, 'interiors')} component={Interiors}/>,
-                        <Route exact path={constructPath(language, 'interiors', true)} component={Interior}/>,
-                    ];
-                }
-            ) }
-            <Route component={NoMatch}/>
-        </Switch>
+        <Analytics id={ GA }>
+            <Switch>
+                { ['lv', 'ru'].map((language) => {
+                        return [
+                            <Route exact path={constructPath(language)} component={Home}/>,
+                            <Route exact path={constructPath(language, 'windows')} component={Windows}/>,
+                            <Route exact path={constructPath(language, 'windows', true)} component={Window}/>,
+                            <Route exact path={constructPath(language, 'doors')} component={Doors}/>,
+                            <Route exact path={constructPath(language, 'doors', true)} component={Door}/>,
+                            <Route exact path={constructPath(language, 'stairs')} component={Stairs}/>,
+                            <Route exact path={constructPath(language, 'contacts')} component={Contacts}/>,
+                            <Route exact path={constructPath(language, 'furniture')} component={Furniture}/>,
+                            <Route exact path={constructPath(language, 'interiors')} component={Interiors}/>,
+                            <Route exact path={constructPath(language, 'interiors', true)} component={Interior}/>,
+                        ];
+                    }
+                ) }
+                <Route component={NoMatch}/>
+            </Switch>
+        </Analytics>
     </div>
 };
 
