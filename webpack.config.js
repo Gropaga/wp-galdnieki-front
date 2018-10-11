@@ -55,9 +55,11 @@ module.exports = (env = 'development', argv = {}) => {
         return Object.assign(settings, {
             optimization: {
                 minimizer: [
+                    // minify js
                     new TerserPlugin({
                         test: /\.js(\?.*)?$/i
                     }),
+                    // minify css
                     new OptimizeCSSAssetsPlugin({
                         cssProcessor: cssnano,
                         cssProcessorOptions: {
@@ -69,6 +71,7 @@ module.exports = (env = 'development', argv = {}) => {
                         canPrint: false,
                     }),
                 ],
+                // saves css to file
                 splitChunks: {
                     cacheGroups: {
                         styles: {

@@ -11,11 +11,30 @@ import BreadcrumbNav from "../BreadcrumbNav"
 import DocumentTitle from "../DocumentTitle";
 
 class Doors extends React.Component {
+    constructor(props, context) {
+        super(props, context);
+        this._numberOfBalls = 3;
+    }
+
+    get numberOfBalls() {
+        return this._numberOfBalls;
+    }
+
     render() {
         return <DocumentTitle title={_(SECTION)}>
             {
                 this.props.isFetching || !this.props.updated ?
-                <h1>Loading...</h1> :
+                <div className="row">
+                    <div className="col-md-12">
+                        <div className="la-container">
+                            <div className="la-ball-fall la-3x">
+                                {
+                                    [...Array(this.numberOfBalls).keys()].map(index => <div key={index} />)
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div> :
                 <div className="row">
                     <BreadcrumbNav breadcrumbs={
                         [
