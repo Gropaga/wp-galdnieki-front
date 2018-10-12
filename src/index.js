@@ -14,6 +14,10 @@ import consoleLogger from './middleware/consoleLogger'
 import { setup as i18nSetup } from "./lib/i18n";
 import { pathMatch } from "./lib/pathMatch";
 
+// setup google analytics
+import ReactGA from 'react-ga';
+ReactGA.initialize(GA); // defined in webpack.config.js
+
 const history = createBrowserHistory();
 
 i18nSetup(key => pathMatch(history.location.pathname)[key]);

@@ -1,5 +1,6 @@
 import React from 'react'
 import { Route, Switch } from 'react-router'
+import Analytics from '../components/Analytics/index'
 import Home from '../components/Home/index'
 import NoMatch from '../components/NoMatch/index'
 import MainNav from '../components/MainNav/index'
@@ -13,12 +14,11 @@ import Door from '../components/Door/index'
 import Interior from '../components/Interior/index'
 import Interiors from '../components/Interiors/index'
 import {_lRev, _p} from "../lib/i18n";
-import Analytics from 'react-router-ga';
 
 export default (history) => {
     return <div className="container">
         <MainNav history={history} />
-        <Analytics id={ GA }>
+        <Analytics history={history}>
             <Switch>
                 { ['lv', 'ru'].map((language) => {
                         return [
