@@ -1,19 +1,14 @@
-import React from 'react'
-import { Route, Switch } from 'react-router'
-import Analytics from '../components/Analytics/index'
-import Home from '../components/Home/index'
-import NoMatch from '../components/NoMatch/index'
-import MainNav from '../components/MainNav/index'
-import Doors from '../components/Doors/index'
-import Windows from '../components/Windows/index'
-import Window from '../components/Window/index'
-import Stairs from '../components/Stairs/index'
-import Contacts from '../components/Contacts/index'
-import Furniture from '../components/Furniture/index'
-import Door from '../components/Door/index'
-import Interior from '../components/Interior/index'
-import Interiors from '../components/Interiors/index'
+import React from 'react';
+import { Route, Switch } from 'react-router';
+import Analytics from '../components/Analytics/index';
+import Home from '../components/Home/index';
+import NoMatch from '../components/NoMatch/index';
+import MainNav from '../components/MainNav/index';
 import {_lRev, _p} from "../lib/i18n";
+
+import manyItems from "../components/Common/ManyItems";
+import singleItem from "../components/Common/SingleItem";
+import simplePage from "../components/Common/SimplePage";
 
 export default (history) => {
     return <div className="container">
@@ -23,15 +18,15 @@ export default (history) => {
                 { ['lv', 'ru'].map((language) => {
                         return [
                             <Route exact path={constructPath(language)} component={Home}/>,
-                            <Route exact path={constructPath(language, 'windows')} component={Windows}/>,
-                            <Route exact path={constructPath(language, 'windows', true)} component={Window}/>,
-                            <Route exact path={constructPath(language, 'doors')} component={Doors}/>,
-                            <Route exact path={constructPath(language, 'doors', true)} component={Door}/>,
-                            <Route exact path={constructPath(language, 'stairs')} component={Stairs}/>,
-                            <Route exact path={constructPath(language, 'contacts')} component={Contacts}/>,
-                            <Route exact path={constructPath(language, 'furniture')} component={Furniture}/>,
-                            <Route exact path={constructPath(language, 'interiors')} component={Interiors}/>,
-                            <Route exact path={constructPath(language, 'interiors', true)} component={Interior}/>,
+                            <Route exact path={constructPath(language, 'windows')} component={manyItems('windows')}/>,
+                            <Route exact path={constructPath(language, 'windows', true)} component={singleItem('windows')}/>,
+                            <Route exact path={constructPath(language, 'doors')} component={manyItems('doors')}/>,
+                            <Route exact path={constructPath(language, 'doors', true)} component={singleItem('doors')}/>,
+                            <Route exact path={constructPath(language, 'stairs')} component={simplePage('stairs')}/>,
+                            <Route exact path={constructPath(language, 'contacts')} component={simplePage('contacts')}/>,
+                            <Route exact path={constructPath(language, 'furniture')} component={simplePage('furniture')}/>,
+                            <Route exact path={constructPath(language, 'interiors')} component={manyItems('interiors')}/>,
+                            <Route exact path={constructPath(language, 'interiors', true)} component={singleItem('interiors')}/>,
                         ];
                     }
                 ) }

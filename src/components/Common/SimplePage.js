@@ -1,26 +1,15 @@
-const SECTION = 'furniture';
-
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import * as actions from "../../actions/common"
-import {_, _p, _lRev, getLocale} from "../../lib/i18n";
+import {_, getLocale} from "../../lib/i18n";
 import UncontrolledCarousel from "reactstrap/lib/UncontrolledCarousel";
 import BreadcrumbNav from "../BreadcrumbNav"
 import DocumentTitle from "../DocumentTitle";
 
-class Furniture extends React.Component {
-    constructor(props, context) {
-        super(props, context);
-        this._numberOfBalls = 3;
-    }
-
-    get numberOfBalls() {
-        return this._numberOfBalls;
-    }
-
+class SimplePage extends React.Component {
     render() {
-        return <DocumentTitle title={_(SECTION)}>
+        return <DocumentTitle title={_(this.props.section)}>
             {
                 this.props.isFetching || !this.props.updated ?
                     <div className="row">
@@ -28,7 +17,7 @@ class Furniture extends React.Component {
                             <div className="la-container">
                                 <div className="la-ball-fall la-3x">
                                     {
-                                        [...Array(this.numberOfBalls).keys()].map(index => <div key={index} />)
+                                        [...Array(3).keys()].map(index => <div key={index} />)
                                     }
                                 </div>
                             </div>
@@ -38,26 +27,26 @@ class Furniture extends React.Component {
                         <BreadcrumbNav breadcrumbs={
                             [
                                 {
-                                    node: _(SECTION),
-                                    key: SECTION,
+                                    node: _(this.props.section),
+                                    key: this.props.section,
                                 }
                             ]
                         }/>
                         <div className="col-lg-6 col-md-6">
                             {
-                                this.props[SECTION] &&
-                                this.props[SECTION].description &&
-                                this.props[SECTION].description[getLocale()] &&
-                                <div dangerouslySetInnerHTML={{__html: this.props[SECTION].description[getLocale()]}}/>
+                                this.props[this.props.section] &&
+                                this.props[this.props.section].description &&
+                                this.props[this.props.section].description[getLocale()] &&
+                                <div dangerouslySetInnerHTML={{__html: this.props[this.props.section].description[getLocale()]}}/>
                             }
                         </div>
                         <div className="col-lg-6 col-md-6">
                             {
-                                this.props[SECTION] && this.props[SECTION].gallery &&
+                                this.props[this.props.section] && this.props[this.props.section].gallery &&
                                 <UncontrolledCarousel
                                     interval={0}
                                     autoPlay={false}
-                                    items={getImages(this.props[SECTION].gallery)}
+                                    items={getImages(this.props[this.props.section].gallery)}
                                 />
                             }
                         </div>
@@ -79,21 +68,28 @@ const getImages = (gallery) => gallery.map((img) => {
     }
 });
 
-Furniture.propTypes = {
+SimplePage.propTypes = {
     isFetching: PropTypes.bool,
+    updated: PropTypes.number,
+    section: PropTypes.string,
+
     requestPage: PropTypes.func.isRequired,
-    receiveError: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = section => state => ({
     isFetching: state.isFetching,
-    [SECTION]: state[SECTION],
-    updated: state.allLoaded[SECTION]
+    [section]: state[section],
+    updated: state.allLoaded[section],
+    section: section
 });
 
-const mapDispatchToProps = dispatch => ({
-    requestPage: () => dispatch(actions.requestAllData(SECTION)),
-    receiveError: (json) => dispatch(receiveError(json)),
+const mapDispatchToProps = section => dispatch => ({
+    requestPage: () => dispatch(actions.requestAllData(section)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Furniture)
+export default (section) => {
+    return connect(
+        mapStateToProps(section),
+        mapDispatchToProps(section)
+    )(SimplePage);
+}
