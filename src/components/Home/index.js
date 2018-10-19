@@ -14,13 +14,8 @@ import * as actions from "../../actions/common"
 import DocumentTitle from "../DocumentTitle";
 
 class Home extends React.Component {
-    constructor(props, context) {
-        super(props, context);
-        this._numberOfBalls = 3;
-    }
-
-    get numberOfBalls() {
-        return this._numberOfBalls;
+    get circleCount() {
+        return 3;
     }
 
     render() {
@@ -32,7 +27,7 @@ class Home extends React.Component {
                             <div className="la-container">
                                 <div className="la-ball-fall la-3x">
                                     {
-                                        [...Array(this.numberOfBalls).keys()].map(index => <div key={index} />)
+                                        [...Array(this.circleCount).keys()].map(index => <div key={index} />)
                                     }
                                 </div>
                             </div>

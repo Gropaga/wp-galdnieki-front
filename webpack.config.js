@@ -6,8 +6,13 @@ const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin"); /
 const TerserPlugin = require('terser-webpack-plugin');
 const cssnano = require("cssnano");
 
-const resource = {
+const resource_url = {
     development: 'http://localhost:8080/app/cache/',
+    production: "/"
+};
+
+const image_url = {
+    development: 'http://localhost:8080/app/uploads/',
     production: "/"
 };
 
@@ -41,7 +46,8 @@ module.exports = (env = 'development', argv = {}) => {
         },
         plugins: [
             new webpack.DefinePlugin({
-                "RESOURCE_URL": JSON.stringify(argv['resource-url']) || JSON.stringify(resource[env]),
+                "RESOURCE_URL": JSON.stringify(argv['resource-url']) || JSON.stringify(resource_url[env]),
+                "IMAGE_URL": JSON.stringify(argv['image-url']) || JSON.stringify(image_url[env]),
                 "GA": JSON.stringify(argv['ga']) || JSON.stringify('UA-111111111-1')
             }),
             new BundleAnalyzerPlugin(),
