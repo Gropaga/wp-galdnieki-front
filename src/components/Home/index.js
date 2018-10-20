@@ -1,4 +1,4 @@
-const SECTION = 'home';
+const HOME_SECTION = 'home';
 
 import React from 'react'
 import PropTypes from 'prop-types'
@@ -8,31 +8,18 @@ import JumbotronLanding from './JumbotronLanding'
 import ItemCards from '../ItemCards'
 import { _, getLocale } from "../../lib/i18n";
 import LinkI18n from "../Helpers/LinkI18n";
+import Loading from "../Loading";
 
 import * as actions from "../../actions/common"
 
 import DocumentTitle from "../DocumentTitle";
 
 class Home extends React.Component {
-    get circleCount() {
-        return 3;
-    }
-
     render() {
-        return <DocumentTitle title={ _(SECTION) }>
+        return <DocumentTitle title={ _(HOME_SECTION) }>
             {
                 this.props.isFetching || !this.props.updated ?
-                    <div className="row">
-                        <div className="col-md-12">
-                            <div className="la-container">
-                                <div className="la-ball-fall la-3x">
-                                    {
-                                        [...Array(this.circleCount).keys()].map(index => <div key={index} />)
-                                    }
-                                </div>
-                            </div>
-                        </div>
-                    </div> :
+                    <Loading/> :
                     <div>
                         <JumbotronLanding
                             locale={ getLocale() }
@@ -55,8 +42,8 @@ class Home extends React.Component {
                                 locale={ getLocale() }
                                 itemSection={'doors'}
                                 items={ filterItems(this.props.doors) }
-                                selectDimensions={ this.props.selectDimensions }
-                                selectColor={ this.props.selectColor }
+                                selectDimensions={ this.props.selectDimensions('doors') }
+                                selectColor={ this.props.selectColor('doors') }
                                 history={ this.props.history }
                             />
                         </div>
@@ -76,8 +63,29 @@ class Home extends React.Component {
                                 locale={ getLocale() }
                                 itemSection={'windows'}
                                 items={ filterItems(this.props.windows) }
-                                selectDimensions={ this.props.selectDimensions }
-                                selectColor={ this.props.selectColor }
+                                selectDimensions={ this.props.selectDimensions('windows') }
+                                selectColor={ this.props.selectColor('windows') }
+                                history={ this.props.history }
+                            />
+                        </div>
+                        <div className="row">
+                            <div className="col-md-12">
+                                <h4>
+                                    { _('interiors') }
+                                    {" "}
+                                    <LinkI18n section="interiors">
+                                        <Button outline color="primary" size="sm">
+                                            { _('interior catalogue') }
+                                        </Button>
+                                    </LinkI18n>
+                                </h4>
+                            </div>
+                            <ItemCards
+                                locale={ getLocale() }
+                                itemSection={'interiors'}
+                                items={ filterItems(this.props.interiors) }
+                                selectDimensions={ this.props.selectDimensions('interiors') }
+                                selectColor={ this.props.selectColor('interiors') }
                                 history={ this.props.history }
                             />
                         </div>
@@ -116,19 +124,20 @@ const mapStateToProps = state => {
         landingImage: state.home.landingImage,
         doors: state.doors,
         windows: state.windows,
+        interiors: state.interiors,
         jumbo: state.home.jumbo,
-        updated: state.allLoaded[SECTION]
+        updated: state.allLoaded[HOME_SECTION]
     }
 };
 
 const mapDispatchToProps = dispatch => ({
-    requestItems: () => dispatch(actions.requestAllData(SECTION)),
+    requestItems: () => dispatch(actions.requestAllData(HOME_SECTION)),
 
-    selectDimensions: (itemId, dimensions) =>
-        dispatch(actions.selectDimensions(SECTION, itemId, dimensions)),
+    selectDimensions: section => (itemId, dimensions) =>
+        dispatch(actions.selectDimensions(section, itemId, dimensions)),
 
-    selectColor: (itemId, colorIndex) =>
-        dispatch(actions.selectColor(SECTION, itemId, colorIndex))
+    selectColor: section => (itemId, colorIndex) =>
+        dispatch(actions.selectColor(section, itemId, colorIndex))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home)

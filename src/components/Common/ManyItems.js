@@ -7,6 +7,7 @@ import { _, getLocale } from "../../lib/i18n";
 import * as actions from "../../actions/common"
 import BreadcrumbNav from "../BreadcrumbNav"
 import DocumentTitle from "../DocumentTitle";
+import Loading from "../Loading";
 
 class MultipleItems extends React.Component {
     render() {
@@ -14,17 +15,7 @@ class MultipleItems extends React.Component {
             {
                 this.props.isFetching || !this.props.updated ?
                     <DocumentTitle title={_(this.props.section)}>
-                        <div className="row">
-                            <div className="col-md-12">
-                                <div className="la-container">
-                                    <div className="la-ball-fall la-3x">
-                                        {
-                                            [...Array(3).keys()].map(index => <div key={index} />)
-                                        }
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <Loading />
                     </DocumentTitle> :
                     <div className="row">
                         <BreadcrumbNav breadcrumbs={

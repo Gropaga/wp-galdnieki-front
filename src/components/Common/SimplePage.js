@@ -6,23 +6,14 @@ import {_, getLocale} from "../../lib/i18n";
 import UncontrolledCarousel from "reactstrap/lib/UncontrolledCarousel";
 import BreadcrumbNav from "../BreadcrumbNav"
 import DocumentTitle from "../DocumentTitle";
+import Loading from "../Loading";
 
 class SimplePage extends React.Component {
     render() {
         return <DocumentTitle title={_(this.props.section)}>
             {
                 this.props.isFetching || !this.props.updated ?
-                    <div className="row">
-                        <div className="col-md-12">
-                            <div className="la-container">
-                                <div className="la-ball-fall la-3x">
-                                    {
-                                        [...Array(3).keys()].map(index => <div key={index} />)
-                                    }
-                                </div>
-                            </div>
-                        </div>
-                    </div> :
+                    <Loading/> :
                     <div className="row">
                         <BreadcrumbNav breadcrumbs={
                             [

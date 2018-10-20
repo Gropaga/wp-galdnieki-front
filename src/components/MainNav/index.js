@@ -25,7 +25,7 @@ export default class MainNav extends React.Component {
         this.combineObject = this.combineObject.bind(this);
         this.getNodes = this.getNodes.bind(this);
     }
-    toggle() {
+    toggle() {ttp://localhost:8080/app/uploads/
         this.setState({
             isOpen: !this.state.isOpen
         });
@@ -34,7 +34,7 @@ export default class MainNav extends React.Component {
         return (
             <Navbar color="white" light expand="lg">
                 <NavbarBrandLocale history={this.props.history} tag={Link} to="/">
-                    <span style={{'font-weight': 700}}>Rīgas Galdnieki</span>
+                    <span style={{'fontWeight': 400}}>Rīgas Galdnieki</span>
                 </NavbarBrandLocale>
                 <NavbarToggler onClick={this.toggle}/>
                 <Collapse isOpen={this.state.isOpen} navbar>
