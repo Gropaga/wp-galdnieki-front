@@ -33,7 +33,9 @@ export default class MainNav extends React.Component {
     render() {
         return (
             <Navbar color="white" light expand="lg">
-                <NavbarBrandLocale history={this.props.history} tag={Link} to="/">Galdnieks.lv</NavbarBrandLocale>
+                <NavbarBrandLocale history={this.props.history} tag={Link} to="/">
+                    <span style={{'font-weight': 700}}>Rīgas Galdnieki</span>
+                </NavbarBrandLocale>
                 <NavbarToggler onClick={this.toggle}/>
                 <Collapse isOpen={this.state.isOpen} navbar>
                     <Nav navbar>

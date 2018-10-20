@@ -6,6 +6,14 @@ const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin"); /
 const TerserPlugin = require('terser-webpack-plugin');
 const cssnano = require("cssnano");
 
+// "npx webpack" arguments:
+// --build-dir=
+// --resource-url= (json file location dir)
+// --image-url= (image file location dir)
+// --ga= (GOOGLE ANALYTICS CODE)
+// --env= (production or development)
+// --mode= (production or development)
+
 const resource_url = {
     development: 'http://localhost:8080/app/cache/',
     production: "/"

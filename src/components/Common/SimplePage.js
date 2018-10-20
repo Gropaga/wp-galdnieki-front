@@ -62,7 +62,7 @@ class SimplePage extends React.Component {
 
 const getImages = (gallery) => gallery.map((img) => {
     return {
-        src: img.medium_large[0],
+        src: IMAGE_URL + img.medium_large[0],
         caption: '',
         altText: '',
     }
