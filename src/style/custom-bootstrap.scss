@@ -4,7 +4,7 @@ $breadcrumb-padding-y:              0;
 $breadcrumb-padding-x:              0;
 
 @import '../../node_modules/bootstrap/scss/bootstrap.scss';
-
+@import "jumbotron";
 .breadcrumb {
   font-size: 95%;
 }

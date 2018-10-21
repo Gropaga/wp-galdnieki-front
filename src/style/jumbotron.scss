@@ -1,0 +1,15 @@
+$jumbotron-font-weight: 300;
+
+.jumbotron h1 {
+  font-size: $display4-size;
+  font-weight: $display4-weight;
+  line-height: $display-line-height;
+}
+
+.jumbotron h2 {
+  font-weight: $jumbotron-font-weight;
+}
+
+.jumbotron h3 {
+  font-weight: $jumbotron-font-weight;
+}

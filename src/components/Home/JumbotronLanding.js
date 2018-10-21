@@ -5,7 +5,11 @@ import {getLocale} from "../../lib/i18n";
 
 const JumbotronLanding = ({ locale, image, jumbo }) => {
     return jumbo.filter((jumbo) => jumbo.locale === locale).map((jumbo) => (
-        <Jumbotron style={{ backgroundSize: 'cover', backgroundImage: 'url(' + IMAGE_URL + image + ')' }}>
+        <Jumbotron style={{
+            backgroundSize: 'cover',
+            backgroundPositionY: 'center',
+            backgroundImage: 'url(' + IMAGE_URL + image + ')'
+        }}>
             <div dangerouslySetInnerHTML={{__html: jumbo.text}}/>
         </Jumbotron>
     )).pop();
