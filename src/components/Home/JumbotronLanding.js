@@ -1,17 +1,12 @@
 import React from 'react';
 import Jumbotron from 'reactstrap/lib/Jumbotron';
 import Button from 'reactstrap/lib/Button';
+import {getLocale} from "../../lib/i18n";
 
 const JumbotronLanding = ({ locale, image, jumbo }) => {
     return jumbo.filter((jumbo) => jumbo.locale === locale).map((jumbo) => (
-        <Jumbotron style={{ backgroundSize: 'cover', backgroundImage: 'url(' + image + ')' }}>
-            <h1 className="display-3">{ jumbo.heading }</h1>
-            <p className="lead">{ jumbo.text }</p>
-            <hr className="my-2" />
-            <p>{ jumbo.subText }</p>
-            <p className="lead">
-                <Button color="primary">{ jumbo.buttonText }</Button>
-            </p>
+        <Jumbotron style={{ backgroundSize: 'cover', backgroundImage: 'url(' + IMAGE_URL + image + ')' }}>
+            <div dangerouslySetInnerHTML={{__html: jumbo.text}}/>
         </Jumbotron>
     )).pop();
 };

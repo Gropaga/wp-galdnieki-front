@@ -79,19 +79,6 @@ export default class MainNav extends React.Component {
         );
     }
 
-
-    getBreadcrumbItems(pathMatch) {
-        return [
-            this.removeEmptyValues,
-            this.combineObject,
-            this.getNodes
-        ].reduce((acc, func) => func(acc), [
-            [(url) => <a href={url}>{ _('home') }</a>, pathMatch['language']],
-            [(url) => <a href={url}>{ pathMatch['page'].replace('/','') }</a>, pathMatch['page']],
-            [() => <a href="#">123</a>, pathMatch['id']],
-        ]);
-    }
-
     removeEmptyValues(acc) {
         return acc.filter(([, path]) => !!path);
     }
