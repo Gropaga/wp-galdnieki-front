@@ -27,9 +27,10 @@ class MultipleItems extends React.Component {
                             ]
                         } />
                         <div className="col-md-12">
-                            <h4>
+                            <h2 className="home-heading">
                                 { _(this.props.section) }
-                            </h4>
+                                <hr />
+                            </h2>
                         </div>
                         <ItemCards
                             locale={ getLocale() }

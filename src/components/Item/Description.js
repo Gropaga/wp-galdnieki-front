@@ -4,7 +4,7 @@ import Price from "./Price";
 
 const Description = ({ item, selectColor, selectDimensions }) =>
     <div className="col-lg-6 col-md-6">
-        <h4>{ item.title }</h4>
+        <h1>{ item.title }</h1>
         <p>{ item.content }</p>
         <Colors window={item} onClick={(itemId) => (color) => selectColor(itemId, color)} />
         <Price window={item} selectDimensions={(itemId) => (dimension) => selectDimensions(itemId, dimension)} />

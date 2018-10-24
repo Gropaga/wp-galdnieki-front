@@ -26,17 +26,17 @@ class Home extends React.Component {
                             image={ this.props.landingImage }
                             jumbo={ this.props.jumbo }
                         />
-                        <div className="row">
+                        <div className="row home-items">
                             <div className="col-md-12">
-                                <h4>
+                                <h2 className="home-heading">
                                     { _('doors') }
-                                    {" "}
                                     <LinkI18n section="doors">
                                         <Button outline color="primary" size="sm">
                                             { _('door catalogue') }
                                         </Button>
                                     </LinkI18n>
-                                </h4>
+                                    <hr />
+                                </h2>
                             </div>
                             <ItemCards
                                 locale={ getLocale() }
@@ -47,17 +47,17 @@ class Home extends React.Component {
                                 history={ this.props.history }
                             />
                         </div>
-                        <div className="row">
+                        <div className="row home-items">
                             <div className="col-md-12">
-                                <h4>
+                                <h2 className="home-heading">
                                     { _('windows') }
-                                    {" "}
                                     <LinkI18n section="windows">
                                         <Button outline color="primary" size="sm">
                                             { _('window catalogue') }
                                         </Button>
                                     </LinkI18n>
-                                </h4>
+                                    <hr />
+                                </h2>
                             </div>
                             <ItemCards
                                 locale={ getLocale() }
@@ -68,17 +68,17 @@ class Home extends React.Component {
                                 history={ this.props.history }
                             />
                         </div>
-                        <div className="row">
+                        <div className="row home-items">
                             <div className="col-md-12">
-                                <h4>
+                                <h2 className="home-heading">
                                     { _('interiors') }
-                                    {" "}
                                     <LinkI18n section="interiors">
                                         <Button outline color="primary" size="sm">
                                             { _('interior catalogue') }
                                         </Button>
                                     </LinkI18n>
-                                </h4>
+                                    <hr />
+                                </h2>
                             </div>
                             <ItemCards
                                 locale={ getLocale() }

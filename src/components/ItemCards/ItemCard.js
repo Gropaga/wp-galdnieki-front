@@ -8,15 +8,14 @@ import LinkI18n from "../Helpers/LinkI18n"
 
 const ItemCard = (props) => {
     return (
-        <div className="col-lg-3 col-md-6">
+        <div className="col-lg-3 col-md-6 item-card">
+            <h5 className="item-card-heading"><LinkI18n section={props.itemSection} id={props.itemId}>{ props.title }</LinkI18n></h5>
             <ItemCarousel
                 itemId={props.itemId}
                 itemSection={ props.itemSection }
                 color={ props.color}
                 colorSelect={ props.colorSelect }
             />
-            <h5 className="mt-3"><LinkI18n section="windows" id={props.itemId}>{ props.title }</LinkI18n></h5>
-            {/*<CardText>{ props.desc }</CardText>*/}
             <ItemColor
                 color={ props.color }
                 colorSelect={ props.colorSelect}
