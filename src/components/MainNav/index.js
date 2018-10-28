@@ -6,7 +6,7 @@ import Nav from "reactstrap/lib/Nav";
 import NavItem from "reactstrap/lib/NavItem";
 
 import { Link } from 'react-router-dom'
-import { _ } from '../../lib/i18n';
+import { _, getLocale } from '../../lib/i18n';
 import NavLinkI18n from './NavLinkI18n'
 import NavLinkLocaleSelect from './NavLinkLocaleSelect'
 import NavbarBrandLocale from "./NavbarBrandLocale";
@@ -60,14 +60,17 @@ export default class MainNav extends React.Component {
                         }
                     </Nav>
                     <Nav className="ml-auto" navbar>
-                        <NavItem>
-                            <NavLinkLocaleSelect history={this.props.history} tag={Link}
-                                                 locale="ru">По-русски</NavLinkLocaleSelect>
-                        </NavItem>
-                        <NavItem>
-                            <NavLinkLocaleSelect history={this.props.history} tag={Link}
-                                                 locale="lv">Latviski</NavLinkLocaleSelect>
-                        </NavItem>
+                        {
+                            getLocale() === 'lv' ?
+                                <NavItem>
+                                    <NavLinkLocaleSelect history={this.props.history} tag={Link}
+                                                         locale="ru">По-русски</NavLinkLocaleSelect>
+                                </NavItem>  :
+                                <NavItem>
+                                    <NavLinkLocaleSelect history={this.props.history} tag={Link}
+                                                         locale="lv">Latviski</NavLinkLocaleSelect>
+                                </NavItem>
+                        }
                     </Nav>
                 </Collapse>
             </Navbar>
