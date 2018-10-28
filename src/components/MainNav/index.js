@@ -6,18 +6,27 @@ import Nav from "reactstrap/lib/Nav";
 import NavItem from "reactstrap/lib/NavItem";
 import BreadcrumbItem from "reactstrap/lib/BreadcrumbItem";
 
-
 import { Link } from 'react-router-dom'
 import { _ } from '../../lib/i18n';
 import NavLinkI18n from './NavLinkI18n'
 import NavLinkLocaleSelect from './NavLinkLocaleSelect'
 import NavbarBrandLocale from "./NavbarBrandLocale";
 
+// TODO move into separate JSON config
+const navItemsConfig = [
+    'doors',
+    'stairs',
+    'windows',
+    'furniture',
+    'contacts',
+];
+
 export default class MainNav extends React.Component {
     constructor(props) {
         super(props);
 
         this.toggle = this.toggle.bind(this);
+        this.close = this.close.bind(this);
         this.state = {
             isOpen: false
         };
@@ -25,9 +34,14 @@ export default class MainNav extends React.Component {
         this.combineObject = this.combineObject.bind(this);
         this.getNodes = this.getNodes.bind(this);
     }
-    toggle() {ttp://localhost:8080/app/uploads/
+    toggle() {
         this.setState({
             isOpen: !this.state.isOpen
+        });
+    }
+    close() {
+        this.setState({
+            isOpen: false
         });
     }
     render() {
@@ -39,30 +53,15 @@ export default class MainNav extends React.Component {
                 <NavbarToggler onClick={this.toggle}/>
                 <Collapse isOpen={this.state.isOpen} navbar>
                     <Nav navbar>
-                        <NavItem>
-                            <NavLinkI18n history={this.props.history} tag={Link}
-                                         to="/doors">{_('doors')}</NavLinkI18n>
-                        </NavItem>
-                        <NavItem>
-                            <NavLinkI18n history={this.props.history} tag={Link}
-                                         to="/stairs">{_('stairs')}</NavLinkI18n>
-                        </NavItem>
-                        <NavItem>
-                            <NavLinkI18n history={this.props.history} tag={Link}
-                                         to="/windows">{_('windows')}</NavLinkI18n>
-                        </NavItem>
-                        <NavItem>
-                            <NavLinkI18n history={this.props.history} tag={Link}
-                                         to="/furniture">{_('furniture')}</NavLinkI18n>
-                        </NavItem>
-                        <NavItem>
-                            <NavLinkI18n history={this.props.history} tag={Link}
-                                         to="/interiors">{_('interiors')}</NavLinkI18n>
-                        </NavItem>
-                        <NavItem>
-                            <NavLinkI18n history={this.props.history} tag={Link}
-                                         to="/contacts">{_('contacts')}</NavLinkI18n>
-                        </NavItem>
+                        {
+                            navItemsConfig.map(item =>
+                                <NavItem key={item} onClick={ this.close }>
+                                    <NavLinkI18n history={this.props.history} tag={Link} to={`/${item}`}>
+                                        { _(item) }
+                                     </NavLinkI18n>
+                                </NavItem>
+                            )
+                        }
                     </Nav>
                     <Nav className="ml-auto" navbar>
                         <NavItem>
