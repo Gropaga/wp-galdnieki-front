@@ -47,7 +47,7 @@ export default class MainNav extends React.Component {
     render() {
         return (
             <Navbar color="white" light expand="lg">
-                <NavbarBrandLocale history={this.props.history} tag={Link} to="/">
+                <NavbarBrandLocale history={this.props.history} onClick={ this.close } tag={Link} to="/">
                     <span style={{'fontWeight': 400}}>Rīgas Galdnieki</span>
                 </NavbarBrandLocale>
                 <NavbarToggler onClick={this.toggle}/>
