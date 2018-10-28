@@ -4,7 +4,6 @@ import Navbar from "reactstrap/lib/Navbar";
 import NavbarToggler from "reactstrap/lib/NavbarToggler";
 import Nav from "reactstrap/lib/Nav";
 import NavItem from "reactstrap/lib/NavItem";
-import BreadcrumbItem from "reactstrap/lib/BreadcrumbItem";
 
 import { Link } from 'react-router-dom'
 import { _ } from '../../lib/i18n';
@@ -30,9 +29,6 @@ export default class MainNav extends React.Component {
         this.state = {
             isOpen: false
         };
-
-        this.combineObject = this.combineObject.bind(this);
-        this.getNodes = this.getNodes.bind(this);
     }
     toggle() {
         this.setState({
@@ -47,8 +43,8 @@ export default class MainNav extends React.Component {
     render() {
         return (
             <Navbar color="white" light expand="lg">
-                <NavbarBrandLocale history={this.props.history} onClick={ this.close } tag={Link} to="/">
-                    <span style={{'fontWeight': 400}}>Rīgas Galdnieki</span>
+                <NavbarBrandLocale history={this.props.history} tag={Link} to="/">
+                    <span onClick={ this.close } style={{'fontWeight': 400}}>Rīgas Galdnieki</span>
                 </NavbarBrandLocale>
                 <NavbarToggler onClick={this.toggle}/>
                 <Collapse isOpen={this.state.isOpen} navbar>
@@ -76,32 +72,6 @@ export default class MainNav extends React.Component {
                 </Collapse>
             </Navbar>
         );
-    }
-
-    removeEmptyValues(acc) {
-        return acc.filter(([, path]) => !!path);
-    }
-
-    getNodes(acc) {
-        return acc.map(([key, value]) => <BreadcrumbItem key={value}>
-            {key(value)}
-        </BreadcrumbItem>);
-    }
-
-    getText(key) {
-        return {
-            language: _('home'),
-            page: _(key),
-            id: _(key),
-        }[key];
-    }
-
-    combineObject([head, ...tail], acc = []) {
-        return tail.length ? this.combineObject(this.addHeadObject(tail, head), [...acc, head]) : [...acc, head];
-    }
-
-    addHeadObject([[headKey, headText], ...tail], [appendKey, appendText]) {
-        return [[headKey, appendText + headText], ...tail];
     }
 }
 
