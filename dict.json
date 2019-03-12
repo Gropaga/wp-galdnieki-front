@@ -3,19 +3,19 @@
     "strings": {
       "lv": {
         "door": "Durvis",
-        "doors": "Durvi",
-        "stairs": "Kapnes",
+        "doors": "Durvis",
+        "stairs": "Kāpnes",
         "windows": "Logi",
         "furniture": "Mēbeles",
         "interiors": "Interjers",
         "contacts": "Kontakti",
-        "home": "Majas",
+        "home": "Mājās",
 
         "door catalogue": "apskatīt durvju katalogu",
         "Colour": "Krāsa",
         "Price": "Cena",
 
-        "Ash": "Pelni",
+        "Ash": "Osis",
         "Oak": "Ozols",
         "Birch": "Bērzs",
         "Nut": "Rieksts"
@@ -34,7 +34,7 @@
         "Colour": "Оттенок",
         "Price": "Цена",
 
-        "Ash": "Орех",
+        "Ash": "Ясень",
         "Oak": "Дуб",
         "Birch": "Берёза",
         "Nut": "Орех"

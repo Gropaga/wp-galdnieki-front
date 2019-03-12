@@ -99,7 +99,8 @@ export function preloadData(excludeSection = false) {
                 return response.json();
             }).then((content) => {
                 dispatch(receiveAllData(section, content));
-            }).catch(() => {
+            }).catch(($err) => {
+                console.log($err);
                 dispatch(receiveError('Web page error', 400));
             });
         });
